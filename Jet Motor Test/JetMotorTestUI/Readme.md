@@ -1,2 +1,2 @@
-# JetMotorTestUI
-test düzeneğinin arayüz programı (User Interface)
+# User Interface
+Jet Motor test düzeneğinin arayüz programı
