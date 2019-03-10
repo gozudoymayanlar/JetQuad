@@ -27,7 +27,7 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t *buffer_arr)
   TxPacket[13] = CRC_H;
 
  // digitalWrite(PA4,HIGH);
-  _port.print("abdullah");//_port.write(TxPacket, 14);
+  _port.write(TxPacket, 14); //_port.print("abdullah");
  // digitalWrite(PA4,LOW);
   delay(10);
 
