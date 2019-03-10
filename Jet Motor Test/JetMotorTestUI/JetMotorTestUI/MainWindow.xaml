@@ -1,0 +1,38 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JetMotorTestUI"
+        xmlns:agc="http://www.arction.com/gauges/" x:Class="JetMotorTestUI.MainWindow"
+        mc:Ignorable="d"
+        Title="JetMotorTestUI" Height="768" Width="1300" Icon="Resources/jetTurbine.png" Background="#FFDEDEDE">
+    <Grid>
+        <agc:Gauge Height="249" Width="315" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   AngleBegin="190" AngleEnd="-10" AdjacentPadding="5" Fill="Transparent" ArcPadding="0">
+           
+            <agc:Gauge.PrimaryScale>
+                <agc:Scale Margin="0,0,0,-135" AdjacentPadding="100" 
+                           AngleBegin="180" AngleEnd="0" RangeEnd="150"
+                           DialColor1="#FF3C3D95" DialColor2="Red" DialColor3="#FFD2AF64"
+                           LabelAngle="225" LabelDistance="1" 
+                           MajorTickCount="6" MinorTickCount="2" 
+                           ValueIndicatorAngle="315" ValueIndicatorDistance="1" ValueFormat="F3" ArcPadding="0" Value="64" FontSize="20">
+                    <agc:Scale.Dial>
+                        <agc:Dial DialShape="WideNeedle"/>
+                    </agc:Scale.Dial>
+                    <agc:Scale.Label>
+                        <TextBlock Text="RPM (x1000)" FontSize="22"/>
+                    </agc:Scale.Label>
+                </agc:Scale>
+            </agc:Gauge.PrimaryScale>
+            <agc:Gauge.SecondaryScales>
+                <agc:Scale AngleBegin="180" AngleEnd="144" ArcPadding="55" ArcStrokeThickness="20" ArcStroke="Turquoise"/>
+                <agc:Scale AngleBegin="144" AngleEnd="108" ArcPadding="55" ArcStrokeThickness="20" ArcStroke="#3C3D95" />
+                <agc:Scale AngleBegin="108" AngleEnd="72" ArcPadding="55" ArcStrokeThickness="20" ArcStroke="#CCFFFF00"/>
+                <agc:Scale AngleBegin="72" AngleEnd="24" ArcPadding="55" ArcStrokeThickness="20" ArcStroke="Orange"/>
+                <agc:Scale AngleBegin="24" AngleEnd="0" ArcPadding="55" ArcStrokeThickness="20" ArcStroke="#CCFF0000"/>
+            </agc:Gauge.SecondaryScales>
+        </agc:Gauge>
+    </Grid>
+</Window>
