@@ -1,3 +1,4 @@
+// push pull deneme
   // ZAZAAZAZAZAZAZAZAZAZAZAZAZA
 #define led 0x41
 #define led_size 0x01
