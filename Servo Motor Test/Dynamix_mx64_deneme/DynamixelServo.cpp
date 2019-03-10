@@ -26,23 +26,24 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t *buffer_arr)
   TxPacket[12] = CRC_L;
   TxPacket[13] = CRC_H;
 
-  _port.write(TxPacket, 14);
-  delay(2);
+ // digitalWrite(PA4,HIGH);
+  _port.print("abdullah");//_port.write(TxPacket, 14);
+ // digitalWrite(PA4,LOW);
+  delay(10);
 
   // read the total number of bytes:
-  _port.readBytes(buffer_arr, dataLength);
+ // _port.readBytes(buffer_arr, dataLength);
 }
 
-void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[])
+void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], uint8_t datas_size)
 {
   uint16_t CRC;
   uint8_t CRC_L = 0;
   uint8_t CRC_H = 0;
 
-  uint8_t datas_size = sizeof(datas);		          //  , len_l			, len_h, inst      , add_h  , add_l
-  uint8_t packetBase[10] = { H1, H2, H3, RSRV, Id, datas_size + 3 , 0x00, Write_inst, address,  0x00 };
   int packetSize = 12 + datas_size;
-  uint8_t TxPacket[packetSize];
+  uint8_t TxPacket[packetSize] = { H1, H2, H3, RSRV, Id, datas_size + 5 , 0x00, Write_inst, address,  0x00 };
+  
   for (int i = 0; i < datas_size; i++)
   {
     TxPacket[i + 10] = datas[i];
@@ -55,7 +56,15 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[])
   TxPacket[packetSize - 2] = CRC_L;
   TxPacket[packetSize - 1] = CRC_H;
 
-  _port.write(TxPacket, packetSize);
+ // digitalWrite(PA4,HIGH);
+ _port.write(TxPacket, packetSize);
+
+
+// for (int i = 0; i < packetSize; i++)
+//  {
+//     _port.print(TxPacket[i], HEX); _port.print(" ");//Serial.print(gelenVeri[i], HEX); Serial.print(" ");
+//  }
+//  digitalWrite(PA4,LOW);
 }
 
 //update_crc function from robotis documentation
