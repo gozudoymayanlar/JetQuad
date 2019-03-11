@@ -1,3 +1,4 @@
+// yeni branch denemesi ağaç şeklinde çıksın diye
 #define DEBUG  // debug yapmak için bunu uncomment et.
 #define servo_mx64
 #include "DynamixelServo.h"
