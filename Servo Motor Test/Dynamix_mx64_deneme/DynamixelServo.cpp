@@ -1,53 +1,75 @@
 #include "Arduino.h"
 #include "DynamixelServo.h"
 
-DynamixelServo::DynamixelServo(HardwareSerial &port, const unsigned long baud): _port (port), _baud (baud)
+DynamixelServo::DynamixelServo(HardwareSerial &port, const uint32_t baud, const int dataControlPin): _port (port), _baud (baud)
 {
-  
+  this->dataControlPin = dataControlPin;
 }
 
 void DynamixelServo::beginComm()
 {
+  pinMode(dataControlPin,OUTPUT);
   _port.begin(_baud);
 }
 
-void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t *buffer_arr)
+void DynamixelServo::end()
 {
-  uint16_t CRC;
-  uint8_t CRC_L = 0;
-  uint8_t CRC_H = 0;
+  _port.end();
+}
 
-  uint8_t dataLength = sizeof(buffer_arr);
+void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], const int datas_size)
+{
   //															                                 len2, inst     , add_l  ,add_h, dataLen_l , dataLen_h
-  uint8_t TxPacket[14] = { H1, H2, H3, RSRV, Id, ReadPacketLength, 0x00, Read_inst, address, 0x00, dataLength,   0x00   ,  CRC_L, CRC_H };
+  uint8_t TxPacket[14] = { H1, H2, H3, RSRV, Id, ReadPacketLength, 0x00, Read_inst, address, 0x00, datas_size,   0x00   ,  CRC_L, CRC_H };
   CRC = update_crc(0, TxPacket, 12);	// 12 = 5 + Packet Length(7)
   CRC_L = (CRC & 0x00FF);				//Little-endian
   CRC_H = (CRC >> 8) & 0x00FF;
   TxPacket[12] = CRC_L;
   TxPacket[13] = CRC_H;
 
- // digitalWrite(PA4,HIGH);
-  _port.write(TxPacket, 14); //_port.print("abdullah");
- // digitalWrite(PA4,LOW);
-  delay(10);
+ #ifndef DEBUG // debug modunda değilse
+  digitalWrite(dataControlPin,HIGH);
+  _port.write(TxPacket, 14);  // write fonksiyonuyla byte byte gönder
+  digitalWrite(dataControlPin,LOW);
+  
+ #else
+  _port.print("Read TxPacket: ");
+  for (int i = 0; i < 14; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
+  {
+     _port.print(TxPacket[i], HEX); _port.print("\t");
+  }
+ #endif
+  delay(2);
 
-  // read the total number of bytes:
- // _port.readBytes(buffer_arr, dataLength);
+ #ifndef DEBUG  // read the total number of bytes:
+  const int statusPacket_size = 11 + datas_size;
+  uint8_t statusPacket[statusPacket_size];
+  _port.readBytes(statusPacket, statusPacket_size);
+  if(statusPacket[4] != Id || statusPacket[8] != 0x00){return;}
+  // TODO buraya CRC check eklenip datanın corrupt olup olmadığı kontrol edilebilir.
+  for(int q = 0; q < datas_size; q++)
+  {
+    datas[q] = statusPacket[q + 9];
+  }
+ #endif
 }
 
-void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], uint8_t datas_size)
+void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int datas_size)
 {
-  uint16_t CRC;
-  uint8_t CRC_L = 0;
-  uint8_t CRC_H = 0;
-
   int packetSize = 12 + datas_size;
-  uint8_t TxPacket[packetSize] = { H1, H2, H3, RSRV, Id, datas_size + 5 , 0x00, Write_inst, address,  0x00 };
+  uint8_t TxPacket[packetSize];//                               len2, inst      , add_l  , add_h
+  uint8_t basePacket[] = { H1, H2, H3, RSRV, Id, datas_size + 5 , 0x00, Write_inst, address, 0x00 };
+
+  for(int q = 0; q < 10; q++)
+  {
+    TxPacket[q] = basePacket[q];
+  }
   
   for (int i = 0; i < datas_size; i++)
   {
     TxPacket[i + 10] = datas[i];
   }
+  
   TxPacket[packetSize - 2] = CRC_L;
   TxPacket[packetSize - 1] = CRC_H;
   CRC = update_crc(0, TxPacket, packetSize - 2);
@@ -56,15 +78,23 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], uin
   TxPacket[packetSize - 2] = CRC_L;
   TxPacket[packetSize - 1] = CRC_H;
 
- // digitalWrite(PA4,HIGH);
- _port.write(TxPacket, packetSize);
+ #ifndef DEBUG  // debug modunda değilse
+  digitalWrite(dataControlPin, HIGH);
+  _port.write(TxPacket, packetSize);  // write fonksiyonuyla byte byte gönder
+  digitalWrite(dataControlPin, LOW);
+  
+ #else  // debug modundaysa
+  _port.print("Write TxPacket: ");
+  for (int i = 0; i < packetSize; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
+  {
+     _port.print(TxPacket[i], HEX); _port.print(" ");
+  }
+ #endif
+}
 
-
-// for (int i = 0; i < packetSize; i++)
-//  {
-//     _port.print(TxPacket[i], HEX); _port.print(" ");//Serial.print(gelenVeri[i], HEX); Serial.print(" ");
-//  }
-//  digitalWrite(PA4,LOW);
+void DynamixelServo::clearRXbuffer(void)
+{
+  while (_port.read() != -1);  // Clear RX buffer;
 }
 
 //update_crc function from robotis documentation
