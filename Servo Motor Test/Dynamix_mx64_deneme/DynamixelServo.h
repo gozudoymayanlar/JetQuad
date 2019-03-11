@@ -4,6 +4,8 @@
  * Created by NightHawk 08.03.2019
  */
 
+#define DEBUG
+
 #ifndef Dynamixel_falanFilan
 #define Dynamixel_falanFilan
 

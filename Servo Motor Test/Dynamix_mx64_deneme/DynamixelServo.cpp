@@ -87,7 +87,7 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int
   _port.print("Write TxPacket: ");
   for (int i = 0; i < packetSize; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
   {
-     _port.print(TxPacket[i], HEX); _port.print(" ");
+     _port.print(TxPacket[i], HEX); _port.print("\t");
   }
  #endif
 }
