@@ -45,7 +45,7 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
   const int statusPacket_size = 11 + datas_size;
   uint8_t statusPacket[statusPacket_size];
   _port.readBytes(statusPacket, statusPacket_size);
-  if(statusPacket[4] != Id || statusPacket[8] != 0x00){return;}
+  //if(statusPacket[4] != Id || statusPacket[8] != 0x00){return;}
   // TODO buraya CRC check eklenip datanın corrupt olup olmadığı kontrol edilebilir.
   for(int q = 0; q < datas_size; q++)
   {
