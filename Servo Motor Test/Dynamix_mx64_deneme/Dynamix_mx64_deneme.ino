@@ -1,4 +1,3 @@
-#define DEBUG  // debug yapmak için bunu uncomment et.
 #define servo_mx64
 #include "DynamixelServo.h"
 
@@ -16,8 +15,6 @@ void setup()
   #else // debug modundaysa
   Serial.println("DEBUG MODE ON...");
   #endif
-  
-  
 }
 
 void loop() 
@@ -30,11 +27,12 @@ void loop()
   servo.read_raw(broadcastID, Present_Position, veri, Present_Position_size);
   
   // konum verisini okunabilir şekilde pc serial portuna yaz
-  Serial.println();  Serial.print("received: ");
-  for (int i = 0; i < Present_Position_size + 11; i++)
-  {
-    Serial.print(veri[i], HEX); Serial.print("\t");
-  }
+  //Serial.println();  Serial.print("received: ");
+//  for (int i = 0; i < Present_Position_size + 11; i++)
+//  {
+//    Serial.print(veri[i], HEX); Serial.print("\t");
+//  }
+  Serial.write(veri, Present_Position_size);
   delay(500);
 
   // LED i aç

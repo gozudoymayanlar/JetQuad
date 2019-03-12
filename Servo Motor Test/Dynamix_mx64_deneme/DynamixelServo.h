@@ -4,7 +4,7 @@
  * Created by NightHawk 08.03.2019
  */
 
-#define DEBUG
+//#define DEBUG  // debug yapmak için bunu uncomment et.
 
 #ifndef Dynamixel_falanFilan
 #define Dynamixel_falanFilan
