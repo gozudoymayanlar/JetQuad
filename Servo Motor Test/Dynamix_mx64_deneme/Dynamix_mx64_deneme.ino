@@ -28,10 +28,11 @@ void loop()
   
   // konum verisini okunabilir şekilde pc serial portuna yaz
   //Serial.println();  Serial.print("received: ");
-  for (int i = 0; i < Present_Position_size + 11; i++)
-  {
-    Serial.print(veri[i], HEX); Serial.print("\t");
-  }
+//  for (int i = 0; i < Present_Position_size + 11; i++)
+//  {
+//    Serial.print(veri[i], HEX); Serial.print("\t");
+//  }
+  Serial.write(veri, Present_Position_size);
   delay(500);
 
   // LED i aç
