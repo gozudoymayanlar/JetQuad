@@ -1,2 +1,4 @@
-# JetQuad
+﻿# JetQuad
 Jet motorlu quadrotor geliştirmesi için kullanılan repository
+
+asdfadsf
