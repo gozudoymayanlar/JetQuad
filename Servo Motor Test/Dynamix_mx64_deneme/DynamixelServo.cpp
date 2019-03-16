@@ -9,6 +9,7 @@ DynamixelServo::DynamixelServo(HardwareSerial &port, const uint32_t baud, const 
 void DynamixelServo::beginComm()
 {
   pinMode(dataControlPin,OUTPUT);
+  digitalWrite(dataControlPin, LOW);
   _port.begin(_baud);
 }
 
@@ -28,36 +29,84 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
   TxPacket[13] = CRC_H;
 
  #ifndef DEBUG // debug modunda değilse
+ Serial.println(); Serial.print("Read_raw INST: ");
+  for (int i = 0; i < 14; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
+  {
+     Serial.print(TxPacket[i], HEX); Serial.print("\t");
+  }
+ //clearRXbuffer();
   digitalWrite(dataControlPin,HIGH);
-  _port.write(TxPacket, 14);  // write fonksiyonuyla byte byte gönder
+  for (int i = 0; i < 14; i++)
+  {
+     _port.write(TxPacket[i]);  // write fonksiyonuyla byte byte gönder
+  }
+  delayMicroseconds(2500);
   digitalWrite(dataControlPin,LOW);
   
  #else
-  _port.print("Read TxPacket: ");
+  _port.println(); _port.print("Read TxPacket: ");
   for (int i = 0; i < 14; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
   {
      _port.print(TxPacket[i], HEX); _port.print("\t");
   }
  #endif
-  delay(2);
 
- #ifndef DEBUG  // read the total number of bytes:
+ //#ifndef DEBUG  // read the total number of bytes:
   const int statusPacket_size = 11 + datas_size;
   uint8_t statusPacket[statusPacket_size];
-  _port.readBytes(statusPacket, statusPacket_size);
+  for(uint8_t q = 0; q < statusPacket_size; q++)
+  {
+    statusPacket[q] = q;
+    }
+  //_port.readBytes(statusPacket, statusPacket_size);
+  uint8_t incomingByte;
+  uint8_t Time_Counter = 0;
+  while((_port.available() < statusPacket_size) && (Time_Counter < 15)){  // Wait for Data
+    Time_Counter++;
+    delayMicroseconds(1000);
+  }
+  while(_port.available() > 0)
+  {
+    incomingByte = _port.read();
+    if(incomingByte == H1 && (_port.peek()== H2))
+    {
+      statusPacket[0] = incomingByte;
+      incomingByte = _port.read();
+      if(incomingByte == H2 && (_port.peek()== H3))
+      {
+        statusPacket[1] = incomingByte;
+        for(int q = 2; q < statusPacket_size; q++)
+        {
+          statusPacket[q] = _port.read();
+        }
+      }
+    }
+  }
+  delay(5);  
   //if(statusPacket[4] != Id || statusPacket[8] != 0x00){return;}
   // TODO buraya CRC check eklenip datanın corrupt olup olmadığı kontrol edilebilir.
-  for(int q = 0; q < datas_size; q++)
+//  for(int q = 0; q < datas_size; q++)
+//  {
+//    datas[q] = statusPacket[q + 9];
+//  }
+  Serial.println(); Serial.print("Read_raw STAT: ");
+  for (int i = 0; i < statusPacket_size; i++)
   {
-    datas[q] = statusPacket[q + 9];
+    Serial.print(statusPacket[i], HEX); Serial.print("\t");
   }
- #endif
+ //#endif
 }
+
+
+
+///////////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int datas_size)
 {
   int packetSize = 12 + datas_size;
-  uint8_t TxPacket[packetSize];//                               len2, inst      , add_l  , add_h
+  uint8_t TxPacket[packetSize];//                                 len2, inst      , add_l  , add_h
   uint8_t basePacket[] = { H1, H2, H3, RSRV, Id, datas_size + 5 , 0x00, Write_inst, address, 0x00 };
 
   for(int q = 0; q < 10; q++)
@@ -79,17 +128,61 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int
   TxPacket[packetSize - 1] = CRC_H;
 
  #ifndef DEBUG  // debug modunda değilse
-  digitalWrite(dataControlPin, HIGH);
-  _port.write(TxPacket, packetSize);  // write fonksiyonuyla byte byte gönder
-  digitalWrite(dataControlPin, LOW);
+  //clearRXbuffer();
+  Serial.println(); Serial.print("write_raw INST: ");
+  for (int i = 0; i < packetSize; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
+  {
+     Serial.print(TxPacket[i], HEX); Serial.print("\t");
+  }
   
+  digitalWrite(dataControlPin, HIGH);
+  for (int i = 0; i < packetSize; i++)
+  {
+     _port.write(TxPacket[i]);  // write fonksiyonuyla byte byte gönder
+  }
+  delayMicroseconds(2500);
+  digitalWrite(dataControlPin, LOW);
+ 
  #else  // debug modundaysa
-  _port.print("Write TxPacket: ");
+  _port.println(); _port.print("Write TxPacket: ");
   for (int i = 0; i < packetSize; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
   {
      _port.print(TxPacket[i], HEX); _port.print("\t");
   }
  #endif
+
+  const int statusPacket_size = 11;
+  uint8_t statusPacket[statusPacket_size] = {1,2,3,4,5,6,7,8,9,10,11};
+  uint8_t incomingByte;
+  uint8_t Time_Counter = 0;
+  while((_port.available() < statusPacket_size) && (Time_Counter < 15)){  // Wait for Data
+    Time_Counter++;
+    delayMicroseconds(1000);
+  }
+  while(_port.available() > 0)
+  {
+    incomingByte = _port.read();
+    if(incomingByte == H1 && (_port.peek()== H2))
+    {
+      statusPacket[0] = incomingByte;
+      incomingByte = _port.read();
+      if(incomingByte == H2 && (_port.peek()== H3))
+      {
+        statusPacket[1] = incomingByte;
+        for(int q = 2; q < statusPacket_size; q++)
+        {
+          statusPacket[q] = _port.read();
+        }
+      }
+    }
+  }
+  delay(5);  
+
+  Serial.println(); Serial.print("write_raw STAT: ");
+  for (int i = 0; i < statusPacket_size; i++)
+  {
+    Serial.print(statusPacket[i], HEX); Serial.print("\t");
+  }
 }
 
 void DynamixelServo::clearRXbuffer(void)
