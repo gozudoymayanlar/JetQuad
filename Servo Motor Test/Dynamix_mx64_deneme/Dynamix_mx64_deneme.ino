@@ -11,9 +11,9 @@
 #define servo_mx64
 #include "DynamixelServo.h"
 
-const uint32_t serialBaud = 9600;
+const uint32_t serialBaud = 115200;
 const uint32_t servoBaud = 57600;
-DynamixelServo servo(Serial1,servoBaud, 2);
+DynamixelServo servo(Serial1,servoBaud, PA4);
 
 unsigned int integerValue=0;  // Max value is 65535
 char incomingByte;
@@ -37,6 +37,9 @@ void setup()
 
   uint8_t torqueEnableVeri[Torque_Enable_size] = {0x01};
   servo.write_raw(0x01, Torque_Enable, torqueEnableVeri, Torque_Enable_size);
+
+//  uint8_t baudRateVeri[Baud_Rate_size] = {0x03};
+//  servo.write_raw(0x01, Baud_Rate, baudRateVeri, Baud_Rate_size);
 }
 
 void loop() 
