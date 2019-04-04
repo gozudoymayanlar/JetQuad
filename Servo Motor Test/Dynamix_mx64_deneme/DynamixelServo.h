@@ -11,6 +11,8 @@
 
 #include "Arduino.h"
 
+#define servo_mx64
+
 #ifdef servo_mx64
 // EEPROM datas: addresses and sizes
 #define Model_Number				    0x00
@@ -172,140 +174,140 @@
 
 #endif
 
-#ifdef servo_xl320
- // EEPROM datas: addresses and sizes
-#define Model_Number          0x00
-#define Model_Number_size       0x02
-
-#define Firmware_Version        0x02
-#define Firmware_Version_size     0x01
-
-#define ID                    0x03
-#define ID_size                 0x01
-
-#define Baud_Rate           0x04
-#define Baud_Rate_size          0x01
-
-#define Return_Delay_Time       0x05
-#define Return_Delay_Time_size      0x01
-
-#define CW_Angle_Limit      0x06
-#define CW_Angle_Limit_size   
-
-#define CCW_Angle_Limit     0x08
-#define CCW_Angle_Limit_size    
-
-#define Control_Mode      0x11
-#define Control_Mode      0x01
-
-#define Limit_Temperature   0x12
-#define Limit_Temperature_size  0x01
-
-#define Lower_Limit_Voltage 0x13
-#define Lower_Limit_Voltage_size  0x02
-
-#define Upper_Limit_Voltage       0x14
-#define Upper_Limit_Voltage_size  0x02
-
-#define Max_Torque            0x26
-#define Max_Torque_size       0x02
-
-#define Return_Level
-#define Alarm_Shutdown
-
-
-
- // RAM datas and addresses
-#define Torque_Enable           0x24
-#define Torque_Enable_size      0x01
-
-#define LED                     0x25
-#define LED_size                0x01
-
-#define D_Gain              0x27
-#define D_Gain_size        0x01
-
-#define I_Gain              0x28
-#define I_Gain_size        0x01
-
-#define P_Gain              0x29
-#define P_Gain_size        0x01
-
-#define Goal_Position               0x30
-#define Goal_Position_size          0x02
-
-#define Moving_Speed            0x7A
-#define Moving_Speed_size                 0x01
-
-#define Torque_Limit    0x35
-#define Torque_Limit    0x02
-
-#define Present_Position            0x84
-#define Present_Position_size       0x04
-
-#define Present_Speed           0x80
-#define Present_Speed_size       0x04
-
-#define Hardware_Error_Status       0x50
-#define Hardware_Error_Status_size  0x01
-
-#define Present_Load            0x80
-#define Present_Load_size       0x04
-    // BURADA KALDIM
-
-
-
-
-#define BUS_Watchdog                0x62
-#define BUS_Watchdog_size           0x01
-
-#define Goal_PWM                    0x64
-#define Goal_PWM_size               0x02
-
-#define Goal_Current                0x66
-#define Goal_Current_size           0x02
-
-#define Goal_Velocity               0x68
-#define Goal_Velocity_size          0x04
-
-#define Profile_Acceleration        0x6C
-#define Profile_Acceleration_size   0x04
-
-#define Profile_Velocity            0x70
-#define Profile_Velocity_size       0x04
-
-
-
-#define Realtime_Tick               0x78
-#define Realtime_Tick_size          0x02
-
-
-
-#define Moving_Status               0x7B
-#define Moving_Status_size          0x01
-
-#define Present_PWM                 0x7C
-#define Present_PWM_size            0x02
-
-#define Present_Current             0x7E
-#define Present_Current_size        0x02
-
-
-
-
-
-#define Velocity_Trajectory         0x88
-#define Velocity_Trajectory_size    0x04
-
-#define Position_Trajectory         0x8C
-#define Position_Trajectory_size    0x04
-
-#define Present_Input_Voltage       0x90
-#define Present_Input_Voltage_size  0x02
-
-#define Present_Temperature         0x92
-#define Present_Temperature_size    0x01
-#endif
+//#ifdef servo_xl320
+// // EEPROM datas: addresses and sizes
+//#define Model_Number          0x00
+//#define Model_Number_size       0x02
+//
+//#define Firmware_Version        0x02
+//#define Firmware_Version_size     0x01
+//
+//#define ID                    0x03
+//#define ID_size                 0x01
+//
+//#define Baud_Rate           0x04
+//#define Baud_Rate_size          0x01
+//
+//#define Return_Delay_Time       0x05
+//#define Return_Delay_Time_size      0x01
+//
+//#define CW_Angle_Limit      0x06
+//#define CW_Angle_Limit_size   
+//
+//#define CCW_Angle_Limit     0x08
+//#define CCW_Angle_Limit_size    
+//
+//#define Control_Mode      0x11
+//#define Control_Mode      0x01
+//
+//#define Limit_Temperature   0x12
+//#define Limit_Temperature_size  0x01
+//
+//#define Lower_Limit_Voltage 0x13
+//#define Lower_Limit_Voltage_size  0x02
+//
+//#define Upper_Limit_Voltage       0x14
+//#define Upper_Limit_Voltage_size  0x02
+//
+//#define Max_Torque            0x26
+//#define Max_Torque_size       0x02
+//
+//#define Return_Level
+//#define Alarm_Shutdown
+//
+//
+//
+// // RAM datas and addresses
+//#define Torque_Enable           0x24
+//#define Torque_Enable_size      0x01
+//
+//#define LED                     0x25
+//#define LED_size                0x01
+//
+//#define D_Gain              0x27
+//#define D_Gain_size        0x01
+//
+//#define I_Gain              0x28
+//#define I_Gain_size        0x01
+//
+//#define P_Gain              0x29
+//#define P_Gain_size        0x01
+//
+//#define Goal_Position               0x30
+//#define Goal_Position_size          0x02
+//
+//#define Moving_Speed            0x7A
+//#define Moving_Speed_size                 0x01
+//
+//#define Torque_Limit    0x35
+//#define Torque_Limit    0x02
+//
+//#define Present_Position            0x84
+//#define Present_Position_size       0x04
+//
+//#define Present_Speed           0x80
+//#define Present_Speed_size       0x04
+//
+//#define Hardware_Error_Status       0x50
+//#define Hardware_Error_Status_size  0x01
+//
+//#define Present_Load            0x80
+//#define Present_Load_size       0x04
+//    // BURADA KALDIM
+//
+//
+//
+//
+//#define BUS_Watchdog                0x62
+//#define BUS_Watchdog_size           0x01
+//
+//#define Goal_PWM                    0x64
+//#define Goal_PWM_size               0x02
+//
+//#define Goal_Current                0x66
+//#define Goal_Current_size           0x02
+//
+//#define Goal_Velocity               0x68
+//#define Goal_Velocity_size          0x04
+//
+//#define Profile_Acceleration        0x6C
+//#define Profile_Acceleration_size   0x04
+//
+//#define Profile_Velocity            0x70
+//#define Profile_Velocity_size       0x04
+//
+//
+//
+//#define Realtime_Tick               0x78
+//#define Realtime_Tick_size          0x02
+//
+//
+//
+//#define Moving_Status               0x7B
+//#define Moving_Status_size          0x01
+//
+//#define Present_PWM                 0x7C
+//#define Present_PWM_size            0x02
+//
+//#define Present_Current             0x7E
+//#define Present_Current_size        0x02
+//
+//
+//
+//
+//
+//#define Velocity_Trajectory         0x88
+//#define Velocity_Trajectory_size    0x04
+//
+//#define Position_Trajectory         0x8C
+//#define Position_Trajectory_size    0x04
+//
+//#define Present_Input_Voltage       0x90
+//#define Present_Input_Voltage_size  0x02
+//
+//#define Present_Temperature         0x92
+//#define Present_Temperature_size    0x01
+//#endif
 
 //data packet constants
 #define	H1		0xFF
@@ -340,6 +342,10 @@
 #define BulkRead_inst		  0x92
 #define BulkWrite_inst	  0x93
 
+
+#define readDelay   3 // ms
+#define writeDelay  3 // ms
+
 class DynamixelServo
 {
   public:
@@ -347,10 +353,17 @@ class DynamixelServo
     DynamixelServo(HardwareSerial &port, const uint32_t baud, const int dataControlPin );
     void beginComm();
     void end(void);
-	  void read_raw(uint8_t Id, uint8_t address, uint8_t datas[], const int datas_size); // this only supports to reach adrresses 0 to 255
+	  uint8_t read_raw(uint8_t Id, uint8_t address, uint8_t datas[], const int datas_size); // this only supports to reach adrresses 0 to 255
 	  void write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int datas_size);
     uint16_t update_crc(uint16_t crc_accum, uint8_t *data_blk_ptr, unsigned short data_blk_size);
-  
+    void write_position(uint8_t Id, long gol_pos);
+    long read_position(uint8_t Id);
+    void write_torque(uint8_t Id, int val);
+    void write_acc_prof(uint8_t Id, long val);
+    void write_vel_prof(uint8_t Id, long val);
+    int read_temperature(uint8_t Id);
+    int read_hardware_error(uint8_t Id);
+    
   private:
     HardwareSerial &_port;
     const uint32_t _baud;
@@ -359,6 +372,8 @@ class DynamixelServo
     uint16_t CRC;
     uint8_t CRC_L = 0;
     uint8_t CRC_H = 0;
+    uint8_t params[10] = {0,0,0,0,0,0,0,0,0,0};
+    boolean data_okey = false;
 };
 
 #endif // !DynamixelServo

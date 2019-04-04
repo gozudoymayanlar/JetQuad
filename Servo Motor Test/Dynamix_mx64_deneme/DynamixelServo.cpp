@@ -23,8 +23,8 @@ void DynamixelServo::end()
 //  lllll     lllllll
 //  ll  ll    ll
 //  ll   ll   lllllll
-  
-void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], const int datas_size)
+
+uint8_t DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], const int datas_size)
 {
   //															                                 len2, inst     , add_l  ,add_h, dataLen_l , dataLen_h
   uint8_t TxPacket[14] = { H1, H2, H3, RSRV, Id, ReadPacketLength, 0x00, Read_inst, address, 0x00, datas_size,   0x00   ,  CRC_L, CRC_H };
@@ -35,14 +35,8 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
   TxPacket[13] = CRC_H;
 
 #ifndef DEBUG // debug modunda değilse
-  Serial.println(); Serial.print("Read_raw INST: ");
-  for (int i = 0; i < 14; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
-  {
-    Serial.print(TxPacket[i], HEX); Serial.print("\t");
-  }
-  
-  digitalWrite(dataControlPin, HIGH);
 
+  digitalWrite(dataControlPin, HIGH);
   clearRXbuffer();
   for (int i = 0; i < 14; i++)
   {
@@ -50,7 +44,6 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
   }
   //noInterrupts();
   _port.flush();
-  //delayMicroseconds(14 * 10 * 1000000 / _baud + 250);
   digitalWrite(dataControlPin, LOW);
   //interrupts();
 
@@ -62,21 +55,16 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
   }
 #endif
 
-  //#ifndef DEBUG  // read the total number of bytes:
   const int statusPacket_size = 11 + datas_size;
   uint8_t statusPacket[statusPacket_size];
   for (uint8_t q = 0; q < statusPacket_size; q++)
   {
     statusPacket[q] = q;
   }
-  //_port.readBytes(statusPacket, statusPacket_size);
   uint8_t incomingByte;
   uint8_t Time_Counter = 0;
-  while ((_port.available() < statusPacket_size)){ // && (Time_Counter < 25)) { // Wait for Data
-    Time_Counter++;
-    delay(1);
-  }
- // delay(20);
+
+  delay(readDelay);
   while (_port.available() > 0)
   {
     incomingByte = _port.read();
@@ -94,22 +82,83 @@ void DynamixelServo::read_raw(uint8_t Id, uint8_t address, uint8_t datas[], cons
       }
     }
   }
-  delay(5);
-  //if(statusPacket[4] != Id || statusPacket[8] != 0x00){return;}
-  // TODO buraya CRC check eklenip datanın corrupt olup olmadığı kontrol edilebilir.
-  //  for(int q = 0; q < datas_size; q++)
-  //  {
-  //    datas[q] = statusPacket[q + 9];
-  //  }
-  Serial.println(); Serial.print("Read_raw STAT: ");
-  for (int i = 0; i < statusPacket_size; i++)
+  
+  CRC = update_crc(0, statusPacket, statusPacket_size - 2);
+  CRC_L = (CRC & 0x00FF);
+  CRC_H = (CRC >> 8) & 0x00FF;
+
+  if ((statusPacket[statusPacket_size - 2] == CRC_L) && (statusPacket[statusPacket_size - 1] == CRC_H) && (statusPacket[8] == 0))//chksm doğru ve error 0
   {
-    Serial.print(statusPacket[i], HEX); Serial.print("\t");
+    data_okey = true;
+    for (int i = 9; i < statusPacket_size - 2; i++)
+    {
+      params[i - 9] = statusPacket[i];
+    }
   }
-  //Serial.flush();
-  //#endif
 }
 
+long DynamixelServo::read_position(uint8_t Id)
+{
+  uint8_t veri[4];
+  read_raw(Id, 0x84, veri, 4);
+
+  long sonuc = 0;
+  sonuc += (long)params[3] << 24;
+  sonuc += (long)params[2] << 16;
+  sonuc += (long)params[1] << 8;
+  sonuc += (long)params[0];
+  if (data_okey)
+  {
+    data_okey = false;
+    params[0] = 0; params[1] = 0; params[2] = 0; params[3] = 0;
+    return sonuc;
+  }
+  else
+  {
+    return -1000;
+  }
+}
+
+int DynamixelServo::read_hardware_error(uint8_t Id)
+{
+  uint8_t veri[1];
+  read_raw(Id, 0x46, veri, 1);
+
+  uint8_t sonuc;
+  if(params[0] == 0) sonuc = 0;
+  else sonuc = 1;
+  
+
+  if (data_okey)  
+  {
+    data_okey = false;
+    params[0] = 0;
+    return sonuc;
+  }
+  else
+  {
+    return -1;
+  }
+}
+
+int DynamixelServo::read_temperature(uint8_t Id)
+{
+  uint8_t veri[1];
+  read_raw(Id, 0x92, veri, 1);
+
+  uint8_t sonuc = params[0];
+
+  if (data_okey)
+  {
+    data_okey = false;
+    params[0] = 0;
+    return sonuc;
+  }
+  else
+  {
+    return -1000;
+  }
+}
 
 
 ///////////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,11 +191,6 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int
 
 #ifndef DEBUG  // debug modunda değilse
   clearRXbuffer();
-  Serial.println(); Serial.print("write_raw INST: ");
-  for (int i = 0; i < packetSize; i++)  // print fonksiyonuyla ascii olarak gönder ki okunabilir olsun
-  {
-    Serial.print(TxPacket[i], HEX); Serial.print("\t");
-  }
 
   digitalWrite(dataControlPin, HIGH);
   for (int i = 0; i < packetSize; i++)
@@ -155,7 +199,6 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int
   }
   //noInterrupts();
   _port.flush();
-  //delayMicroseconds(packetSize * 10 * 1000000 / _baud + 250);
   digitalWrite(dataControlPin, LOW);
   //interrupts();
 
@@ -167,45 +210,79 @@ void DynamixelServo::write_raw(uint8_t Id, uint8_t address, uint8_t datas[], int
   }
 #endif
 
-  const int statusPacket_size = 11;
-  uint8_t statusPacket[statusPacket_size] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-  uint8_t incomingByte;
-  uint8_t Time_Counter = 0;
-  while ((_port.available() < statusPacket_size)){ // && (Time_Counter < 20)) { // Wait for Data
-    Time_Counter++;
-    delayMicroseconds(1000);
-  }
-  while (_port.available() > 0)
-  {
-    incomingByte = _port.read();
-    if (incomingByte == H1 && (_port.peek() == H2))
+    const int statusPacket_size = 11;
+    uint8_t statusPacket[statusPacket_size] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    uint8_t incomingByte;
+    uint8_t Time_Counter = 0;
+  
+    delay(writeDelay);
+    while (_port.available() > 0)
     {
-      statusPacket[0] = incomingByte;
       incomingByte = _port.read();
-      if (incomingByte == H2 && (_port.peek() == H3))
+      if (incomingByte == H1 && (_port.peek() == H2))
       {
-        statusPacket[1] = incomingByte;
-        for (int q = 2; q < statusPacket_size; q++)
+        statusPacket[0] = incomingByte;
+        incomingByte = _port.read();
+        if (incomingByte == H2 && (_port.peek() == H3))
         {
-          statusPacket[q] = _port.read();
+          statusPacket[1] = incomingByte;
+          for (int q = 2; q < statusPacket_size; q++)
+          {
+            statusPacket[q] = _port.read();
+          }
         }
       }
     }
-  }
-  delay(5);
-
-  Serial.println(); Serial.print("write_raw STAT: ");
-  for (int i = 0; i < statusPacket_size; i++)
-  {
-    Serial.print(statusPacket[i], HEX); Serial.print("\t");
-  }
-  //Serial.flush();
 }
 
 void DynamixelServo::clearRXbuffer(void)
 {
-  while (_port.read() != -1);  // Clear RX buffer;
+  //while (_port.read() != -1);  // Clear RX buffer;
+  while(_port.available()){_port.read();}
 }
+
+void DynamixelServo::write_position(uint8_t Id, long gol_pos)
+{
+  uint8_t goalPositionVeri[4] = {0x00, 0x00, 0x00, 0x00};
+  goalPositionVeri[0] = (byte)(gol_pos & 0xFF);
+  goalPositionVeri[1] = (byte)((gol_pos >> 8) & 0xFF);
+  goalPositionVeri[2] = (byte)((gol_pos >> 16) & 0xFF);
+  goalPositionVeri[3] = (byte)((gol_pos >> 24) & 0xFF);
+  write_raw(Id, Goal_Position, goalPositionVeri, Goal_Position_size);
+}
+
+void DynamixelServo::write_torque(uint8_t Id, int val)
+{
+  uint8_t torqueEnableVeri[1] = {val};
+  write_raw(Id, Torque_Enable, torqueEnableVeri, Torque_Enable_size);
+}
+
+void DynamixelServo::write_acc_prof(uint8_t Id, long val) // (0 <= val <= 32767)_____unit = 0.3745 rad/s^2______(214.57 rev/min^2)
+{//455 yapmak lazım iç eksende (1 Nm tork ile ivmelenmek için) (0.7 kasnak oranı ile)
+  //345 dış eksende (1Nm tork ile ivmelenmek için)
+  uint8_t accProfVeri[4] = {0x00, 0x00, 0x00, 0x00};
+  accProfVeri[0] = (byte)(val & 0xFF);
+  accProfVeri[1] = (byte)((val >> 8) & 0xFF);
+  accProfVeri[2] = (byte)((val >> 16) & 0xFF);
+  accProfVeri[3] = (byte)((val >> 24) & 0xFF);
+  write_raw(Id, Profile_Acceleration, accProfVeri, Profile_Acceleration_size);
+}
+
+void DynamixelServo::write_vel_prof(uint8_t Id, long val) // (0 <= val <= vel limit(0-1023))_____unit = 0.024 rad/s______(0.229 rpm)
+{// her iki motor için 2rad/s maksimum hız olacak, yani val = 120 olacak (0.7 kasnak oranı ile)
+  uint8_t velProfVeri[4] = {0x00, 0x00, 0x00, 0x00};
+  velProfVeri[0] = (byte)(val & 0xFF);
+  velProfVeri[1] = (byte)((val >> 8) & 0xFF);
+  velProfVeri[2] = (byte)((val >> 16) & 0xFF);
+  velProfVeri[3] = (byte)((val >> 24) & 0xFF);
+  write_raw(Id, Profile_Velocity, velProfVeri, Profile_Velocity_size);
+}
+
+
+
+
+
+
 
 //update_crc function from robotis documentation
 uint16_t DynamixelServo::update_crc(uint16_t crc_accum, uint8_t *data_blk_ptr, unsigned short data_blk_size)
