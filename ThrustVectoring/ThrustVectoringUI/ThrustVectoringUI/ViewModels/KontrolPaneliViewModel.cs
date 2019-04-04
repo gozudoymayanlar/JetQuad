@@ -61,6 +61,7 @@ namespace ThrustVectoringUI.ViewModels
 
             KontrolPaneli = new KontrolPaneliModel();
             KontrolPaneli.StartingDate = new DateTime();
+            KontrolPaneli.ServoError = 1;
 
             //var dayConfig = Mappers.Xy<DateTimePoint>()
             //    .X(dateTimePoint => (double)dateTimePoint.DateTime.Ticks / TimeSpan.FromHours(1).Ticks)
@@ -237,10 +238,8 @@ namespace ThrustVectoringUI.ViewModels
 
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
                     MyStopwatch.Start();
-                    //KontrolPaneli.Timer.Start();
+                    KontrolPaneli.Timer.Start();
                     KontrolPaneli.MotorStatus = EnumMotorStatus.Standby_Start;
-
-
                 }
                 catch (Exception e)
                 {
@@ -319,6 +318,8 @@ namespace ThrustVectoringUI.ViewModels
                 KontrolPaneli.PitchSeriesCollection[1].Values.RemoveAt(0);
             }
 
+            //KontrolPaneli.ServoError = r.Next(-1, 2);
+
         }
 
         private bool CmdKaydetCanExecute(object arg)
@@ -344,7 +345,7 @@ namespace ThrustVectoringUI.ViewModels
                 sw = new StreamWriter(fs, Encoding.Default);
                 sw.Write("1.Time \r\n2.MotorStatus \r\n3.KumandaThrottle \r\n4.KumandaTrim \r\n5.ArduThrottle \r\n6.ArduTrim \r\n" +
                     "7.MotorThrottle \r\n8.Thrust \r\n9.RefRPM \r\n10.MotorRPM \r\n11.EGT \r\n12.BatteryVoltage \r\n13.PumpVoltage \r\n14.Fuel" +
-                    "\r\n15.Roll \r\n16.RollRef \r\n17.RollTemp \r\n18.Pitch \r\n19.PitchRef \r\n20.PitchTemp \r\n" + 
+                    "\r\n15.Roll \r\n16.RollRef \r\n17.RollTemp \r\n18.Pitch \r\n19.PitchRef \r\n20.PitchTemp \r\n21.ServoError \r\n" + 
                     "veri" + s + "= [");
                 KontrolPaneli.KayitYap = true;
             }
@@ -360,8 +361,7 @@ namespace ThrustVectoringUI.ViewModels
 
                 string receivedData = KontrolPaneli.MySerialPort.ReadLine();
                 
-                //%1#32#0#32#40#7300#7432#77#11.3#3.9#92
-                if (receivedData[0] == '%') // if Angle datas are received
+                if (receivedData[0] == '%') // if datas are received
                 {
                     receivedData = receivedData.Remove(0, 1);
                     string[] datas = receivedData.Split('#');
@@ -392,31 +392,34 @@ namespace ThrustVectoringUI.ViewModels
                     KontrolPaneli.CurrentPitchRef = float.Parse(datas[15], CultureInfo.InvariantCulture.NumberFormat);
                     KontrolPaneli.PitchTemp = float.Parse(datas[16], CultureInfo.InvariantCulture.NumberFormat);
 
+                    KontrolPaneli.ServoError = int.Parse(datas[17], CultureInfo.InvariantCulture.NumberFormat);
+
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
 
                     if (KontrolPaneli.KayitYap)
                     {
                         // BURADA DEĞİŞİKLİK YAPINCA CmdKaydetExecute İÇİNDE SIRALAMAYI BELİRTEN YERDE DEĞİŞİKLİK YAPMAYI UNUTMA
-                        sw.Write(KontrolPaneli.Time.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                (int) KontrolPaneli.MotorStatus+ "," +
-                                KontrolPaneli.KumandaThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.KumandaTrim.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.ArduThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.ArduTrim.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.MotorThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.Thrust.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.ReferenceRPM.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.MotorRPM.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.EGT.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.BatteryVoltage.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.PumpVoltage.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.CurrentRoll.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.CurrentRollRef.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.RollTemp.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.CurrentPitch.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.CurrentPitchRef.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.PitchTemp.ToString(CultureInfo.InvariantCulture.NumberFormat) +";" + 
+                        sw.Write(KontrolPaneli.Time.ToString(CultureInfo.InvariantCulture.NumberFormat)             + "," +
+                                (int) KontrolPaneli.MotorStatus                                                     + "," +
+                                KontrolPaneli.KumandaThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat)   + "," +
+                                KontrolPaneli.KumandaTrim.ToString(CultureInfo.InvariantCulture.NumberFormat)       + "," +
+                                KontrolPaneli.ArduThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat)      + "," +
+                                KontrolPaneli.ArduTrim.ToString(CultureInfo.InvariantCulture.NumberFormat)          + "," +
+                                KontrolPaneli.MotorThrottle.ToString(CultureInfo.InvariantCulture.NumberFormat)     + "," +
+                                KontrolPaneli.Thrust.ToString(CultureInfo.InvariantCulture.NumberFormat)            + "," +
+                                KontrolPaneli.ReferenceRPM.ToString(CultureInfo.InvariantCulture.NumberFormat)      + "," +
+                                KontrolPaneli.MotorRPM.ToString(CultureInfo.InvariantCulture.NumberFormat)          + "," +
+                                KontrolPaneli.EGT.ToString(CultureInfo.InvariantCulture.NumberFormat)               + "," +
+                                KontrolPaneli.BatteryVoltage.ToString(CultureInfo.InvariantCulture.NumberFormat)    + "," +
+                                KontrolPaneli.PumpVoltage.ToString(CultureInfo.InvariantCulture.NumberFormat)       + "," +
+                                KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat)              + "," +
+                                KontrolPaneli.CurrentRoll.ToString(CultureInfo.InvariantCulture.NumberFormat)       + "," +
+                                KontrolPaneli.CurrentRollRef.ToString(CultureInfo.InvariantCulture.NumberFormat)    + "," +
+                                KontrolPaneli.RollTemp.ToString(CultureInfo.InvariantCulture.NumberFormat)          + "," +
+                                KontrolPaneli.CurrentPitch.ToString(CultureInfo.InvariantCulture.NumberFormat)      + "," +
+                                KontrolPaneli.CurrentPitchRef.ToString(CultureInfo.InvariantCulture.NumberFormat)   + "," +
+                                KontrolPaneli.PitchTemp.ToString(CultureInfo.InvariantCulture.NumberFormat)         + "," +
+                                KontrolPaneli.ServoError.ToString(CultureInfo.InvariantCulture.NumberFormat)        + ";" + 
                                 Environment.NewLine);
                     }
                 }

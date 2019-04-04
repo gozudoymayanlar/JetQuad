@@ -1,2 +1,2 @@
-# User Interface
-Jet Motor test düzeneğinin arayüz programı
+﻿# User Interface
+Jet motor ve eğme mekanizmasının test arayüz programı

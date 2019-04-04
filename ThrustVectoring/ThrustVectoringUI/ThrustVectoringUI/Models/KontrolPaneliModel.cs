@@ -72,6 +72,8 @@ namespace ThrustVectoringUI.Models
         private float _rollTemp;
         private float _pitchTemp;
         private DateTime _startingDate;
+
+        private int _servoError;
         #endregion
 
         #region PUBLIC PROPERTIES
@@ -282,6 +284,12 @@ namespace ThrustVectoringUI.Models
                 OnPropertyChanged(nameof(CurrentPitchRef));
                 PitchSeriesCollection[1].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
             }
+        }
+
+        public int ServoError
+        {
+            get { return _servoError; }
+            set { _servoError = value; OnPropertyChanged(nameof(ServoError)); }
         }
         #endregion
 

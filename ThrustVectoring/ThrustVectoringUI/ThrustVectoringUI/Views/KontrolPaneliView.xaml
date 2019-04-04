@@ -612,15 +612,18 @@
                                Source="/Resources/itü.png"/>-->
                     </Grid>
                 </Canvas>
-                <Image Grid.Row="1" Height="130" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 120 130 0"  Source="/ThrustVectoringUI;component/Resources/itu_transparentBack.png" Opacity="0.4"/>
+                
+                <!-- ITU AMBLEM -->
+                <Image Grid.Row="1" Height="130" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 120 320 0"  Source="/ThrustVectoringUI;component/Resources/itu_transparentBack.png" Opacity="0.4"/>
+                
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1.7*"/>
-                        <ColumnDefinition Width="1.4*"/>
+                        <ColumnDefinition Width="255*"/>
+                        <ColumnDefinition Width="537*"/>
+                        <ColumnDefinition Width="574*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <StackPanel Orientation="Horizontal" Margin="50 30 50 0">
+                    <StackPanel Grid.Column="0" Margin="0,0,0.2,-0.2">
+                        <StackPanel Orientation="Horizontal" Margin="10 30 10 0">
                             <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=KontrolPaneli.Baudrate, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 0" HorizontalAlignment="Left" Width="110" FontSize="20" SelectedIndex="2">
                                 <ComboBoxItem Content="9600"/>
                                 <ComboBoxItem Content="19200"/>
@@ -639,76 +642,28 @@
                             </ComboBox>
                         </StackPanel>
 
-                        <Button Command="{Binding CmdBaglan}" Tag="{Binding KontrolPaneli.Baglanti}" Margin="50 20 50 0" Height="75" FontSize="24" >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="BaglantiYok">
-                                            <Setter Property="Content" Value="Bağlan"/>
-                                            <Setter Property="Background" Value="Green"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="Bagli">
-                                            <Setter Property="Content" Value="Bağlantıyı Kes"/>
-                                            <Setter Property="Background" Value="Red"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="HataliVeri">
-                                            <Setter Property="Background" Value="Red"/>
-                                            <Setter Property="Content" Value="Bağlantıyı Kes"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
-                            <Button Content="Motor Başlat" Command="{Binding CmdMotorBaslat}" Tag="{Binding KontrolPaneli.MotorStatus}" 
-                            Margin="0 0 0 0" Height="75" FontSize="24">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 10 0 0">
+                            <Button Command="{Binding CmdBaglan}" Tag="{Binding KontrolPaneli.Baglanti}" Margin="10 0 0 0" Width="110" FontSize="16">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="BaglantiYok">
-                                                <Setter Property="Background" Value="Gray"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Off">
-                                                <Setter Property="Background" Value="LightGray"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Standby_Start">
+                                            <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="BaglantiYok">
+                                                <Setter Property="Content" Value="Bağlan"/>
                                                 <Setter Property="Background" Value="Green"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="PreHeat1">
-                                                <Setter Property="Background" Value="Yellow"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="PreHeat2">
-                                                <Setter Property="Background" Value="Orange"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="MainF_On">
+                                            <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="Bagli">
+                                                <Setter Property="Content" Value="Bağlantıyı Kes"/>
                                                 <Setter Property="Background" Value="Red"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="AccelDly">
+                                            <DataTrigger Binding="{Binding KontrolPaneli.Baglanti}" Value="HataliVeri">
                                                 <Setter Property="Background" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Ker_Full">
-                                                <Setter Property="Background" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Stabil">
-                                                <Setter Property="Background" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="LearnLO">
-                                                <Setter Property="Background" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Run">
-                                                <Setter Property="Background" Value="Red"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Auto_Off">
-                                                <Setter Property="Background" Value="Gray"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Slow_Down">
-                                                <Setter Property="Background" Value="Gray"/>
+                                                <Setter Property="Content" Value="Bağlantıyı Kes"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Button Margin="20 0 0 0" Height="75" Command="{Binding CmdKaydet}">
+                            <Button Margin="10 0 0 0" Width="110" Command="{Binding CmdKaydet}">
                                 <Image Height="70" Stretch="Uniform" Tag="{Binding KontrolPaneli.KayitYap}">
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -724,63 +679,95 @@
                                     </Image.Style>
                                 </Image>
                             </Button>
-
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <StackPanel Margin="0 0 0 0">
-                                <TextBlock Text="Throttle" FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 15 0 0"/>
-                                <Slider Value="{Binding KontrolPaneli.KumandaThrottle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Orientation="Vertical" Height="100" Margin="0 10 0 0" HorizontalAlignment="Center"
-                            TickPlacement="Both" Maximum="100" Minimum="0" TickFrequency="10"
-                            SmallChange="5" LargeChange="25" Style="{DynamicResource SliderStyle1}" MouseWheel="Slider_MouseWheel">
-                                    <!-- Timer kullandığım için aşağısını kullanmıyorum-->
-                                    <!--<i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="ValueChanged">
-                                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="SendThrottle"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>-->
+                        
+                        <Button Content="Motor Başlat" Command="{Binding CmdMotorBaslat}" Tag="{Binding KontrolPaneli.MotorStatus}" 
+                            Margin="0 0 0 0" Height="75" FontSize="24" Visibility="Collapsed">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="BaglantiYok">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Off">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Standby_Start">
+                                            <Setter Property="Background" Value="Green"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="PreHeat1">
+                                            <Setter Property="Background" Value="Yellow"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="PreHeat2">
+                                            <Setter Property="Background" Value="Orange"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="MainF_On">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="AccelDly">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Ker_Full">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Stabil">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="LearnLO">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Run">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Auto_Off">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.MotorStatus}" Value="Slow_Down">
+                                            <Setter Property="Background" Value="Gray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Fuel LC: " FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding KontrolPaneli.Fuel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 0 0 0"/>
+                                <TextBlock Text="Kg"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                            </StackPanel>
+                            <Grid HorizontalAlignment="Center">
+                                <Image Height="275" Width="100" VerticalAlignment="Bottom" Margin="0 0 0 13"
+                                    Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill" 
+                                    RenderTransformOrigin="0.5,0.5" Opacity="0.7">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+                                <Slider Value="{Binding KontrolPaneli.Fuel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Orientation="Vertical" Height="100" HorizontalAlignment="Center"
+                                    TickPlacement="Both" Minimum="0" Style="{DynamicResource SliderStyle1}" SmallChange="1">
                                     <Slider.LayoutTransform>
                                         <ScaleTransform ScaleX="3" ScaleY="3"/>
                                     </Slider.LayoutTransform>
                                 </Slider>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding KontrolPaneli.KumandaThrottle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                    <TextBlock Text="%"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 5 0 0"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding KontrolPaneli.ArduThrottle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                    <TextBlock Text="%"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 5 0 0"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel Margin="20 80 0 0" Width="110">
-                                <TextBlock Text="Trim" FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 15 0 0"/>
-                                <Slider Value="{Binding KontrolPaneli.KumandaTrim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Orientation="Vertical" Height="70" Margin="0 10 0 0" HorizontalAlignment="Center"
-                            TickPlacement="Both" Maximum="100" Minimum="0" TickFrequency="25"
-                            SmallChange="10" LargeChange="20" Style="{DynamicResource SliderStyle1}" MouseWheel="Slider_MouseWheel">
-                                    <!-- Timer kullandığım için aşağısını kullanmıyorum-->
-                                    <!--<i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="ValueChanged">
-                                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="SendThrottle"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>-->
-                                    <Slider.LayoutTransform>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                    </Slider.LayoutTransform>
-                                </Slider>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding KontrolPaneli.KumandaTrim, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                    <TextBlock Text="%"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 5 0 0"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding KontrolPaneli.ArduTrim, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 5 0 0"/>
-                                    <TextBlock Text="%"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 5 0 0"/>
-                                </StackPanel>
-                            </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5 15 5 0">
+                            <Image Height="50" Source="/ThrustVectoringUI;component/Resources/battery.png"/>
+                            <TextBlock Text="Batarya [V]:" Margin="5 0 0 0" Width="130" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                            <TextBlock Text="{Binding KontrolPaneli.BatteryVoltage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                            <Image Height="50" Source="/ThrustVectoringUI;component/Resources/pump.png"/>
+                            <TextBlock Text="Pompa [V]:" Margin="5 0 0 0" Width="130" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                            <TextBlock Text="{Binding KontrolPaneli.PumpVoltage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        
+
                         <agc:Gauge Height="300" Width="450" Margin="0 35 0 0" HorizontalAlignment="Center" VerticalAlignment="Top"
                             AngleBegin="190" AngleEnd="-10" AdjacentPadding="5" Fill="Transparent" ArcPadding="0" LightDirection="0">
                             <agc:Gauge.PrimaryScale>
@@ -812,96 +799,173 @@
                         <TextBlock Text="Motor Throttle:" Margin="5 0 0 0" Width="170" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
                         <TextBlock Text="{Binding KontrolPaneli.MotorThrottle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
                     </StackPanel>-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 15 0 0">
-                            <TextBlock Text="Thrust LC: " FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 0 0 0"/>
-                            <TextBlock Text="{Binding KontrolPaneli.Thrust, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center"/>
-                            <TextBlock Text=" N"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 0 0 0"/>
-                            <TextBlock Text="EGT: " FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="50 0 0 0"/>
-                            <TextBlock Text="{Binding KontrolPaneli.EGT, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center"/>
-                            <TextBlock Text=" °C"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center"/>
-                            <TextBlock Text="Fuel LC: " FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="50 0 0 0"/>
-                            <TextBlock Text="{Binding KontrolPaneli.Fuel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 0 0 0"/>
-                            <TextBlock Text="Kg"  FontSize="30" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+
+                        <!-- butun sliderlarin ve basliklarinin oldugu alan-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+
+                            <!-- Throttle-->
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Throttle" FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding KontrolPaneli.ArduThrottle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="25" Foreground="#3C3D95"/>
+                                    <TextBlock Text="%"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Slider Value="{Binding KontrolPaneli.ArduThrottle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Orientation="Vertical" Height="100" HorizontalAlignment="Center"
+                                        TickPlacement="BottomRight" Maximum="200" Minimum="0" TickFrequency="10">
+                                        <Slider.LayoutTransform>
+                                            <ScaleTransform ScaleX="3" ScaleY="3"/>
+                                        </Slider.LayoutTransform>
+                                    </Slider>
+                                    <Image Height="275" Width="20" VerticalAlignment="Bottom" Margin="-17 0 0 13"
+                                        Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill"
+                                        Opacity="0.7"/>
+                                </StackPanel>
+                            </StackPanel>
+
+
+                            <!-- thrust lc-->
+                            <StackPanel HorizontalAlignment="Center" Margin='30 0 0 0'>
+                                <TextBlock Text="Thrust LC" FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation='Horizontal' HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding KontrolPaneli.Thrust, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                    <TextBlock Text=" N"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Slider Value="{Binding KontrolPaneli.Thrust, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Orientation="Vertical" Height="100" HorizontalAlignment="Center"
+                                        TickPlacement="BottomRight" Maximum="200" Minimum="0" TickFrequency="10">
+                                        <Slider.LayoutTransform>
+                                            <ScaleTransform ScaleX="3" ScaleY="3"/>
+                                        </Slider.LayoutTransform>
+                                    </Slider>
+                                    <Image Height="275" Width="20" VerticalAlignment="Bottom" Margin="-17 0 0 13"
+                                        Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill"
+                                        Opacity="0.7"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- EGT-->
+                            <StackPanel HorizontalAlignment="Center" Margin='30 0 0 0'>
+                                <TextBlock Text="EGT" FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding KontrolPaneli.EGT, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                    <TextBlock Text=" °C"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Grid HorizontalAlignment="Center">
+                                    <Image Height="275" Width="50" VerticalAlignment="Bottom" Margin="0 0 0 13" 
+                                        Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill"
+                                        Opacity="0.7"/>
+                                    <Slider Value="{Binding KontrolPaneli.EGT, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Orientation="Vertical" Height="100" HorizontalAlignment="Center"
+                                        TickPlacement="Both" Maximum="1400" Minimum="-20" TickFrequency="142" Style="{DynamicResource SliderStyle1}" SmallChange="1">
+                                        <Slider.LayoutTransform>
+                                            <ScaleTransform ScaleX="3" ScaleY="3"/>
+                                        </Slider.LayoutTransform>
+                                    </Slider>
+                                </Grid>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Slider Value="{Binding KontrolPaneli.Thrust, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                            Orientation="Vertical" Height="100" Margin="0 10 0 0" HorizontalAlignment="Center"
-                            TickPlacement="BottomRight" Maximum="200" Minimum="0" TickFrequency="10">
-                                <Slider.LayoutTransform>
-                                    <ScaleTransform ScaleX="3" ScaleY="3"/>
-                                </Slider.LayoutTransform>
-                            </Slider>
-                            <Image Height="275" Width="20" VerticalAlignment="Bottom" Margin="-17 0 0 13"
-                               Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill"
-                               Opacity="0.7"/>
-                            <Image Height="275" Width="50" VerticalAlignment="Bottom" Margin="100 0 0 13" 
-                               Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill"
-                               Opacity="0.7"/>
-                            <Slider Value="{Binding KontrolPaneli.EGT, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                            Orientation="Vertical" Height="100" Margin="-75 10 0 0" HorizontalAlignment="Center"
-                            TickPlacement="Both" Maximum="1400" Minimum="-20" TickFrequency="142" Style="{DynamicResource SliderStyle1}" SmallChange="1">
-                                <Slider.LayoutTransform>
-                                    <ScaleTransform ScaleX="3" ScaleY="3"/>
-                                </Slider.LayoutTransform>
-                            </Slider>
-                            <Image Height="275" Width="100" VerticalAlignment="Bottom" Margin="100 0 0 13"
-                               Source="/ThrustVectoringUI;component/Resources/linearBar.png" Stretch="Fill" 
-                               RenderTransformOrigin="0.5,0.5" Opacity="0.7">
-                                <Image.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleY="-1" ScaleX="1"/>
-                                    </TransformGroup>
-                                </Image.RenderTransform>
-                            </Image>
-                            <Slider Value="{Binding KontrolPaneli.Fuel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                            Orientation="Vertical" Height="100" Margin="-108 10 0 0" HorizontalAlignment="Center"
-                            TickPlacement="Both" Minimum="0" Style="{DynamicResource SliderStyle1}" SmallChange="1">
-                                <Slider.LayoutTransform>
-                                    <ScaleTransform ScaleX="3" ScaleY="3"/>
-                                </Slider.LayoutTransform>
-                            </Slider>
-                        </StackPanel>
+                        <!-- butun sliderlarin bittigi yer-->
+
                     </StackPanel>
-                    <StackPanel Grid.Column="3">
-                        <StackPanel Orientation="Horizontal" Margin="5 30 5 0">
-                            <Image Height="50" Source="/ThrustVectoringUI;component/Resources/battery.png"/>
-                            <TextBlock Text="Batarya [V]:" Margin="5 0 0 0" Width="130" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
-                            <TextBlock Text="{Binding KontrolPaneli.BatteryVoltage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                    <StackPanel Grid.Column="2" Margin="0 20 0 0">
+                        <!--Roll grafigi ve sicakligi-->
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">
+                                <!-- Roll Temp.-->
+                                <TextBlock Text="Roll Temp." FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding KontrolPaneli.RollTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center" Margin="0 5 0 0"/>
+                                    <TextBlock Text="°C"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Slider Value="{Binding KontrolPaneli.RollTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Orientation="Vertical" Height="75" HorizontalAlignment="Center"
+                                    TickPlacement="Both" Maximum="100" Minimum="0" TickFrequency="10"
+                                    Style="{DynamicResource SliderStyle1}" MouseWheel="Slider_MouseWheel">
+                                    <!-- Timer kullandığım için aşağısını kullanmıyorum-->
+                                    <!--<i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="ValueChanged">
+                                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="SendThrottle"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>-->
+                                    <Slider.LayoutTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3"/>
+                                    </Slider.LayoutTransform>
+                                </Slider>
+                            </StackPanel>
+                            <lvc:CartesianChart Series="{Binding KontrolPaneli.RollSeriesCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LegendLocation="Right" Width='415' Height="300">
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Roll Position [°]" FontSize="15" Foreground="#3C3D95"></lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis DisableAnimations="True" Labels=" " >
+                                        <!--LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">-->
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="True" Step="{Binding Step, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></lvc:Separator>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                            </lvc:CartesianChart>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                            <Image Height="50" Source="/ThrustVectoringUI;component/Resources/pump.png"/>
-                            <TextBlock Text="Pompa [V]:" Margin="5 0 0 0" Width="130" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
-                            <TextBlock Text="{Binding KontrolPaneli.PumpVoltage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+
+                        <!--Pitch grafigi ve sicakligi-->
+                        <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
+                            <!-- Pitch Temp. -->
+                            <StackPanel HorizontalAlignment='Center' Width="150">
+                                <TextBlock Text="Pitch Temp." FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding KontrolPaneli.PitchTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="°C"  FontSize="25" Foreground="#3C3D95" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Slider Value="{Binding KontrolPaneli.PitchTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        Orientation="Vertical" Height="75" HorizontalAlignment="Center"
+                            TickPlacement="Both" Maximum="100" Minimum="0" TickFrequency="10"
+                            Style="{DynamicResource SliderStyle1}" MouseWheel="Slider_MouseWheel">
+                                    <!-- Timer kullandığım için aşağısını kullanmıyorum-->
+                                    <!--<i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="ValueChanged">
+                                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="SendThrottle"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>-->
+                                    <Slider.LayoutTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3"/>
+                                    </Slider.LayoutTransform>
+                                </Slider>
+                            </StackPanel>
+                            <lvc:CartesianChart Series="{Binding KontrolPaneli.PitchSeriesCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LegendLocation="Right" Width="413" Height="330">
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Pitch Position [°]" FontSize="15" Foreground="#3C3D95"></lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Time [s]" LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="True" Step="{Binding Step, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></lvc:Separator>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                            </lvc:CartesianChart>
                         </StackPanel>
-                        <lvc:CartesianChart Series="{Binding KontrolPaneli.RollSeriesCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LegendLocation="Right" Height="265">
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Position [°]" FontSize="15" Foreground="#3C3D95"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis DisableAnimations="True" Labels=" " >
-                                    <!--LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">-->
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="True" Step="{Binding Step, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></lvc:Separator>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                        </lvc:CartesianChart>
-                        <lvc:CartesianChart Series="{Binding KontrolPaneli.PitchSeriesCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LegendLocation="Right" Height="300">
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Position [°]" FontSize="15" Foreground="#3C3D95"></lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Time [s]" LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="True" Step="{Binding Step, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></lvc:Separator>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                        </lvc:CartesianChart>
-                        <!--<Image Height="150" Stretch="Uniform" HorizontalAlignment="Center" Margin="0 30 0 0"  Source="/ThrustVectoringUI;component/Resources/itu_transparentBack.png"/>-->
+                        
+                        <!-- ServoError image -->
+                        <Image Tag="{Binding KontrolPaneli.ServoError}" Width="150" Height="58" Stretch="Fill" HorizontalAlignment="Center">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.ServoError}" Value="0">
+                                            <Setter Property="Source" Value="/ThrustVectoringUI;component/Resources/yesilKucuk.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding KontrolPaneli.ServoError}" Value="1">
+                                            <Setter Property="Source" Value="/ThrustVectoringUI;component/Resources/kirmiziBuyuk.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </StackPanel>
                 </Grid>
-                
+                 <!-- BÖRÜ NIGHTHAWK -->
                 <Image Grid.Row="1" Height="40" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 -20 5" Source="/ThrustVectoringUI;component/Resources/börü.png" Opacity="0.25"/>
             </Grid>
         </Viewbox>
