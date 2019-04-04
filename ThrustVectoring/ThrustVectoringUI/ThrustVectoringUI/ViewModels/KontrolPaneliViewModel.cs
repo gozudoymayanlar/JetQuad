@@ -49,7 +49,7 @@ namespace ThrustVectoringUI.ViewModels
 
         private bool _alreadySendingThrottle = false;
 
-        private double _step = TimeSpan.FromMilliseconds(100).Ticks;
+        private double _step;
         private Func<double, string> _formatter;
         #endregion
 
@@ -71,7 +71,7 @@ namespace ThrustVectoringUI.ViewModels
             //    .X(dateTimePoint => dateTimePoint.DateTime.ToOADate())
             //    .Y(dateTimePoint => dateTimePoint.Value);
 
-            Step = TimeSpan.FromMilliseconds(250).Ticks;
+            Step = TimeSpan.FromSeconds(1).Ticks;
 
             var dayConfig = Mappers.Xy<DateTimePoint>()
                 .X(dateTimePoint => dateTimePoint.DateTime.Ticks)
@@ -156,7 +156,8 @@ namespace ThrustVectoringUI.ViewModels
                     }
                 }
             };
-            Formatter = value => new DateTime((long)value).ToString("mm:ss:fff");
+           
+            Formatter = value => new DateTime((long)value).ToString("mm:ss");
             //Formatter = value => new DateTime((long)(value * TimeSpan.FromHours(1).Ticks)).ToString("t");
         }
 
@@ -238,7 +239,7 @@ namespace ThrustVectoringUI.ViewModels
 
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
                     MyStopwatch.Start();
-                    KontrolPaneli.Timer.Start();
+                    //KontrolPaneli.Timer.Start();
                     KontrolPaneli.MotorStatus = EnumMotorStatus.Standby_Start;
                 }
                 catch (Exception e)
@@ -299,24 +300,24 @@ namespace ThrustVectoringUI.ViewModels
             KontrolPaneli.CurrentPitchRef = r.Next(-60, 60);
 
 
-            while (((DateTimePoint)KontrolPaneli.RollSeriesCollection[0].Values[KontrolPaneli.RollSeriesCollection[0].Values.Count - 1]).DateTime.Ticks - ((DateTimePoint)KontrolPaneli.RollSeriesCollection[0].Values[0]).DateTime.Ticks > TimeSpan.FromSeconds(1).Ticks
-                && KontrolPaneli.RollSeriesCollection[0].Values.Count > 2)
-            {
-                KontrolPaneli.RollSeriesCollection[0].Values.RemoveAt(0);
-                KontrolPaneli.RollSeriesCollection[1].Values.RemoveAt(0);
+            //while (((DateTimePoint)KontrolPaneli.RollSeriesCollection[0].Values[KontrolPaneli.RollSeriesCollection[0].Values.Count - 1]).DateTime.Ticks - ((DateTimePoint)KontrolPaneli.RollSeriesCollection[0].Values[0]).DateTime.Ticks > TimeSpan.FromSeconds(1).Ticks
+            //    && KontrolPaneli.RollSeriesCollection[0].Values.Count > 2)
+            //{
+            //    KontrolPaneli.RollSeriesCollection[0].Values.RemoveAt(0);
+            //    KontrolPaneli.RollSeriesCollection[1].Values.RemoveAt(0);
 
-                KontrolPaneli.PitchSeriesCollection[0].Values.RemoveAt(0);
-                KontrolPaneli.PitchSeriesCollection[1].Values.RemoveAt(0);
-            }
+            //    KontrolPaneli.PitchSeriesCollection[0].Values.RemoveAt(0);
+            //    KontrolPaneli.PitchSeriesCollection[1].Values.RemoveAt(0);
+            //}
 
-            if (KontrolPaneli.RollSeriesCollection[0].Values.Count > 10)
-            {
-                KontrolPaneli.RollSeriesCollection[0].Values.RemoveAt(0);
-                KontrolPaneli.RollSeriesCollection[1].Values.RemoveAt(0);
+            //if (KontrolPaneli.RollSeriesCollection[0].Values.Count > 10)
+            //{
+            //    KontrolPaneli.RollSeriesCollection[0].Values.RemoveAt(0);
+            //    KontrolPaneli.RollSeriesCollection[1].Values.RemoveAt(0);
 
-                KontrolPaneli.PitchSeriesCollection[0].Values.RemoveAt(0);
-                KontrolPaneli.PitchSeriesCollection[1].Values.RemoveAt(0);
-            }
+            //    KontrolPaneli.PitchSeriesCollection[0].Values.RemoveAt(0);
+            //    KontrolPaneli.PitchSeriesCollection[1].Values.RemoveAt(0);
+            //}
 
             //KontrolPaneli.ServoError = r.Next(-1, 2);
 

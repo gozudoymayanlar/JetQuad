@@ -682,7 +682,7 @@
                         </StackPanel>
                         
                         <Button Content="Motor Başlat" Command="{Binding CmdMotorBaslat}" Tag="{Binding KontrolPaneli.MotorStatus}" 
-                            Margin="0 0 0 0" Height="75" FontSize="24" Visibility="Collapsed">
+                            Margin="0 0 0 0" Height="75" FontSize="24" Visibility="Visible">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Style.Triggers>
@@ -939,7 +939,7 @@
                                     <lvc:Axis Title="Pitch Position [°]" FontSize="15" Foreground="#3C3D95"></lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
                                 <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis Title="Time [s]" LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">
+                                    <lvc:Axis DisableAnimations="True" Title="Time [s]" LabelFormatter="{Binding Formatter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LabelsRotation="45" FontSize="15" Foreground="#3C3D95">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator IsEnabled="True" Step="{Binding Step, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></lvc:Separator>
                                         </lvc:Axis.Separator>

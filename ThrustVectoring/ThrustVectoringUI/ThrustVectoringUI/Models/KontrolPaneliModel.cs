@@ -74,6 +74,8 @@ namespace ThrustVectoringUI.Models
         private DateTime _startingDate;
 
         private int _servoError;
+
+        private int _grafikteGosterilecekSaniye = 3;
         #endregion
 
         #region PUBLIC PROPERTIES
@@ -253,6 +255,10 @@ namespace ThrustVectoringUI.Models
             {   _currentRoll = value;
                 OnPropertyChanged(nameof(CurrentRoll));
                 RollSeriesCollection[0].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
+                if (RollSeriesCollection[0].Values.Count > 15 * _grafikteGosterilecekSaniye)
+                {
+                    RollSeriesCollection[0].Values.RemoveAt(0);
+                }
             }
         }
 
@@ -263,6 +269,10 @@ namespace ThrustVectoringUI.Models
             {   _currentRollRef = value;
                 OnPropertyChanged(nameof(CurrentRollRef));
                 RollSeriesCollection[1].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
+                if (RollSeriesCollection[1].Values.Count > 15 * _grafikteGosterilecekSaniye)
+                {
+                    RollSeriesCollection[1].Values.RemoveAt(0);
+                }
             }
         }
 
@@ -273,6 +283,10 @@ namespace ThrustVectoringUI.Models
             {   _currentPitch = value;
                 OnPropertyChanged(nameof(CurrentPitch));
                 PitchSeriesCollection[0].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
+                if (PitchSeriesCollection[0].Values.Count > 15 * _grafikteGosterilecekSaniye)
+                {
+                    PitchSeriesCollection[0].Values.RemoveAt(0);
+                }
             }
         }
 
@@ -283,6 +297,10 @@ namespace ThrustVectoringUI.Models
             {   _currentPitchRef = value;
                 OnPropertyChanged(nameof(CurrentPitchRef));
                 PitchSeriesCollection[1].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
+                if (PitchSeriesCollection[1].Values.Count > 15 * 3)
+                {
+                    PitchSeriesCollection[1].Values.RemoveAt(0);
+                }
             }
         }
 
