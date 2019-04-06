@@ -50,6 +50,7 @@ namespace ThrustVectoringUI.ViewModels
         private bool _alreadySendingThrottle = false;
 
         private double _step;
+        private double[] _labels;
         private Func<double, string> _formatter;
         #endregion
 
@@ -60,8 +61,7 @@ namespace ThrustVectoringUI.ViewModels
             _cmdKaydet = new RelayCommand(CmdKaydetExecute, CmdKaydetCanExecute);
 
             KontrolPaneli = new KontrolPaneliModel();
-            KontrolPaneli.StartingDate = new DateTime();
-            KontrolPaneli.ServoError = 1;
+            
 
             //var dayConfig = Mappers.Xy<DateTimePoint>()
             //    .X(dateTimePoint => (double)dateTimePoint.DateTime.Ticks / TimeSpan.FromHours(1).Ticks)
@@ -71,7 +71,7 @@ namespace ThrustVectoringUI.ViewModels
             //    .X(dateTimePoint => dateTimePoint.DateTime.ToOADate())
             //    .Y(dateTimePoint => dateTimePoint.Value);
 
-            Step = TimeSpan.FromSeconds(1).Ticks;
+            
 
             var dayConfig = Mappers.Xy<DateTimePoint>()
                 .X(dateTimePoint => dateTimePoint.DateTime.Ticks)
@@ -82,8 +82,9 @@ namespace ThrustVectoringUI.ViewModels
                 new LineSeries
                 {
                     Title = "Roll",
-                    DataLabels = true,
+                    //DataLabels = true,
                     //Values = new ChartValues<DateTimePoint> { }
+                    
                     Values = new ChartValues<DateTimePoint>
                     {
                         new DateTimePoint
@@ -122,7 +123,7 @@ namespace ThrustVectoringUI.ViewModels
                 new LineSeries
                 {
                     Title = "Pitch",
-                    DataLabels = true,
+                    //DataLabels = true,
                     Values = new ChartValues<DateTimePoint>
                     {
                         new DateTimePoint
@@ -156,7 +157,8 @@ namespace ThrustVectoringUI.ViewModels
                     }
                 }
             };
-           
+            Step = TimeSpan.FromSeconds(3).Ticks;
+            Labels = new double[] { -45, -30, -15, 0, 15, 30, 45 };
             Formatter = value => new DateTime((long)value).ToString("mm:ss");
             //Formatter = value => new DateTime((long)(value * TimeSpan.FromHours(1).Ticks)).ToString("t");
         }
@@ -192,6 +194,19 @@ namespace ThrustVectoringUI.ViewModels
             get { return _step; }
             set { _step = value; OnPropertyChanged(nameof(Step)); }
         }
+
+        public double[] Labels
+        {
+            get
+            {
+                return _labels;
+            }
+
+            set
+            {
+                _labels = value; OnPropertyChanged(nameof(Labels));
+            }
+        }
         #endregion
 
         #region METHODS
@@ -206,6 +221,9 @@ namespace ThrustVectoringUI.ViewModels
         {
             if (KontrolPaneli.Baglanti >= EnumBaglanti.Bagli)   // eğer bağlantı zaten varsa, bağlantıyı kes
             {
+                KontrolPaneli.MySerialPort.DiscardInBuffer();
+                KontrolPaneli.MySerialPort.DiscardOutBuffer();
+
                 KontrolPaneli.Timer.Stop();
                 KontrolPaneli.Timer.Elapsed -= Timer_Elapsed;
 
@@ -239,7 +257,7 @@ namespace ThrustVectoringUI.ViewModels
 
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
                     MyStopwatch.Start();
-                    KontrolPaneli.Timer.Start();
+                    //KontrolPaneli.Timer.Start();
                     KontrolPaneli.MotorStatus = EnumMotorStatus.Standby_Start;
                 }
                 catch (Exception e)
@@ -346,7 +364,7 @@ namespace ThrustVectoringUI.ViewModels
                 sw = new StreamWriter(fs, Encoding.Default);
                 sw.Write("1.Time \r\n2.MotorStatus \r\n3.KumandaThrottle \r\n4.KumandaTrim \r\n5.ArduThrottle \r\n6.ArduTrim \r\n" +
                     "7.MotorThrottle \r\n8.Thrust \r\n9.RefRPM \r\n10.MotorRPM \r\n11.EGT \r\n12.BatteryVoltage \r\n13.PumpVoltage \r\n14.Fuel" +
-                    "\r\n15.Roll \r\n16.RollRef \r\n17.RollTemp \r\n18.Pitch \r\n19.PitchRef \r\n20.PitchTemp \r\n21.ServoError \r\n" + 
+                    "\r\n15.Roll \r\n16.RollRef \r\n17.RollTemp \r\n18.Pitch \r\n19.PitchRef \r\n20.PitchTemp \r\n21.ServoError \r\n21.RollAkim \r\n22.PitchAkim \r\n" + 
                     "veri" + s + "= [");
                 KontrolPaneli.KayitYap = true;
             }
@@ -395,6 +413,9 @@ namespace ThrustVectoringUI.ViewModels
 
                     KontrolPaneli.ServoError = int.Parse(datas[17], CultureInfo.InvariantCulture.NumberFormat);
 
+                    KontrolPaneli.RollAkim = float.Parse(datas[18], CultureInfo.InvariantCulture.NumberFormat);
+                    KontrolPaneli.PitchAkim = float.Parse(datas[19], CultureInfo.InvariantCulture.NumberFormat);
+
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
 
                     if (KontrolPaneli.KayitYap)
@@ -420,7 +441,9 @@ namespace ThrustVectoringUI.ViewModels
                                 KontrolPaneli.CurrentPitch.ToString(CultureInfo.InvariantCulture.NumberFormat)      + "," +
                                 KontrolPaneli.CurrentPitchRef.ToString(CultureInfo.InvariantCulture.NumberFormat)   + "," +
                                 KontrolPaneli.PitchTemp.ToString(CultureInfo.InvariantCulture.NumberFormat)         + "," +
-                                KontrolPaneli.ServoError.ToString(CultureInfo.InvariantCulture.NumberFormat)        + ";" + 
+                                KontrolPaneli.ServoError.ToString(CultureInfo.InvariantCulture.NumberFormat)        + ","+
+                                KontrolPaneli.RollAkim.ToString(CultureInfo.InvariantCulture.NumberFormat)        + ","+
+                                KontrolPaneli.PitchAkim.ToString(CultureInfo.InvariantCulture.NumberFormat)        + ";" + 
                                 Environment.NewLine);
                     }
                 }

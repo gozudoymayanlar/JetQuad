@@ -36,7 +36,7 @@ namespace ThrustVectoringUI.Models
         private SerialPort _mySerialPort;
         private System.Timers.Timer _timer;
         private string _seciliComPort;
-        private string _baudRate = "38400";
+        private string _baudRate = "115200";
         private bool _kayitYap = false;
         private EnumBaglanti _baglanti = EnumBaglanti.BaglantiYok;
         private EnumMotorStatus _motorStatus = EnumMotorStatus.BaglantiYok;
@@ -62,10 +62,14 @@ namespace ThrustVectoringUI.Models
         private long _time = 0;
 
         private SeriesCollection _rollSeriesCollection;
+        private List<DateTimePoint> _rollBuffer;
+        private List<DateTimePoint> _rollRefBuffer;
         private float _currentRoll;
         private float _currentRollRef;
 
         private SeriesCollection _pitchSeriesCollection;
+        private List<DateTimePoint> _pitchBuffer;
+        private List<DateTimePoint> _pitchRefBuffer;
         private float _currentPitch;
         private float _currentPitchRef;
 
@@ -75,8 +79,24 @@ namespace ThrustVectoringUI.Models
 
         private int _servoError;
 
+        private float _rollAkim;
+        private float _pitchAkim;
+
         private int _grafikteGosterilecekSaniye = 3;
         #endregion
+
+        public KontrolPaneliModel()
+        {
+            StartingDate = new DateTime();
+            ServoError = 1;
+            RollBuffer = new List<DateTimePoint> { };
+            RollRefBuffer = new List<DateTimePoint> { };
+            PitchBuffer = new List<DateTimePoint> { };
+            PitchRefBuffer = new List<DateTimePoint> { };
+            Baudrate = "115200";
+
+        }
+
 
         #region PUBLIC PROPERTIES
         public ObservableCollection<string> ComPortCollection
@@ -227,13 +247,71 @@ namespace ThrustVectoringUI.Models
         public SeriesCollection RollSeriesCollection
         {
             get { return _rollSeriesCollection; }
-            set { _rollSeriesCollection = value; OnPropertyChanged(nameof(RollSeriesCollection)); }
+            set
+            {
+                _rollSeriesCollection = value; OnPropertyChanged(nameof(RollSeriesCollection));
+                
+            }
+        }
+
+        public List<DateTimePoint> RollBuffer
+        {
+            get
+            {
+                return _rollBuffer;
+            }
+
+            set
+            {
+                _rollBuffer = value; OnPropertyChanged(nameof(RollBuffer));
+            }
+        }
+
+        public List<DateTimePoint> RollRefBuffer
+        {
+            get
+            {
+                return _rollRefBuffer;
+            }
+
+            set
+            {
+                _rollRefBuffer = value; OnPropertyChanged(nameof(RollRefBuffer));
+            }
         }
 
         public SeriesCollection PitchSeriesCollection
         {
             get { return _pitchSeriesCollection; }
-            set { _pitchSeriesCollection = value; OnPropertyChanged(nameof(PitchSeriesCollection)); }
+            set
+            {
+                _pitchSeriesCollection = value; OnPropertyChanged(nameof(PitchSeriesCollection));
+            }
+        }
+        public List<DateTimePoint> PitchBuffer
+        {
+            get
+            {
+                return _pitchBuffer;
+            }
+
+            set
+            {
+                _pitchBuffer = value; OnPropertyChanged(nameof(PitchBuffer));
+            }
+        }
+        public List<DateTimePoint> PitchRefBuffer
+        {
+            get
+            {
+                return _pitchRefBuffer;
+            }
+
+            set
+            {
+                _pitchRefBuffer = value; OnPropertyChanged(nameof(PitchRefBuffer));
+               
+            }
         }
 
         public float RollTemp
@@ -254,11 +332,7 @@ namespace ThrustVectoringUI.Models
             set
             {   _currentRoll = value;
                 OnPropertyChanged(nameof(CurrentRoll));
-                RollSeriesCollection[0].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
-                if (RollSeriesCollection[0].Values.Count > 15 * _grafikteGosterilecekSaniye)
-                {
-                    RollSeriesCollection[0].Values.RemoveAt(0);
-                }
+                //RollBuffer.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
             }
         }
 
@@ -268,11 +342,7 @@ namespace ThrustVectoringUI.Models
             set
             {   _currentRollRef = value;
                 OnPropertyChanged(nameof(CurrentRollRef));
-                RollSeriesCollection[1].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
-                if (RollSeriesCollection[1].Values.Count > 15 * _grafikteGosterilecekSaniye)
-                {
-                    RollSeriesCollection[1].Values.RemoveAt(0);
-                }
+                //RollRefBuffer.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
             }
         }
 
@@ -282,11 +352,7 @@ namespace ThrustVectoringUI.Models
             set
             {   _currentPitch = value;
                 OnPropertyChanged(nameof(CurrentPitch));
-                PitchSeriesCollection[0].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
-                if (PitchSeriesCollection[0].Values.Count > 15 * _grafikteGosterilecekSaniye)
-                {
-                    PitchSeriesCollection[0].Values.RemoveAt(0);
-                }
+                //PitchBuffer.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
             }
         }
 
@@ -296,10 +362,35 @@ namespace ThrustVectoringUI.Models
             set
             {   _currentPitchRef = value;
                 OnPropertyChanged(nameof(CurrentPitchRef));
-                PitchSeriesCollection[1].Values.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
-                if (PitchSeriesCollection[1].Values.Count > 15 * 3)
+                //PitchRefBuffer.Add(new DateTimePoint(StartingDate.AddMilliseconds(Time), value));
+                //Update();
+            }
+        }
+
+        private void Update()
+        {
+            if (PitchRefBuffer.Count > 5)
+            {
+                RollSeriesCollection[0].Values.AddRange(RollBuffer);
+                RollSeriesCollection[1].Values.AddRange(RollRefBuffer);
+
+                PitchSeriesCollection[0].Values.AddRange(PitchBuffer);
+                PitchSeriesCollection[1].Values.AddRange(PitchRefBuffer);
+
+                RollBuffer.Clear();
+                RollRefBuffer.Clear();
+                PitchBuffer.Clear();
+                PitchRefBuffer.Clear();
+
+                if (RollSeriesCollection[1].Values.Count > 34)
                 {
-                    PitchSeriesCollection[1].Values.RemoveAt(0);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        RollSeriesCollection[0].Values.RemoveAt(0);
+                        RollSeriesCollection[1].Values.RemoveAt(0);
+                        PitchSeriesCollection[0].Values.RemoveAt(0);
+                        PitchSeriesCollection[1].Values.RemoveAt(0);
+                    }
                 }
             }
         }
@@ -308,6 +399,18 @@ namespace ThrustVectoringUI.Models
         {
             get { return _servoError; }
             set { _servoError = value; OnPropertyChanged(nameof(ServoError)); }
+        }
+
+        public float RollAkim
+        {
+            get { return _rollAkim; }
+            set { _rollAkim = value; OnPropertyChanged(nameof(RollAkim)); }
+        }
+
+        public float PitchAkim
+        {
+            get { return _pitchAkim; }
+            set { _pitchAkim = value; OnPropertyChanged(nameof(PitchAkim)); }
         }
         #endregion
 
