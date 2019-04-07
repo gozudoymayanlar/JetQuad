@@ -257,7 +257,7 @@ namespace ThrustVectoringUI.ViewModels
 
                     KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
                     MyStopwatch.Start();
-                    //KontrolPaneli.Timer.Start();
+                    KontrolPaneli.Timer.Start();
                     KontrolPaneli.MotorStatus = EnumMotorStatus.Standby_Start;
                 }
                 catch (Exception e)

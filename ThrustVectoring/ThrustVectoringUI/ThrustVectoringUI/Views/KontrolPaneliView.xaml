@@ -683,7 +683,7 @@
                         </StackPanel>
                         
                         <Button Content="Motor Başlat" Command="{Binding CmdMotorBaslat}" Tag="{Binding KontrolPaneli.MotorStatus}" 
-                            Margin="0 0 0 0" Height="75" FontSize="24" Visibility="Visible">
+                            Margin="0 0 0 0" Height="75" FontSize="24" Visibility="Collapsed">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Style.Triggers>
