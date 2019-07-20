@@ -1,0 +1,16 @@
+1.Time
+2.MotorStatus
+3.KumandaThrottle
+4.KumandaTrim
+5.ArduThrottle
+6.ArduTrim
+7.MotorThrottle
+8.Thrust
+9.RefRPM
+10.MotorRPM
+11.EGT
+12.BatteryVoltage
+13.PumpVoltage
+14.Fuel
+veri2019_02_16__13_21_45= [];
+
