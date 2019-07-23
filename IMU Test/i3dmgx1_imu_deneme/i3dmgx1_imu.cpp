@@ -54,9 +54,9 @@ int i3dmgx1_imu::sendBuffData(unsigned char *command, int commandLenght)
 /*---------------------------------------------------------------------
 * parameters:  response - a pointer to a character buffer
 *              responseLength - the # of bytes expected for response.
-*
+*			   !!! checksum olmayan parametrelerde problem cikabilir. !!!!!!!!!!!
 * returns:     COMM_OK if write/read succeeded
-*              COMM_READ_ERROR if there was an reading from the port
+*              I3DMGX1_CHECKSUM_ERROR if checksums doesnt match
 *              COMM_RLDLEN_ERROR if the length of the response did not
 *                            match the number of returned bytes.
 *---------------------------------------------------------------------*/
@@ -64,6 +64,7 @@ int i3dmgx1_imu::receiveData(unsigned char *response, int responseLength)
 {
 	int Count = 0;
 	int MaxCount = 31;
+	int calculatedCheckSum = 0;
 
 	int returnVal = I3DMGX1_COMM_OK;
 
@@ -80,7 +81,14 @@ int i3dmgx1_imu::receiveData(unsigned char *response, int responseLength)
 		//Serial.print("number of bytes read %d and requested were %d\n", Count, responseLength);
 		#endif // DEBUG
 	}
-		
+	else
+	{
+		calculatedCheckSum = calcChecksum(response, responseLength);
+		if (calculatedCheckSum != convert2short(&response[responseLength-2]))
+		{
+			returnVal = I3DMGX1_CHECKSUM_ERROR;
+		}
+	}
 	return returnVal;
 }
 
@@ -146,6 +154,95 @@ int i3dmgx1_imu::GetDeviceInfo()
 }
 
 /*----------------------------------------------------------------------
+* CMD_SEND_GYRO_STABILIZED_EULER_ANGLES	0x0E
+* parameters   portNum    : the number of the sensor device (1..n)
+*             I3dmGX1Set    : pointer to a struct containing the values
+*                             pitch angle in degrees
+*
+* returns:     errorCode : I3DMGX1_OK if succeeded, otherwise returns
+*                          an error code.
+*--------------------------------------------------------------------*/
+int i3dmgx1_imu::EulerAngles(float* euler_angles) //TODO - buraya acilari uygun formata cevirip pointerin arrayine atmak gerek
+{
+	int responseLength = 11;
+	int status;
+	unsigned char Bresponse[11] = { 0 };
+
+	status = sendBuffData(&CMD_SEND_GYRO_STABILIZED_EULER_ANGLES, 1);
+	if (status == I3DMGX1_COMM_OK) 
+	{
+		status = receiveData(&Bresponse[0], responseLength);
+	}
+	else
+		status = I3DMGX1_COMM_WRITE_ERROR;
+
+	if (status == I3DMGX1_COMM_OK)
+	{
+		euler_angles[0] = (float)convert2short(&Bresponse[1]) * EULER_SCALE_FACTOR;	// ROLL
+		euler_angles[1] = (float)convert2short(&Bresponse[3]) * EULER_SCALE_FACTOR;	// PITCH
+		euler_angles[2] = (float)convert2short(&Bresponse[5]) * EULER_SCALE_FACTOR;	// YAW
+		euler_angles[3] = (float)convert2short(&Bresponse[7]) * TIMER_SCALE_FACTOR;	// TimerTicks
+	}
+	return status;
+}
+
+int i3dmgx1_imu::EulerAccelRate(unsigned char* euler_accel_rate)
+{
+	int responseLength = 23;
+	int status;
+	unsigned char Bresponse[23] = { 0 };
+
+	status = sendBuffData(&CMD_SEND_GYRO_STABILIZED_EULER_ACCEL_RATE_VECTOR, 1);
+	if (status == I3DMGX1_COMM_OK)
+	{
+		status = receiveData(&Bresponse[0], responseLength);
+	}
+	else
+		status = I3DMGX1_COMM_WRITE_ERROR;
+
+	if (status == I3DMGX1_COMM_OK)
+	{
+		euler_accel_rate[0] = (float)convert2short(&Bresponse[1]) * EULER_SCALE_FACTOR;	// ROLL
+		euler_accel_rate[1] = (float)convert2short(&Bresponse[3]) * EULER_SCALE_FACTOR;	// PITCH
+		euler_accel_rate[2] = (float)convert2short(&Bresponse[5]) * EULER_SCALE_FACTOR;	// YAW
+		euler_accel_rate[3] = (float)convert2short(&Bresponse[1]) * ACCEL_SCALE_FACTOR;	// ACCEL_X
+		euler_accel_rate[4] = (float)convert2short(&Bresponse[1]) * ACCEL_SCALE_FACTOR;	// ACCEL_Y
+		euler_accel_rate[5] = (float)convert2short(&Bresponse[1]) * ACCEL_SCALE_FACTOR;	// ACCEL_Z
+		euler_accel_rate[6] = (float)convert2short(&Bresponse[1]) * GYRO_SCALE_FACTOR;	// CompAngRate_X
+		euler_accel_rate[7] = (float)convert2short(&Bresponse[1]) * GYRO_SCALE_FACTOR;	// CompAngRate_Y
+		euler_accel_rate[8] = (float)convert2short(&Bresponse[1]) * GYRO_SCALE_FACTOR;	// CompAngRate_Z
+		euler_accel_rate[9] = (float)convert2short(&Bresponse[7]) * TIMER_SCALE_FACTOR;	// TimerTicks
+	}
+	return status;
+}
+
+int i3dmgx1_imu::TareCoordinateSystem()
+{
+	return 0;
+}
+
+int i3dmgx1_imu::RemoveTare()
+{
+	return 0;
+}
+
+int i3dmgx1_imu::SetContinuousMode(bool)
+{
+	return 0;
+}
+
+int i3dmgx1_imu::InitializeHardIronFieldCalibration()
+{
+	return 0;
+}
+
+int i3dmgx1_imu::CollectHardIronCalibrationData()
+{
+	return 0;
+}
+
+
+/*----------------------------------------------------------------------
 * Calculate checksum on a received data buffer.
 *
 * Note: The last two bytes, which contain the received checksum,
@@ -172,19 +269,6 @@ int i3dmgx1_imu::calcChecksum(unsigned char* buffer, int length)
 }
 
 #pragma region Convert functions
-/*----------------------------------------------------------------------
-* TestByteOrder()
-* Tests byte alignment to determine Endian Format of local host.
-*
-* returns:     The ENDIAN platform identifier.
-*--------------------------------------------------------------------*/
-int i3dmgx1_imu::TestByteOrder()
-{
-	short int word = 0x0001;
-	char *byte = (char *)&word;
-	return(byte[0] ? LITTLE_ENDIAN : BIG_ENDIAN);
-}
-
 /*----------------------------------------------------------------------
 * FloatFromBytes
 * Converts bytes to Float.
@@ -219,15 +303,9 @@ float i3dmgx1_imu::FloatFromBytes(const unsigned char* pBytes)
 * parameters:  buffer : pointer to first of two buffer bytes.
 * returns:     the converted value aa a signed short -32 to +32k.
 *--------------------------------------------------------------------*/
-short i3dmgx1_imu::convert2short(unsigned char* buffer) {
-	short x;
-	if (TestByteOrder() != BIG_ENDIAN) {
-		x = (buffer[0] << 8) + (buffer[1] & 0xFF);
-	}
-	else {
-		x = (short)buffer;
-	}
-	return x;
+short i3dmgx1_imu::convert2short(unsigned char* buffer) 
+{
+	return (buffer[0] << 8) + (buffer[1] & 0xFF);
 }
 
 /*----------------------------------------------------------------------
@@ -237,15 +315,9 @@ short i3dmgx1_imu::convert2short(unsigned char* buffer) {
 * parameters:  buffer : pointer to first of two buffer bytes.
 * returns:     the converted value as a unsigned short 0-64k.
 *--------------------------------------------------------------------*/
-unsigned short i3dmgx1_imu::convert2ushort(unsigned char* buffer) {
-	unsigned short x;
-	if (TestByteOrder() != BIG_ENDIAN) {
-		x = (buffer[0] << 8) + (buffer[1] & 0xFF);
-	}
-	else {
-		x = (unsigned short)buffer;
-	}
-	return x;
+unsigned short i3dmgx1_imu::convert2ushort(unsigned char* buffer)
+{
+	return (buffer[0] << 8) + (buffer[1] & 0xFF);
 }
 
 /*----------------------------------------------------------------------
@@ -255,15 +327,9 @@ unsigned short i3dmgx1_imu::convert2ushort(unsigned char* buffer) {
 * parameters:  buffer : pointer to a 4 byte buffer.
 * returns:     the converted value as a signed long.
 *--------------------------------------------------------------------*/
-long i3dmgx1_imu::convert2long(unsigned char* plbyte) {
-	long l = 0;
-	if (TestByteOrder() != BIG_ENDIAN) {
-		l = (plbyte[0] << 24) + (plbyte[1] << 16) + (plbyte[2] << 8) + (plbyte[3] & 0xFF);
-	}
-	else {
-		l = (long)plbyte;
-	}
-	return l;
+long i3dmgx1_imu::convert2long(unsigned char* plbyte) 
+{
+	return (plbyte[0] << 24) + (plbyte[1] << 16) + (plbyte[2] << 8) + (plbyte[3] & 0xFF);
 }
 
 /*----------------------------------------------------------------------
@@ -273,14 +339,8 @@ long i3dmgx1_imu::convert2long(unsigned char* plbyte) {
 * parameters:  buffer : pointer to a 4 byte buffer.
 * returns:     the converted value as a unsigned long.
 *--------------------------------------------------------------------*/
-unsigned long i3dmgx1_imu::convert2ulong(unsigned char* plbyte) {
-	unsigned long ul = 0;
-	if (TestByteOrder() != BIG_ENDIAN) {
-		ul = (plbyte[0] << 24) + (plbyte[1] << 16) + (plbyte[2] << 8) + (plbyte[3] & 0xFF);
-	}
-	else {
-		ul = (unsigned long)plbyte;
-	}
-	return ul;
+unsigned long i3dmgx1_imu::convert2ulong(unsigned char* plbyte)
+{
+	return (plbyte[0] << 24) + (plbyte[1] << 16) + (plbyte[2] << 8) + (plbyte[3] & 0xFF);
 }
 #pragma endregion
