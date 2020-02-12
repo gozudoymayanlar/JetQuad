@@ -21,20 +21,8 @@ using System.Windows.Controls;
 
 namespace AttitudeControlTestUI.ViewModels
 {
-    class KontrolPaneliViewModel : INotifyPropertyChanged
+    class KontrolPaneliViewModel : BaseViewModel
     {
-        #region MVVM THINGIES
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        protected virtual void OnPropertyChangedByExplicitName(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
         #region PRIVATE FIELDS
         Stopwatch MyStopwatch = new Stopwatch();
         FileStream fs;
@@ -420,46 +408,46 @@ namespace AttitudeControlTestUI.ViewModels
                 string2send += initChars[1] + Convert.ToString(KontrolPaneli.BaslangicKutle) + "#";
                 KontrolPaneli.DataChangedFlags[1] = false;
             }
-            if (KontrolPaneli.DataChangedFlags[2])
-            {
-                string2send += initChars[2] + Convert.ToString(KontrolPaneli.Quad_roll_min_ui) + "#";
-                KontrolPaneli.DataChangedFlags[2] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[3])
-            {
-                string2send += initChars[3] + Convert.ToString(KontrolPaneli.Quad_roll_max_ui) + "#";
-                KontrolPaneli.DataChangedFlags[3] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[4])
-            {
-                string2send += initChars[4] + Convert.ToString(KontrolPaneli.Quad_pitch_min_ui) + "#";
-                KontrolPaneli.DataChangedFlags[4] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[5])
-            {
-                string2send += initChars[5] + Convert.ToString(KontrolPaneli.Quad_pitch_max_ui) + "#";
-                KontrolPaneli.DataChangedFlags[5] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[6])
-            {
-                string2send += initChars[6] + Convert.ToString(KontrolPaneli.Quad_yaw_min_ui) + "#";
-                KontrolPaneli.DataChangedFlags[6] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[7])
-            {
-                string2send += initChars[7] + Convert.ToString(KontrolPaneli.Quad_yaw_max_ui) + "#";
-                KontrolPaneli.DataChangedFlags[7] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[8])
-            {
-                string2send += initChars[8] + Convert.ToString(KontrolPaneli.Quad_z_min_ui) + "#";
-                KontrolPaneli.DataChangedFlags[8] = false;
-            }
-            if (KontrolPaneli.DataChangedFlags[9])
-            {
-                string2send += initChars[9] + Convert.ToString(KontrolPaneli.Quad_z_max_ui) + "#";
-                KontrolPaneli.DataChangedFlags[9] = false;
-            }
+            //if (KontrolPaneli.DataChangedFlags[2])
+            //{
+            //    string2send += initChars[2] + Convert.ToString(KontrolPaneli.Quad_roll_min_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[2] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[3])
+            //{
+            //    string2send += initChars[3] + Convert.ToString(KontrolPaneli.Quad_roll_max_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[3] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[4])
+            //{
+            //    string2send += initChars[4] + Convert.ToString(KontrolPaneli.Quad_pitch_min_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[4] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[5])
+            //{
+            //    string2send += initChars[5] + Convert.ToString(KontrolPaneli.Quad_pitch_max_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[5] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[6])
+            //{
+            //    string2send += initChars[6] + Convert.ToString(KontrolPaneli.Quad_yaw_min_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[6] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[7])
+            //{
+            //    string2send += initChars[7] + Convert.ToString(KontrolPaneli.Quad_yaw_max_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[7] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[8])
+            //{
+            //    string2send += initChars[8] + Convert.ToString(KontrolPaneli.Quad_z_min_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[8] = false;
+            //}
+            //if (KontrolPaneli.DataChangedFlags[9])
+            //{
+            //    string2send += initChars[9] + Convert.ToString(KontrolPaneli.Quad_z_max_ui) + "#";
+            //    KontrolPaneli.DataChangedFlags[9] = false;
+            //}
             string2send += "\n";
             KontrolPaneli.MySerialPort.Write(string2send);
         }
@@ -587,8 +575,13 @@ namespace AttitudeControlTestUI.ViewModels
                             KontrolPaneli.BaslangicKutle.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                             KontrolPaneli.TahminiKutle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                             KontrolPaneli.LQR.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.HoverServoAcisi.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            KontrolPaneli.HoverServoAcisi.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
 
+                        for (int i = 0; i < 4; i++)
+                        {
+                            sw.Write(KontrolPaneli.ServoRollRef[i].ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                        }
+                        sw.Write(
                             KontrolPaneli.ServoRollRef[0].ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                             KontrolPaneli.ServoRollRef[1].ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                             KontrolPaneli.ServoRollRef[2].ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
@@ -656,15 +649,15 @@ namespace AttitudeControlTestUI.ViewModels
                             KontrolPaneli.QuadAct[2].ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                             KontrolPaneli.QuadAct[3].ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
 
-                            KontrolPaneli.Quad_roll_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_roll_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_pitch_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_pitch_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_roll_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_roll_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_pitch_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_pitch_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
 
-                            KontrolPaneli.Quad_yaw_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_yaw_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_z_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.Quad_z_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_yaw_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_yaw_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_z_min_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                            //KontrolPaneli.Quad_z_max_veh.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
 
                             //KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat)              + "," +
                             Environment.NewLine);

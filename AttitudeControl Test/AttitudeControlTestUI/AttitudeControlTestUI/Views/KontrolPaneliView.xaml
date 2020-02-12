@@ -1083,7 +1083,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="40" Margin="0 5 0 5">
                                             <TextBlock Text="Min" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_roll_min_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat={}{0:#.##}, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat={}{0:#.##}, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <!--
                                                 key event olusturma
@@ -1096,10 +1096,10 @@
                                                 </TextBox.InputBindings>
                                                 
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_roll_min_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_pitch_min_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N2, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N2, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1107,10 +1107,10 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_pitch_min_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_yaw_min_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1118,10 +1118,10 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_yaw_min_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_z_min_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1129,7 +1129,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_z_min_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="50">
@@ -1137,7 +1137,7 @@
                                                 <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                             </StackPanel.Background>
                                             <TextBlock Text="Max" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_roll_max_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1146,10 +1146,10 @@
                                                 </TextBox.InputBindings>
                                             </TextBox>
 
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_roll_max_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_pitch_max_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1157,10 +1157,10 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_pitch_max_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_yaw_max_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1168,10 +1168,10 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_yaw_max_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.Quad_z_max_ui, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1179,7 +1179,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.Quad_z_min_veh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
                                         </StackPanel>
                                     </StackPanel>

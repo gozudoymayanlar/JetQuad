@@ -101,6 +101,7 @@
     <Compile Include="Converters\ServoSicaklikRenkConverter.cs" />
     <Compile Include="Converters\ServoRenkConverter.cs" />
     <Compile Include="Converters\DurumRenkConverter.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\DateTimePoint.cs" />
     <Compile Include="Models\KontrolPaneliModel.cs" />
     <Compile Include="Models\MyVeri.cs" />

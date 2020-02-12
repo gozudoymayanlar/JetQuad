@@ -19,21 +19,8 @@ using System.Collections.Specialized;
 
 namespace AttitudeControlTestUI.Models
 {
-    class KontrolPaneliModel : INotifyPropertyChanged
+    class KontrolPaneliModel : BaseViewModel
     {
-        #region MVVM THINGIES
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        protected virtual void OnPropertyChangedByExplicitName(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
         #region PRIVATE FIELDS
         private ObservableCollection<string> _comPortCollection = new ObservableCollection<string> { };
         private SerialPort _mySerialPort;
@@ -80,24 +67,35 @@ namespace AttitudeControlTestUI.Models
         private ObservableCollection<float> _quadAct = new ObservableCollection<float> { 44.0f, 45.0f, 46.0f, 47.0f };
         private ObservableCollection<float> _quadErr = new ObservableCollection<float> { -3f, -2f, 2f, 3f };
 
-        private float _quad_roll_min_ui= 61;
-        private float _quad_roll_max_ui = 62;
-        private float _quad_pitch_min_ui = 63;
-        private float _quad_pitch_max_ui = 64;
-        private float _quad_yaw_min_ui = 65;
-        private float _quad_yaw_max_ui = 66;
-        private float _quad_z_min_ui = 67;
-        private float _quad_z_max_ui = 68;
+        //private float _quad_roll_min_ui = 61;
+        //private float _quad_roll_max_ui = 62;
+        //private float _quad_pitch_min_ui = 63;
+        //private float _quad_pitch_max_ui = 64;
+        //private float _quad_yaw_min_ui = 65;
+        //private float _quad_yaw_max_ui = 66;
+        //private float _quad_z_min_ui = 67;
+        //private float _quad_z_max_ui = 68;
 
-        private float _quad_roll_min_veh = 61;
-        private float _quad_roll_max_veh = 62;
-        private float _quad_pitch_min_veh = 63;
-        private float _quad_pitch_max_veh = 64;
-        private float _quad_yaw_min_veh = 65;
-        private float _quad_yaw_max_veh = 66;
-        private float _quad_z_min_veh = 67;
-        private float _quad_z_max_veh = 68;
+        //private float _quad_roll_min_veh = 61;
+        //private float _quad_roll_max_veh = 62;
+        //private float _quad_pitch_min_veh = 63;
+        //private float _quad_pitch_max_veh = 64;
+        //private float _quad_yaw_min_veh = 65;
+        //private float _quad_yaw_max_veh = 66;
+        //private float _quad_z_min_veh = 67;
+        //private float _quad_z_max_veh = 68;
 
+        private ObservableCollection<MyVeri> _quadMinUI = new ObservableCollection<MyVeri>
+            { new MyVeri(61, 0, 180, 0), new MyVeri(62, 0, 180, 1), new MyVeri(63, 0, 180, 2), new MyVeri(64, 0, 180, 3) };
+
+        private ObservableCollection<MyVeri> _quadMaxUI = new ObservableCollection<MyVeri>
+            { new MyVeri(65, 0, 180, 0), new MyVeri(66, 0, 180, 1), new MyVeri(67, 0, 180, 2), new MyVeri(68, 0, 180, 3) };
+
+        private ObservableCollection<MyVeri> _quadMinVeh = new ObservableCollection<MyVeri>
+            { new MyVeri(69, 0, 180, 0), new MyVeri(70, 0, 180, 1), new MyVeri(71, 0, 180, 2), new MyVeri(72, 0, 180, 3) };
+
+        private ObservableCollection<MyVeri> _quadMaxVeh = new ObservableCollection<MyVeri>
+            { new MyVeri(73, 0, 180, 0), new MyVeri(74, 0, 180, 1), new MyVeri(75, 0, 180, 2), new MyVeri(76, 0, 180, 3) };
 
         private float _fuel = 30f; // ???????????????
 
@@ -137,14 +135,22 @@ namespace AttitudeControlTestUI.Models
             Baudrate = "115200";
             BaslangicKutle.PropertyChanged += (s, e) => 
             {
-                BaslangicKutle = BaslangicKutle;
+                _dataChangedFlags[1] = true;
             };
-        }
-
-        private void hoppalaa(string propertyName)
-        {
-            OnPropertyChanged(nameof(BaslangicKutle));
-            _dataChangedFlags[1] = true;
+            foreach (var item in QuadMinUI)
+            {
+                item.PropertyChanged += (s, e) =>
+                {
+                    _dataChangedFlags[2 + item.Idx] = true;
+                };
+            }
+            foreach (var item in QuadMaxUI)
+            {
+                item.PropertyChanged += (s, e) =>
+                {
+                    _dataChangedFlags[6 + item.Idx] = true;
+                };
+            }
         }
 
         #region PUBLIC PROPERTIES
@@ -363,338 +369,250 @@ namespace AttitudeControlTestUI.Models
             set { _estopVeh = value; OnPropertyChanged(nameof(EstopVeh)); }
         }
 
-        public float Quad_roll_min_ui
-        {
-            get
-            {
-                return _quad_roll_min_ui;
-            }
-
-            set
-            {
-                _quad_roll_min_ui = value;
-                OnPropertyChanged(nameof(Quad_roll_min_ui));
-                _dataChangedFlags[2] = true;
-            }
-        }
-        public float Quad_roll_max_ui
-        {
-            get
-            {
-                return _quad_roll_max_ui;
-            }
-
-            set
-            {
-                _quad_roll_max_ui = value;
-                OnPropertyChanged(nameof(Quad_roll_max_ui));
-                _dataChangedFlags[3] = true;
-            }
-        }
-        public float Quad_pitch_min_ui
-        {
-            get
-            {
-                return _quad_pitch_min_ui;
-            }
-
-            set
-            {
-                _quad_pitch_min_ui = value;
-                OnPropertyChanged(nameof(Quad_pitch_min_ui));
-                _dataChangedFlags[4] = true;
-            }
-        }
-        public float Quad_pitch_max_ui
-        {
-            get
-            {
-                return _quad_pitch_max_ui;
-            }
-
-            set
-            {
-                _quad_pitch_max_ui = value;
-                OnPropertyChanged(nameof(Quad_pitch_max_ui));
-                _dataChangedFlags[5] = true;
-            }
-        }
-        public float Quad_yaw_min_ui
-        {
-            get
-            {
-                return _quad_yaw_min_ui;
-            }
-
-            set
-            {
-                _quad_yaw_min_ui = value;
-                OnPropertyChanged(nameof(Quad_yaw_min_ui));
-                _dataChangedFlags[6] = true;
-            }
-        }
-        public float Quad_yaw_max_ui
-        {
-            get
-            {
-                return _quad_yaw_max_ui;
-            }
-
-            set
-            {
-                _quad_yaw_max_ui = value;
-                OnPropertyChanged(nameof(Quad_yaw_max_ui));
-                _dataChangedFlags[7] = true;
-            }
-        }
-        public float Quad_z_min_ui
-        {
-            get
-            {
-                return _quad_z_min_ui;
-            }
-
-            set
-            {
-                _quad_z_min_ui = value;
-                OnPropertyChanged(nameof(Quad_z_min_ui));
-                _dataChangedFlags[8] = true;
-            }
-        }
-        public float Quad_z_max_ui
-        {
-            get
-            {
-                return _quad_z_max_ui;
-            }
-
-            set
-            {
-                _quad_z_max_ui = value;
-                OnPropertyChanged(nameof(Quad_z_max_ui));
-                _dataChangedFlags[9] = true;
-            }
-        }
-
-        public float Quad_roll_min_veh
-        {
-            get
-            {
-                return _quad_roll_min_veh;
-            }
-
-            set
-            {
-                _quad_roll_min_veh = value;
-                OnPropertyChanged(nameof(Quad_roll_min_veh));
-            }
-        }
-        public float Quad_roll_max_veh
-        {
-            get
-            {
-                return _quad_roll_max_veh;
-            }
-
-            set
-            {
-                _quad_roll_max_veh = value;
-                OnPropertyChanged(nameof(Quad_roll_max_veh));
-            }
-        }
-        public float Quad_pitch_min_veh
-        {
-            get
-            {
-                return _quad_pitch_min_veh;
-            }
-
-            set
-            {
-                _quad_pitch_min_veh = value;
-                OnPropertyChanged(nameof(Quad_pitch_min_veh));
-            }
-        }
-        public float Quad_pitch_max_veh
-        {
-            get
-            {
-                return _quad_pitch_max_veh;
-            }
-
-            set
-            {
-                _quad_pitch_max_veh = value;
-                OnPropertyChanged(nameof(Quad_pitch_max_veh));
-            }
-        }
-        public float Quad_yaw_min_veh
-        {
-            get
-            {
-                return _quad_yaw_min_veh;
-            }
-
-            set
-            {
-                _quad_yaw_min_veh = value;
-                OnPropertyChanged(nameof(Quad_yaw_min_veh));
-            }
-        }
-        public float Quad_yaw_max_veh
-        {
-            get
-            {
-                return _quad_yaw_max_veh;
-            }
-
-            set
-            {
-                _quad_yaw_max_veh = value;
-                OnPropertyChanged(nameof(Quad_yaw_max_veh));
-            }
-        }
-        public float Quad_z_min_veh
-        {
-            get
-            {
-                return _quad_z_min_veh;
-            }
-
-            set
-            {
-                _quad_z_min_veh = value;
-                OnPropertyChanged(nameof(Quad_z_min_veh));
-            }
-        }
-        public float Quad_z_max_veh
-        {
-            get
-            {
-                return _quad_z_max_veh;
-            }
-
-            set
-            {
-                _quad_z_max_veh = value;
-                OnPropertyChanged(nameof(Quad_z_max_veh));
-            }
-        }
-
-
-        //public float MotorRPM_gauge
-        //{
-        //    get { return _motorRPM_gauge; }
-        //    set { _motorRPM_gauge = value; OnPropertyChanged(nameof(MotorRPM_gauge)); }
-        //}
-        //public float PumpVoltage
-        //{
-        //    get { return _pumpVoltage; }
-        //    set { _pumpVoltage = value; OnPropertyChanged(nameof(PumpVoltage)); }
-        //}
-
-        //public SeriesCollection RollSeriesCollection
-        //{
-        //    get { return _rollSeriesCollection; }
-        //    set
-        //    {
-        //        _rollSeriesCollection = value; OnPropertyChanged(nameof(RollSeriesCollection));
-
-        //    }
-        //}
-
-        //public List<DateTimePoint> RollBuffer
+        #region tekli veriler
+        //public float Quad_roll_min_ui
         //{
         //    get
         //    {
-        //        return _rollBuffer;
+        //        return _quad_roll_min_ui;
         //    }
 
         //    set
         //    {
-        //        _rollBuffer = value; OnPropertyChanged(nameof(RollBuffer));
+        //        _quad_roll_min_ui = value;
+        //        OnPropertyChanged(nameof(Quad_roll_min_ui));
+        //        _dataChangedFlags[2] = true;
         //    }
         //}
-
-        //public List<DateTimePoint> RollRefBuffer
+        //public float Quad_roll_max_ui
         //{
         //    get
         //    {
-        //        return _rollRefBuffer;
+        //        return _quad_roll_max_ui;
         //    }
 
         //    set
         //    {
-        //        _rollRefBuffer = value; OnPropertyChanged(nameof(RollRefBuffer));
+        //        _quad_roll_max_ui = value;
+        //        OnPropertyChanged(nameof(Quad_roll_max_ui));
+        //        _dataChangedFlags[3] = true;
         //    }
         //}
-
-        //public SeriesCollection PitchSeriesCollection
-        //{
-        //    get { return _pitchSeriesCollection; }
-        //    set
-        //    {
-        //        _pitchSeriesCollection = value; OnPropertyChanged(nameof(PitchSeriesCollection));
-        //    }
-        //}
-        //public List<DateTimePoint> PitchBuffer
+        //public float Quad_pitch_min_ui
         //{
         //    get
         //    {
-        //        return _pitchBuffer;
+        //        return _quad_pitch_min_ui;
         //    }
 
         //    set
         //    {
-        //        _pitchBuffer = value; OnPropertyChanged(nameof(PitchBuffer));
+        //        _quad_pitch_min_ui = value;
+        //        OnPropertyChanged(nameof(Quad_pitch_min_ui));
+        //        _dataChangedFlags[4] = true;
         //    }
         //}
-        //public List<DateTimePoint> PitchRefBuffer
+
+        //public float Quad_pitch_max_ui
         //{
         //    get
         //    {
-        //        return _pitchRefBuffer;
+        //        return _quad_pitch_max_ui;
         //    }
 
         //    set
         //    {
-        //        _pitchRefBuffer = value; OnPropertyChanged(nameof(PitchRefBuffer));
-
+        //        _quad_pitch_max_ui = value;
+        //        OnPropertyChanged(nameof(Quad_pitch_max_ui));
+        //        _dataChangedFlags[5] = true;
         //    }
         //}
-        //public float PitchTemp
+        //public float Quad_yaw_min_ui
         //{
-        //    get { return _pitchTemp; }
-        //    set { _pitchTemp = value; OnPropertyChanged(nameof(PitchTemp)); }
-        //}
-
-        //private void Update()
-        //{
-        //    if (PitchRefBuffer.Count > 5)
+        //    get
         //    {
-        //        RollSeriesCollection[0].Values.AddRange(RollBuffer);
-        //        RollSeriesCollection[1].Values.AddRange(RollRefBuffer);
+        //        return _quad_yaw_min_ui;
+        //    }
 
-        //        PitchSeriesCollection[0].Values.AddRange(PitchBuffer);
-        //        PitchSeriesCollection[1].Values.AddRange(PitchRefBuffer);
-
-        //        RollBuffer.Clear();
-        //        RollRefBuffer.Clear();
-        //        PitchBuffer.Clear();
-        //        PitchRefBuffer.Clear();
-
-        //        if (RollSeriesCollection[1].Values.Count > 34)
-        //        {
-        //            for (int i = 0; i < 5; i++)
-        //            {
-        //                RollSeriesCollection[0].Values.RemoveAt(0);
-        //                RollSeriesCollection[1].Values.RemoveAt(0);
-        //                PitchSeriesCollection[0].Values.RemoveAt(0);
-        //                PitchSeriesCollection[1].Values.RemoveAt(0);
-        //            }
-        //        }
+        //    set
+        //    {
+        //        _quad_yaw_min_ui = value;
+        //        OnPropertyChanged(nameof(Quad_yaw_min_ui));
+        //        _dataChangedFlags[6] = true;
         //    }
         //}
+        //public float Quad_yaw_max_ui
+        //{
+        //    get
+        //    {
+        //        return _quad_yaw_max_ui;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_yaw_max_ui = value;
+        //        OnPropertyChanged(nameof(Quad_yaw_max_ui));
+        //        _dataChangedFlags[7] = true;
+        //    }
+        //}
+        //public float Quad_z_min_ui
+        //{
+        //    get
+        //    {
+        //        return _quad_z_min_ui;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_z_min_ui = value;
+        //        OnPropertyChanged(nameof(Quad_z_min_ui));
+        //        _dataChangedFlags[8] = true;
+        //    }
+        //}
+        //public float Quad_z_max_ui
+        //{
+        //    get
+        //    {
+        //        return _quad_z_max_ui;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_z_max_ui = value;
+        //        OnPropertyChanged(nameof(Quad_z_max_ui));
+        //        _dataChangedFlags[9] = true;
+        //    }
+        //}
+
+        //public float Quad_roll_min_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_roll_min_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_roll_min_veh = value;
+        //        OnPropertyChanged(nameof(Quad_roll_min_veh));
+        //    }
+        //}
+        //public float Quad_roll_max_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_roll_max_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_roll_max_veh = value;
+        //        OnPropertyChanged(nameof(Quad_roll_max_veh));
+        //    }
+        //}
+        //public float Quad_pitch_min_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_pitch_min_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_pitch_min_veh = value;
+        //        OnPropertyChanged(nameof(Quad_pitch_min_veh));
+        //    }
+        //}
+        //public float Quad_pitch_max_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_pitch_max_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_pitch_max_veh = value;
+        //        OnPropertyChanged(nameof(Quad_pitch_max_veh));
+        //    }
+        //}
+        //public float Quad_yaw_min_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_yaw_min_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_yaw_min_veh = value;
+        //        OnPropertyChanged(nameof(Quad_yaw_min_veh));
+        //    }
+        //}
+        //public float Quad_yaw_max_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_yaw_max_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_yaw_max_veh = value;
+        //        OnPropertyChanged(nameof(Quad_yaw_max_veh));
+        //    }
+        //}
+        //public float Quad_z_min_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_z_min_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_z_min_veh = value;
+        //        OnPropertyChanged(nameof(Quad_z_min_veh));
+        //    }
+        //}
+        //public float Quad_z_max_veh
+        //{
+        //    get
+        //    {
+        //        return _quad_z_max_veh;
+        //    }
+
+        //    set
+        //    {
+        //        _quad_z_max_veh = value;
+        //        OnPropertyChanged(nameof(Quad_z_max_veh));
+        //    }
+        //}
+        #endregion
+
+        public ObservableCollection<MyVeri> QuadMinUI
+        {
+            get { return _quadMinUI; }
+            set { _quadMinUI = value; OnPropertyChanged(nameof(QuadMinUI)); }
+        }
+
+        public ObservableCollection<MyVeri> QuadMaxUI
+        {
+            get { return _quadMaxUI; }
+            set { _quadMaxUI = value; OnPropertyChanged(nameof(QuadMaxUI)); }
+        }
+
+        public ObservableCollection<MyVeri> QuadMinVeh
+        {
+            get { return _quadMinVeh; }
+            set { _quadMinVeh = value; OnPropertyChanged(nameof(QuadMinVeh)); }
+        }
+
+        public ObservableCollection<MyVeri> QuadMaxVeh
+        {
+            get { return _quadMaxVeh; }
+            set { _quadMaxVeh = value; OnPropertyChanged(nameof(QuadMaxVeh)); }
+        }
 
         /// <summary>
         /// Ardunun Jet motor ECU'sundan okuduğu throttle değeri. Bu değer ardudan okunuyor.

@@ -8,25 +8,23 @@ using System.Runtime.CompilerServices;
 
 namespace AttitudeControlTestUI.Models
 {
-    class MyVeri : INotifyPropertyChanged
+    class MyVeri : BaseViewModel
     {
-        #region MVVM THINGIES
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        protected virtual void OnPropertyChangedByExplicitName(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
         private float _degerFloat;
         private byte _degerByte;
         private float _max;
         private float _min;
         private bool _byteDegisti = false;
+        private int _idx;
+
+
+        public MyVeri(float deger, float min, float max, int idx = 0)
+        {
+            _min = min;
+            _max = max;
+            _idx = idx;
+            DegerFloat = deger;
+        }
 
         private byte map2byte(float toMin = 0, float toMax = 255)
         {
@@ -59,13 +57,6 @@ namespace AttitudeControlTestUI.Models
 
             float to = toAbs + _min;
             return to;
-        }
-
-        public MyVeri(float deger, float min, float max)
-        {
-            _min = min;
-            _max = max;
-            DegerFloat = deger;
         }
 
         public float DegerFloat
@@ -129,6 +120,10 @@ namespace AttitudeControlTestUI.Models
             }
         }
 
-
+        public int Idx
+        {
+            get { return _idx; }
+            set { _idx = value; }
+        }
     }
 }
