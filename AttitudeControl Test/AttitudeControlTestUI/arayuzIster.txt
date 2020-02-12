@@ -1,0 +1,94 @@
+Aksi belirtilmedikçe her bir değişken 1 bayt.
+
+GUI ye gelen veri:
+jet1_durum
+jet1_rpm (2bayt)
+jet1_itki
+jet1_egt
+jet1_batVoltage
+jet2_durum
+jet2_rpm (2bayt)
+jet2_itki
+jet2_egt
+jet2_batVoltage
+jet3_durum
+jet3_rpm (2bayt)
+jet3_itki
+jet3_egt
+jet3_batVoltage
+jet4_durum
+jet4_rpm (2bayt)
+jet4_itki
+jet4_egt
+jet4_batVoltage
+jet1_roll_ref
+jet1_roll_actual
+jet1_roll_temp
+jet1_pitch_ref
+jet1_pitch_actual
+jet1_pitch_temp
+jet2_roll_ref
+jet2_roll_actual
+jet2_roll_temp
+jet2_pitch_ref
+jet2_pitch_actual
+jet2_pitch_temp
+jet3_roll_ref
+jet3_roll_actual
+jet3_roll_temp
+jet3_pitch_ref
+jet3_pitch_actual
+jet3_pitch_temp
+jet4_roll_ref
+jet4_roll_actual
+jet4_roll_temp
+jet4_pitch_ref
+jet4_pitch_actual
+jet4_pitch_temp
+servo_battery
+jetquad_roll_ref
+jetquad_roll_actual
+jet_quad_roll_min
+jet_quad_roll_max
+jetquad_pitch_ref
+jetquad_pitch_actual
+jet_quad_pitch_min
+jet_quad_pitch_max
+jetquad_yaw_ref
+jetquad_yaw_actual
+jet_quad_yaw_min
+jet_quad_yaw_max
+jetquad_z_ref
+jetquad_z_actual
+jet_quad_z_min
+jet_quad_z_max
+estop (0 veya 1 olacak)
+tahmini_kutle
+otonom (0 veya 1 olacak)
+hover_servo_angle
+
+Gelen veride her bir bayt arasında # işareti bulunacak. veri her 100 milisaniyede bir gelecek.
+Gelen veri bayt olarak geleceği için her bir değişken belli bir min,max değeri arasına map 
+edilecek ve o şekilde gerçek değer elde edilecek. O min ve max değerleri henüz belli değil, 
+her şey monte edildikten sonra belli olacak.
+
+jetquad roll, pitch, yaw, z "min" ve "max" değerleri için textbox yanında bi de araçtan gelen
+min ve max değerlerini gösteren labeller olursa çok iyi olur. Resimde çizdim nasıl olacağını.
+
+-------------------------------------------------------------
+GUI den giden veri:
+estop (0 veya 1 olacak)
+başlangıc_arac_kutlesi
+jet_quad_roll_min
+jet_quad_roll_max
+jet_quad_pitch_min
+jet_quad_pitch_max
+jet_quad_yaw_min
+jet_quad_yaw_max
+jet_quad_z_min
+jet_quad_z_max
+
+Giden veri şu şekilde gidecek, herhangi bir verinin bulunduğu textboxa sayı girildiği zaman
+enter a basarak o veriyi başına ve sonuna belli bir işaret koyarak bayt olarak gönderecez.
+Gerçek değerinden bayt değerine map edilecek tabi, ama bu mapin min ve max değerleri
+henüz belli değil.

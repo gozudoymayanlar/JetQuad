@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\nighthawk\desktop\deneme\deneme\source.cpp(45): warning C4101: 'status': unreferenced local variable
+c:\users\nighthawk\desktop\deneme\deneme\source.cpp(47): warning C4101: 'singleByteSent': unreferenced local variable
+c:\users\nighthawk\desktop\deneme\deneme\source.cpp(88): warning C4302: 'type cast': truncation from 'unsigned int *' to 'short'
+  deneme.vcxproj -> C:\Users\NightHawk\Desktop\deneme\Debug\deneme.exe
+  deneme.vcxproj -> C:\Users\NightHawk\Desktop\deneme\Debug\deneme.pdb (Full PDB)

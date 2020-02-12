@@ -1,0 +1,133 @@
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.xml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\MainWindow.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\Views\KontrolPaneliView.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\App.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\MainWindow.baml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\Views\KontrolPaneliView.baml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI.csproj.GenerateResource.Cache
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\AttitudeControlTestUI.exe.config
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\AttitudeControlTestUI.exe
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\bin\Debug\AttitudeControlTestUI.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.cache
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.lref
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI.g.resources
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI.Properties.Resources.resources
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI.exe
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\ThrustVectoringUI\obj\Debug\AttitudeControlTestUI.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.exe.config
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.exe
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.exe
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.xml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.csprojResolveAssemblyReference.cache
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\MainWindow.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\Views\KontrolPaneliView.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\App.g.cs
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.cache
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.lref
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\MainWindow.baml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\Views\KontrolPaneliView.baml
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.g.resources
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.Properties.Resources.resources
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.csproj.GenerateResource.Cache
+C:\Users\NIGHTHAWK\Desktop\AttitudeControlTest\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.exe.config
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.exe
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.pdb
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.csprojResolveAssemblyReference.cache
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\MainWindow.g.cs
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\Views\KontrolPaneliView.g.cs
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\App.g.cs
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.cache
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI_MarkupCompile.lref
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.exe
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\AttitudeControlTestUI.pdb
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\System.Windows.Interactivity.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.pdb
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.xml
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.pdb
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\LiveCharts.Wpf.xml
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\de\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\en\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\es\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\it\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\MainWindow.baml
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\Views\KontrolPaneliView.baml
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.g.resources
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.Properties.Resources.resources
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\AttitudeControl Test\AttitudeControlTestUI\AttitudeControlTestUI\obj\Debug\AttitudeControlTestUI.csproj.GenerateResource.Cache
