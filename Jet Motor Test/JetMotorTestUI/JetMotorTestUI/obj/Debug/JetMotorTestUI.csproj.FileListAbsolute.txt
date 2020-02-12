@@ -52,3 +52,6 @@ D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\JetMotorTestUI\JetMotorTest
 D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\JetMotorTestUI\JetMotorTestUI\obj\Debug\JetMotorTestUI.exe
 D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\JetMotorTestUI\JetMotorTestUI\obj\Debug\JetMotorTestUI.pdb
 D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\JetMotorTestUI\JetMotorTestUI\obj\Debug\JetMotorTestUI.csprojResolveAssemblyReference.cache
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\Jet Motor Test\JetMotorTestUI\JetMotorTestUI\bin\Debug\JetMotorTestUI.exe.config
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\Jet Motor Test\JetMotorTestUI\JetMotorTestUI\obj\Debug\JetMotorTestUI.exe
+D:\MEGAsync\ISTANBUL TEKNIK Sync\VI.Jet MotorProjesi\GithubRepo\Jet Motor Test\JetMotorTestUI\JetMotorTestUI\obj\Debug\JetMotorTestUI.pdb

@@ -68,6 +68,11 @@ int i3dmgx1_imu::receiveData(unsigned char *response, int responseLength)
 
 	int returnVal = I3DMGX1_COMM_OK;
 
+	for (int i = 0; i < responseLength; i++)
+	{
+		response[i] = _port.read();
+	}
+
 	while (_port.available() > 0 && Count < MaxCount)
 	{
 		response[Count] = _port.read();
@@ -171,6 +176,7 @@ int i3dmgx1_imu::EulerAngles(float* euler_angles) //TODO - buraya acilari uygun 
 	status = sendBuffData(&CMD_SEND_GYRO_STABILIZED_EULER_ANGLES, 1);
 	if (status == I3DMGX1_COMM_OK) 
 	{
+		delay(100);
 		status = receiveData(&Bresponse[0], responseLength);
 	}
 	else
@@ -277,24 +283,24 @@ int i3dmgx1_imu::calcChecksum(unsigned char* buffer, int length)
 *
 * returns:     a float value.
 *--------------------------------------------------------------------*/
-float i3dmgx1_imu::FloatFromBytes(const unsigned char* pBytes)
-{
-	float f = 0;
-	if (TestByteOrder() != BIG_ENDIAN) {
-		((unsigned char*)(&f))[0] = pBytes[3];
-		((unsigned char*)(&f))[1] = pBytes[2];
-		((unsigned char*)(&f))[2] = pBytes[1];
-		((unsigned char*)(&f))[3] = pBytes[0];
-	}
-	else {
-		((unsigned char*)(&f))[0] = pBytes[0];
-		((unsigned char*)(&f))[1] = pBytes[1];
-		((unsigned char*)(&f))[2] = pBytes[2];
-		((unsigned char*)(&f))[3] = pBytes[3];
-	}
-
-	return f;
-}
+//float i3dmgx1_imu::FloatFromBytes(const unsigned char* pBytes)
+//{
+//	float f = 0;
+//	if (TestByteOrder() != BIG_ENDIAN) {
+//		((unsigned char*)(&f))[0] = pBytes[3];
+//		((unsigned char*)(&f))[1] = pBytes[2];
+//		((unsigned char*)(&f))[2] = pBytes[1];
+//		((unsigned char*)(&f))[3] = pBytes[0];
+//	}
+//	else {
+//		((unsigned char*)(&f))[0] = pBytes[0];
+//		((unsigned char*)(&f))[1] = pBytes[1];
+//		((unsigned char*)(&f))[2] = pBytes[2];
+//		((unsigned char*)(&f))[3] = pBytes[3];
+//	}
+//
+//	return f;
+//}
 
 /*----------------------------------------------------------------------
 * convert2short

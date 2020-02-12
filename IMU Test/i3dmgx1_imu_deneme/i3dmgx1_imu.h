@@ -50,8 +50,8 @@
 
 #define EULER_SCALE_FACTOR	(360/65536)
 #define TIMER_SCALE_FACTOR	6.5536
-#define ACCEL_SCALE_FACTOR	???		//TODO - BUNLARIN DEGERLERI BULUNACAK
-#define GYRO_SCALE_FACTOR	???		// EEPROM OKUMA FONKSIYONU GEREKEBILIR.
+#define ACCEL_SCALE_FACTOR	1		//TODO - BUNLARIN DEGERLERI BULUNACAK
+#define GYRO_SCALE_FACTOR	1		// EEPROM OKUMA FONKSIYONU GEREKEBILIR.
 
 class i3dmgx1_imu
 {
@@ -70,7 +70,7 @@ public:
 	const unsigned char CMD_SEND_SERIAL_NUMBER = 0xF1;
 	const unsigned char CMD_SEND_GYRO_STABILIZED_EULER_ANGLES = 0x0E;
 	const unsigned char CMD_TARE_COORDINATE_SYSTEM = 0x0F;
-	const unsigned char CMD_REMOVE_TARE = 0x11
+	const unsigned char CMD_REMOVE_TARE = 0x11;
 	const unsigned char CMD_SET_CONTINUOUS_MODE = 0X10;
 	const unsigned char CMD_SEND_GYRO_STABILIZED_EULER_ACCEL_RATE_VECTOR = 0x31;
 	const unsigned char CMD_INITIALIZE_HARD_IRON_FIELD_CALIBRATION = 0x40;
@@ -101,7 +101,7 @@ public:
 	
 
 	/* Miscellaneous utility functions used by the 3DM-gx1 Adapter.*/
-	int calcChecksum(unsigned char* buffer, int length);
+	//int calcChecksum(unsigned char* buffer, int length);
 	short convert2short(unsigned char *);
 	unsigned short convert2ushort(unsigned char *);
 	unsigned long convert2ulong(unsigned char *);
