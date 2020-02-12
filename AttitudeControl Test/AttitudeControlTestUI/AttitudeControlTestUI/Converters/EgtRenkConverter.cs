@@ -14,7 +14,7 @@ namespace AttitudeControlTestUI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int egt = (int)value;
+            float egt = (float)value;
             float egtMax = 1400;
             float egtMin = -20;
             float renkMax = 160;

@@ -39,33 +39,55 @@ namespace AttitudeControlTestUI.Models
         private float _hoverServoAcisi = 21;
         //private int _motorThrottle = 52;
 
-        // servo motor değişkenleri sağ üst geniş tablo
-        private ObservableCollection<float> _servoRollRef = new ObservableCollection<float> { 0, 1, 2, 3 };
-        private ObservableCollection<float> _servoRollAct = new ObservableCollection<float> { 4, 5, 6, 7 };
-        private ObservableCollection<float> _servoRollErr = new ObservableCollection<float> { 30, 30, 30, 30 };
-        private ObservableCollection<float> _servoRollTemp = new ObservableCollection<float> { 8, 9, 10, 11 };
 
-        private ObservableCollection<float> _servoPitchRef = new ObservableCollection<float> { 12, 13, 14, 15 };
-        private ObservableCollection<float> _servoPitchAct = new ObservableCollection<float> { 16, 17, 18, 19 };
-        private ObservableCollection<float> _servoPitchErr = new ObservableCollection<float> { 30, 30, 30, 30 };
-        private ObservableCollection<float> _servoPitchTemp = new ObservableCollection<float> { 20, 21, 22, 45 };
+        // servo motor değişkenleri sağ üst geniş tablo
+        private ObservableCollection<MyVeri> _servoRollRef = new ObservableCollection<MyVeri>
+            { new MyVeri(0, -30, 30), new MyVeri(1, -30, 30), new MyVeri(2, -30, 30), new MyVeri(3, -30, 30) };
+
+        private ObservableCollection<MyVeri> _servoRollAct = new ObservableCollection<MyVeri>
+            { new MyVeri(4, -30, 30), new MyVeri(5, -30, 30), new MyVeri(6, -30, 30), new MyVeri(7, -30, 30) };
+
+        private ObservableCollection<float> _servoRollErr = new ObservableCollection<float> { 4,5,6,7 };
+
+        private ObservableCollection<MyVeri> _servoRollTemp = new ObservableCollection<MyVeri>
+            { new MyVeri(12, 10, 60), new MyVeri(13, 10, 60), new MyVeri(14, 10, 60), new MyVeri(15, 10, 60) };
+
+
+        private ObservableCollection<MyVeri> _servoPitchRef = new ObservableCollection<MyVeri>
+            { new MyVeri(0, -30, 30), new MyVeri(0, -30, 30), new MyVeri(0, -30, 30), new MyVeri(0, -30, 30) };
+
+        private ObservableCollection<MyVeri> _servoPitchAct = new ObservableCollection<MyVeri>
+            { new MyVeri(0, -30, 30), new MyVeri(0, -30, 30), new MyVeri(0, -30, 30), new MyVeri(0, -30, 30) };
+
+        private ObservableCollection<float> _servoPitchErr = new ObservableCollection<float> { 0,1,2,3 };
+
+        private ObservableCollection<MyVeri> _servoPitchTemp = new ObservableCollection<MyVeri>
+            { new MyVeri(15, 10, 60), new MyVeri(30, 10, 60), new MyVeri(45, 10, 60), new MyVeri(60, 10, 60) };
+
 
         // servo batarya için 16.8 - 12
-        private float _servoBatVolt = 16.8f;
+        private MyVeri _servoBatVolt = new MyVeri(16.8f, 12f, 16.8f);
 
         // jet motor değişkenler - sağ alt sol tablo
         private ObservableCollection<EnumMotorStatus> _durum = new ObservableCollection<EnumMotorStatus> { EnumMotorStatus.BaglantiYok, EnumMotorStatus.AccelDly, EnumMotorStatus.HataliVeri, EnumMotorStatus.Run };
 
-        private ObservableCollection<long> _rpm = new ObservableCollection<long> { 30000, 75000, 120000, 150000 };
-        private ObservableCollection<float> _itki = new ObservableCollection<float> { 30.0f, 31.0f, 32.0f, 33.0f };
-        private ObservableCollection<int> _egt = new ObservableCollection<int> { 0, 300, 600, 1400 };
-        private ObservableCollection<float> _jetBatVolt = new ObservableCollection<float> { 12.6f, 11.4f, 10.4f, 9f };
+        private ObservableCollection<MyVeri> _rpm = new ObservableCollection<MyVeri>
+            { new MyVeri(30000, 0, 180000), new MyVeri(75000, 0, 180000), new MyVeri(120000, 0, 180000), new MyVeri(150000, 0, 180000) };
+
+        private ObservableCollection<MyVeri> _itki = new ObservableCollection<MyVeri>
+            { new MyVeri(32f, 0, 200), new MyVeri(33f, 0, 200), new MyVeri(33f, 0, 200), new MyVeri(34f, 0, 200) };
+
+        private ObservableCollection<MyVeri> _egt = new ObservableCollection<MyVeri>
+            { new MyVeri(0, 0, 1500), new MyVeri(300, 0, 1500), new MyVeri(600, 0, 1500), new MyVeri(1400, 0, 1500) };
+        
         // jet bataryalar için 12.6 - 9
+        private ObservableCollection<MyVeri> _jetBatVolt = new ObservableCollection<MyVeri>
+            {  new MyVeri(12.6f, 8, 12.6f), new MyVeri(11.4f, 8, 12.6f), new MyVeri(10.4f, 8, 12.6f), new MyVeri(9f, 8, 12.6f)};
 
         // Jet quad değişkenleri tablosu - sağ alt sağ tablo
-        private ObservableCollection<float> _quadRef = new ObservableCollection<float> { 40.0f, 41.0f, 42.0f, 43.0f };
-        private ObservableCollection<float> _quadAct = new ObservableCollection<float> { 44.0f, 45.0f, 46.0f, 47.0f };
-        private ObservableCollection<float> _quadErr = new ObservableCollection<float> { -3f, -2f, 2f, 3f };
+        private ObservableCollection<MyVeri> _quadRef = new ObservableCollection<MyVeri> { new MyVeri(4, -30, 30), new MyVeri(5, -30, 30), new MyVeri(6, -30, 30), new MyVeri(7, -30, 30) };
+        private ObservableCollection<MyVeri> _quadAct = new ObservableCollection<MyVeri> { new MyVeri(8, -30, 30), new MyVeri(9, -30, 30), new MyVeri(10, -30, 30), new MyVeri(1, -30, 30) };
+        private ObservableCollection<float> _quadErr = new ObservableCollection<float> { 12,13,14,15 };
 
         //private float _quad_roll_min_ui = 61;
         //private float _quad_roll_max_ui = 62;
@@ -226,12 +248,12 @@ namespace AttitudeControlTestUI.Models
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        public ObservableCollection<float> ServoRollRef
+        public ObservableCollection<MyVeri> ServoRollRef
         {
             get { return _servoRollRef; }
             set { _servoRollRef = value; OnPropertyChanged(nameof(ServoRollRef)); }
         }
-        public ObservableCollection<float> ServoRollAct
+        public ObservableCollection<MyVeri> ServoRollAct
         {
             get { return _servoRollAct; }
             set
@@ -245,18 +267,18 @@ namespace AttitudeControlTestUI.Models
             get { return _servoRollErr; }
             set { _servoRollErr = value; OnPropertyChanged(nameof(ServoRollErr)); }
         }
-        public ObservableCollection<float> ServoRollTemp
+        public ObservableCollection<MyVeri> ServoRollTemp
         {
             get { return _servoRollTemp; }
             set { _servoRollTemp = value; OnPropertyChanged(nameof(ServoRollTemp)); }
         }
 
-        public ObservableCollection<float> ServoPitchRef
+        public ObservableCollection<MyVeri> ServoPitchRef
         {
             get { return _servoPitchRef; }
             set { _servoPitchRef = value; OnPropertyChanged(nameof(ServoPitchRef)); }
         }
-        public ObservableCollection<float> ServoPitchAct
+        public ObservableCollection<MyVeri> ServoPitchAct
         {
             get { return _servoPitchAct; }
             set
@@ -270,12 +292,12 @@ namespace AttitudeControlTestUI.Models
             get { return _servoPitchErr; }
             set { _servoPitchErr = value; OnPropertyChanged(nameof(ServoPitchErr)); }
         }
-        public ObservableCollection<float> ServoPitchTemp
+        public ObservableCollection<MyVeri> ServoPitchTemp
         {
             get { return _servoPitchTemp; }
             set { _servoPitchTemp = value; OnPropertyChanged(nameof(ServoPitchTemp)); }
         }
-        public float ServoBatVolt
+        public MyVeri ServoBatVolt
         {
             get { return _servoBatVolt; }
             set { _servoBatVolt = value; OnPropertyChanged(nameof(ServoBatVolt)); }
@@ -288,22 +310,22 @@ namespace AttitudeControlTestUI.Models
             get { return _durum; }
             set { _durum = value; OnPropertyChanged(nameof(Durum)); }
         }
-        public ObservableCollection<long> RPM
+        public ObservableCollection<MyVeri> RPM
         {
             get { return _rpm; }
             set { _rpm = value; OnPropertyChanged(nameof(RPM)); }
         }
-        public ObservableCollection<float> Itki
+        public ObservableCollection<MyVeri> Itki
         {
             get { return _itki; }
             set { _itki = value; OnPropertyChanged(nameof(Itki)); }
         }
-        public ObservableCollection<int> EGT
+        public ObservableCollection<MyVeri> EGT
         {
             get { return _egt; }
             set { _egt = value; OnPropertyChanged(nameof(EGT)); }
         }
-        public ObservableCollection<float> JetBatVolt
+        public ObservableCollection<MyVeri> JetBatVolt
         {
             get { return _jetBatVolt; }
             set { _jetBatVolt = value; OnPropertyChanged(nameof(JetBatVolt)); }
@@ -311,12 +333,12 @@ namespace AttitudeControlTestUI.Models
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        public ObservableCollection<float> QuadRef
+        public ObservableCollection<MyVeri> QuadRef
         {
             get { return _quadRef; }
             set { _quadRef = value; OnPropertyChanged(nameof(QuadRef)); }
         }
-        public ObservableCollection<float> QuadAct
+        public ObservableCollection<MyVeri> QuadAct
         {
             get { return _quadAct; }
             set { _quadAct = value; OnPropertyChanged(nameof(QuadAct)); }
