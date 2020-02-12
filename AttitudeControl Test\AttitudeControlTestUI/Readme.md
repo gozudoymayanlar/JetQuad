@@ -1,1 +1,0 @@
-#ucus kontrol test arayuzu
