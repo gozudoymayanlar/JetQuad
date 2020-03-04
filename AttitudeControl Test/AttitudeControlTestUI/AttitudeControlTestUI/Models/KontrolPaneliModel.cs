@@ -71,6 +71,7 @@ namespace AttitudeControlTestUI.Models
         // jet motor değişkenler - sağ alt sol tablo
         private ObservableCollection<EnumMotorStatus> _durum = new ObservableCollection<EnumMotorStatus> { EnumMotorStatus.BaglantiYok, EnumMotorStatus.AccelDly, EnumMotorStatus.HataliVeri, EnumMotorStatus.Run };
 
+        // TODO BUNLAR 2 BYTE'LIK OLACAK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         private ObservableCollection<MyVeri> _rpm = new ObservableCollection<MyVeri>
             { new MyVeri(30000, 0, 180000), new MyVeri(75000, 0, 180000), new MyVeri(120000, 0, 180000), new MyVeri(150000, 0, 180000) };
 
@@ -118,6 +119,15 @@ namespace AttitudeControlTestUI.Models
 
         private ObservableCollection<MyVeri> _quadMaxVeh = new ObservableCollection<MyVeri>
             { new MyVeri(73, 0, 180, 0), new MyVeri(74, 0, 180, 1), new MyVeri(75, 0, 180, 2), new MyVeri(76, 0, 180, 3) };
+
+        private MyVeri _rcRoll = new MyVeri(0, -30, 30);
+        private MyVeri _rcPitch = new MyVeri(0, -30, 30);
+        private MyVeri _rcYaw = new MyVeri(0, 0, 360);
+        private MyVeri _rcZ = new MyVeri(0, -5, 15);
+        private MyVeri _rcThrust = new MyVeri(0, 0, 150);
+        private MyVeri _rcServo = new MyVeri(0, -30, 30);
+        private bool _rcLQR = false;
+        private bool _rcEstop = false;
 
         private float _fuel = 30f; // ???????????????
 
@@ -634,6 +644,47 @@ namespace AttitudeControlTestUI.Models
         {
             get { return _quadMaxVeh; }
             set { _quadMaxVeh = value; OnPropertyChanged(nameof(QuadMaxVeh)); }
+        }
+
+        public MyVeri RcRoll
+        {
+            get { return _rcRoll; }
+            set { _rcRoll = value; OnPropertyChanged(nameof(RcRoll)); }
+        }
+        public MyVeri RcPitch
+        {
+            get { return _rcPitch; }
+            set { _rcPitch = value; OnPropertyChanged(nameof(RcPitch)); }
+        }
+        public MyVeri RcYaw
+        {
+            get { return _rcYaw; }
+            set { _rcYaw = value; OnPropertyChanged(nameof(RcYaw)); }
+        }
+        public MyVeri RcZ
+        {
+            get { return _rcZ; }
+            set { _rcZ = value; OnPropertyChanged(nameof(RcZ)); }
+        }
+        public MyVeri RcThrust
+        {
+            get { return _rcThrust; }
+            set { _rcThrust = value; OnPropertyChanged(nameof(RcThrust)); }
+        }
+        public MyVeri RcServo
+        {
+            get { return _rcServo; }
+            set { _rcServo = value; OnPropertyChanged(nameof(RcServo)); }
+        }
+        public bool RcLQR
+        {
+            get { return _rcLQR; }
+            set { _rcLQR = value; OnPropertyChanged(nameof(RcLQR)); }
+        }
+        public bool RcEstop
+        {
+            get { return _rcEstop; }
+            set { _rcEstop = value; OnPropertyChanged(nameof(RcEstop)); }
         }
 
         /// <summary>

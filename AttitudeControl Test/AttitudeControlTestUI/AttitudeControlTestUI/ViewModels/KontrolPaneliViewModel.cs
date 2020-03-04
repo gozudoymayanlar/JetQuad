@@ -38,7 +38,13 @@ namespace AttitudeControlTestUI.ViewModels
 
         private bool _alreadySendingThrottle = false;
 
-        char[] initChars = { '"', '!', '\'', '^', '+', '%', '&', '/', '(', ')' };
+        private int sqFlags = 0;
+        private int? gelenByte = null;
+        private byte[] receivedData = new byte[82];
+
+        // PROTOKOL DEĞİŞTİĞİ İÇİN BUNLARI KULLANMIYORUM ARTIK
+        //byte[] initChars = { (byte)'"', (byte)'!', (byte)'\'', (byte)'^', (byte)'+', (byte)'%', (byte)'&', (byte)'/', (byte)'(', (byte)')' };
+        //byte frameEnd = (byte)'#';
 
         //private double _step;
         //private double[] _labels;
@@ -386,10 +392,15 @@ namespace AttitudeControlTestUI.ViewModels
         private void CmdEstopExecute(object obj)
         {
             KontrolPaneli.EstopUI = KontrolPaneli.EstopUI ? false : true;
-            string string2send = "";
-            string2send += Convert.ToString(initChars[0]) + Convert.ToString(KontrolPaneli.EstopUI) + "#";
-            string2send += "\n";
-            KontrolPaneli.MySerialPort.Write(string2send);
+            // ABDULLAH TODO
+            // ÖNCE BAŞINA SONUNA KARAKTER EKLEDİĞİMİZ VERSİYONU İMPLEMENTE ETMİŞTİM
+            // PROTOKOL DEĞİŞTİĞİ İÇİN AŞAĞIDAKİLER KULLANILMIYOR.
+            // SEN AYARLICAN ARTIK
+            
+            //string string2send = "";
+            //string2send += Convert.ToString(initChars[0]) + Convert.ToString(KontrolPaneli.EstopUI) + "#";
+            //string2send += "\n";
+            //KontrolPaneli.MySerialPort.Write(string2send);
         }
 
         private bool CmdEnterCanExecute(object arg)
@@ -401,56 +412,44 @@ namespace AttitudeControlTestUI.ViewModels
         }
         private void CmdEnterExecute(object obj)
         {
-            string string2send = "";
+            List<byte> bytes2send = new List<byte> { };
 
-            if (KontrolPaneli.DataChangedFlags[1])
-            {
-                string2send += initChars[1] + Convert.ToString(KontrolPaneli.BaslangicKutle) + "#";
-                KontrolPaneli.DataChangedFlags[1] = false;
-            }
-            //if (KontrolPaneli.DataChangedFlags[2])
+            // ABDULLAH TODO
+            // TODO - add initial sequence
+            // TODO - CALCLATE AND add checksum
+
+            // ÖNCE BAŞINA SONUNA KARAKTER EKLEDİĞİMİZ VERSİYONU İMPLEMENTE ETMİŞTİM
+            // PROTOKOL DEĞİŞTİĞİ İÇİN AŞAĞIDAKİLER KULLANILMIYOR.
+            // SEN AYARLICAN ARTIK
+            //if (KontrolPaneli.DataChangedFlags[1])
             //{
-            //    string2send += initChars[2] + Convert.ToString(KontrolPaneli.Quad_roll_min_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[2] = false;
+            //    bytes2send.Add(initChars[1]);
+            //    bytes2send.Add(KontrolPaneli.BaslangicKutle.DegerByte);
+            //    bytes2send.Add(frameEnd);
+            //    KontrolPaneli.DataChangedFlags[1] = false;
             //}
-            //if (KontrolPaneli.DataChangedFlags[3])
+            //for (int i = 0; i < 4; i++)
             //{
-            //    string2send += initChars[3] + Convert.ToString(KontrolPaneli.Quad_roll_max_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[3] = false;
+            //    if (KontrolPaneli.DataChangedFlags[i+2])
+            //    {
+            //        bytes2send.Add(initChars[i + 2]);
+            //        bytes2send.Add(KontrolPaneli.QuadMinUI[i].DegerByte);
+            //        bytes2send.Add(frameEnd);
+            //        KontrolPaneli.DataChangedFlags[i+2] = false;
+            //    }
             //}
-            //if (KontrolPaneli.DataChangedFlags[4])
+            //for (int i = 0; i < 4; i++)
             //{
-            //    string2send += initChars[4] + Convert.ToString(KontrolPaneli.Quad_pitch_min_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[4] = false;
+            //    if (KontrolPaneli.DataChangedFlags[i + 6])
+            //    {
+            //        bytes2send.Add(initChars[i + 6]);
+            //        bytes2send.Add(KontrolPaneli.QuadMaxUI[i].DegerByte);
+            //        bytes2send.Add(frameEnd);
+            //        KontrolPaneli.DataChangedFlags[i + 6] = false;
+            //    }
             //}
-            //if (KontrolPaneli.DataChangedFlags[5])
-            //{
-            //    string2send += initChars[5] + Convert.ToString(KontrolPaneli.Quad_pitch_max_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[5] = false;
-            //}
-            //if (KontrolPaneli.DataChangedFlags[6])
-            //{
-            //    string2send += initChars[6] + Convert.ToString(KontrolPaneli.Quad_yaw_min_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[6] = false;
-            //}
-            //if (KontrolPaneli.DataChangedFlags[7])
-            //{
-            //    string2send += initChars[7] + Convert.ToString(KontrolPaneli.Quad_yaw_max_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[7] = false;
-            //}
-            //if (KontrolPaneli.DataChangedFlags[8])
-            //{
-            //    string2send += initChars[8] + Convert.ToString(KontrolPaneli.Quad_z_min_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[8] = false;
-            //}
-            //if (KontrolPaneli.DataChangedFlags[9])
-            //{
-            //    string2send += initChars[9] + Convert.ToString(KontrolPaneli.Quad_z_max_ui) + "#";
-            //    KontrolPaneli.DataChangedFlags[9] = false;
-            //}
-            string2send += "\n";
-            KontrolPaneli.MySerialPort.Write(string2send);
-        }
+            KontrolPaneli.MySerialPort.Write(bytes2send.ToArray(),0,bytes2send.Count);
+        } //end of cmdEnterExecute
 
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -460,162 +459,176 @@ namespace AttitudeControlTestUI.ViewModels
                 KontrolPaneli.Time = MyStopwatch.ElapsedMilliseconds;
                 MyStopwatch.Start();
 
-                string receivedData = KontrolPaneli.MySerialPort.ReadLine();
-                
-                if (receivedData[0] == '%') // if datas are received
+                KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
+
+                // checking for initial sequence
+                while (sqFlags != 3 && KontrolPaneli.MySerialPort.BytesToRead >= 3)
                 {
-                    KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
-
-                    receivedData = receivedData.Remove(0, 1);
-                    string[] datas = receivedData.Split('#');
-
-                    //GELEN DATALARI KontrolPaneli DEĞİŞKENLERINE ATA
-                    #region
-                    // BURADA DEĞİŞİKLİK YAPINCA ALTTA if (KontrolPaneli.KayitYap) İÇİNDE DEĞİŞİKLİK YAPMAYI UNUTMA
-                    KontrolPaneli.BaslangicKutle.DegerFloat = float.Parse(datas[0], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.TahminiKutle = float.Parse(datas[1], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.LQR = float.Parse(datas[2], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.HoverServoAcisi = float.Parse(datas[3], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoRollRef[0].DegerFloat = float.Parse(datas[4], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollRef[1].DegerFloat = float.Parse(datas[5], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollRef[2].DegerFloat = float.Parse(datas[6], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollRef[3].DegerFloat = float.Parse(datas[7], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoPitchRef[0].DegerFloat = float.Parse(datas[8], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchRef[1].DegerFloat = float.Parse(datas[9], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchRef[2].DegerFloat = float.Parse(datas[10], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchRef[3].DegerFloat = float.Parse(datas[11], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoRollAct[0].DegerFloat = float.Parse(datas[12], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollAct[1].DegerFloat = float.Parse(datas[13], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollAct[2].DegerFloat = float.Parse(datas[14], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollAct[3].DegerFloat = float.Parse(datas[15], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoPitchAct[0].DegerFloat = float.Parse(datas[16], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchAct[1].DegerFloat = float.Parse(datas[17], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchAct[2].DegerFloat = float.Parse(datas[18], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchAct[3].DegerFloat = float.Parse(datas[19], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoRollTemp[0].DegerFloat = float.Parse(datas[20], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollTemp[1].DegerFloat = float.Parse(datas[21], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollTemp[2].DegerFloat = float.Parse(datas[22], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoRollTemp[3].DegerFloat = float.Parse(datas[23], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoPitchTemp[0].DegerFloat = float.Parse(datas[24], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchTemp[1].DegerFloat = float.Parse(datas[25], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchTemp[2].DegerFloat = float.Parse(datas[26], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.ServoPitchTemp[3].DegerFloat = float.Parse(datas[27], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.ServoBatVolt.DegerFloat = float.Parse(datas[28], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.Durum[0] = (EnumMotorStatus)(int.Parse(datas[29]));
-                    KontrolPaneli.Durum[1] = (EnumMotorStatus)(int.Parse(datas[30]));
-                    KontrolPaneli.Durum[2] = (EnumMotorStatus)(int.Parse(datas[31]));
-                    KontrolPaneli.Durum[3] = (EnumMotorStatus)(int.Parse(datas[32]));
-
-                    KontrolPaneli.RPM[0].DegerFloat = float.Parse(datas[33], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.RPM[1].DegerFloat = float.Parse(datas[34], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.RPM[2].DegerFloat = float.Parse(datas[35], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.RPM[3].DegerFloat = float.Parse(datas[36], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.Itki[0].DegerFloat = float.Parse(datas[37], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.Itki[1].DegerFloat = float.Parse(datas[38], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.Itki[2].DegerFloat = float.Parse(datas[39], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.Itki[3].DegerFloat = float.Parse(datas[40], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.EGT[0].DegerFloat = float.Parse(datas[41], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.EGT[1].DegerFloat = float.Parse(datas[42], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.EGT[2].DegerFloat = float.Parse(datas[43], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.EGT[3].DegerFloat = float.Parse(datas[44], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.JetBatVolt[0].DegerFloat = float.Parse(datas[45], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.JetBatVolt[1].DegerFloat = float.Parse(datas[46], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.JetBatVolt[2].DegerFloat = float.Parse(datas[47], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.JetBatVolt[3].DegerFloat = float.Parse(datas[48], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.QuadRef[0].DegerFloat = float.Parse(datas[49], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadRef[1].DegerFloat = float.Parse(datas[50], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadRef[2].DegerFloat = float.Parse(datas[51], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadRef[3].DegerFloat = float.Parse(datas[52], CultureInfo.InvariantCulture.NumberFormat);
-
-                    KontrolPaneli.QuadAct[0].DegerFloat = float.Parse(datas[53], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadAct[1].DegerFloat = float.Parse(datas[54], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadAct[2].DegerFloat = float.Parse(datas[55], CultureInfo.InvariantCulture.NumberFormat);
-                    KontrolPaneli.QuadAct[3].DegerFloat = float.Parse(datas[56], CultureInfo.InvariantCulture.NumberFormat);
-
-                    //KontrolPaneli.Fuel = float.Parse(datas[10], CultureInfo.InvariantCulture.NumberFormat)/1000f;
-                    #endregion
-
-                    // ERRORLARI GUNCELLE
-                    #region
-                    KontrolPaneli.ServoRollErr[0] = KontrolPaneli.ServoRollRef[0].DegerFloat - KontrolPaneli.ServoRollAct[0].DegerFloat;
-                    KontrolPaneli.ServoRollErr[1] = KontrolPaneli.ServoRollRef[1].DegerFloat - KontrolPaneli.ServoRollAct[1].DegerFloat;
-                    KontrolPaneli.ServoRollErr[2] = KontrolPaneli.ServoRollRef[2].DegerFloat - KontrolPaneli.ServoRollAct[2].DegerFloat;
-                    KontrolPaneli.ServoRollErr[3] = KontrolPaneli.ServoRollRef[3].DegerFloat - KontrolPaneli.ServoRollAct[3].DegerFloat;
-
-                    KontrolPaneli.ServoPitchErr[0] = KontrolPaneli.ServoPitchRef[0].DegerFloat - KontrolPaneli.ServoPitchAct[0].DegerFloat;
-                    KontrolPaneli.ServoPitchErr[1] = KontrolPaneli.ServoPitchRef[1].DegerFloat - KontrolPaneli.ServoPitchAct[1].DegerFloat;
-                    KontrolPaneli.ServoPitchErr[2] = KontrolPaneli.ServoPitchRef[2].DegerFloat - KontrolPaneli.ServoPitchAct[2].DegerFloat;
-                    KontrolPaneli.ServoPitchErr[3] = KontrolPaneli.ServoPitchRef[3].DegerFloat - KontrolPaneli.ServoPitchAct[3].DegerFloat;
-
-                    KontrolPaneli.QuadErr[0] = KontrolPaneli.QuadRef[0].DegerFloat - KontrolPaneli.QuadAct[0].DegerFloat;
-                    KontrolPaneli.QuadErr[1] = KontrolPaneli.QuadRef[1].DegerFloat - KontrolPaneli.QuadAct[1].DegerFloat;
-                    KontrolPaneli.QuadErr[2] = KontrolPaneli.QuadRef[2].DegerFloat - KontrolPaneli.QuadAct[2].DegerFloat;
-                    KontrolPaneli.QuadErr[3] = KontrolPaneli.QuadRef[3].DegerFloat - KontrolPaneli.QuadAct[3].DegerFloat;
-                    #endregion
-
-                    if (KontrolPaneli.KayitYap)
+                    if (gelenByte == null)
                     {
-                        // GELEN DATALARI TEXT DOSYASINA KAYDET
+                        gelenByte = KontrolPaneli.MySerialPort.ReadByte();
+                    }
+
+                    if (gelenByte == 0xAB)
+                    {
+                        sqFlags++;
+                        gelenByte = KontrolPaneli.MySerialPort.ReadByte();
+                        if (gelenByte == 0xCD)
+                        {
+                            sqFlags++;
+                            gelenByte = KontrolPaneli.MySerialPort.ReadByte();
+                            if (gelenByte == 0xEF)
+                            {
+                                sqFlags++;
+                                break;
+                            }
+                            sqFlags = 0;
+                            continue;
+                        }
+                        sqFlags = 0;
+                        continue;
+                    }
+                    gelenByte = null;
+                    continue;
+                }
+                
+                // TODO - check for checksum
+                if (sqFlags == 3) // if initial squence is received
+                {
+                    KontrolPaneli.MySerialPort.Read(receivedData, 0, 82);
+                    int sum = 0;
+                    for (int i = 0; i < 80; i++)
+                    {
+                        sum += receivedData[i];
+                    }
+                    int receivedChecksum = receivedData[81];
+                    receivedChecksum = receivedChecksum | (receivedData[80] << 8);
+
+                    if (sum == receivedChecksum)
+                    {
+                        //receivedData = receivedData.Remove(0, 1);
+                        //string[] datas = receivedData.Split('#');
+
+                        //ABDULLAH TODO
+                        //GELEN DATALARI KontrolPaneli DEĞİŞKENLERINE ATA
                         #region
-                        // BURADA DEĞİŞİKLİK YAPINCA CmdKaydetExecute İÇİNDE SIRALAMAYI BELİRTEN YERDE DEĞİŞİKLİK YAPMAYI UNUTMA
-                        sw.Write(
-                            KontrolPaneli.Time.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.BaslangicKutle.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.TahminiKutle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.LQR.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                            KontrolPaneli.HoverServoAcisi.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
-                            KontrolPaneli.ServoBatVolt.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
-                            KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                        // BURADA DEĞİŞİKLİK YAPINCA ALTTA if (KontrolPaneli.KayitYap) İÇİNDE DEĞİŞİKLİK YAPMAYI UNUTMA
+                        for (int i = 0; i < 4; i++)
+                        {
+                            KontrolPaneli.Durum[i] = (EnumMotorStatus)receivedData[0 + i * 5];
+                            KontrolPaneli.RPM[i].DegerByte = receivedData[1 + i * 5];
+                            // BURDAN SONRASINI ÜSTTEKİ SATIRDAKİ GİBİ YAPACAKSIN
+                            //KontrolPaneli.Itki[i].DegerFloat = float.Parse(receivedData[2 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.EGT[i].DegerFloat = float.Parse(receivedData[3 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.JetBatVolt[i].DegerFloat = float.Parse(receivedData[4 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
+                        }
 
                         for (int i = 0; i < 4; i++)
                         {
-                            sw.Write(KontrolPaneli.ServoRollRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoRollRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoPitchRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoRollAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoPitchAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoRollTemp[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.ServoPitchTemp[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write((int)KontrolPaneli.Durum[i] + ",");
-                            sw.Write(KontrolPaneli.RPM[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.Itki[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.EGT[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.JetBatVolt[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadMinUI[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadMaxUI[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadMinVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadMaxVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
-                            sw.Write(KontrolPaneli.QuadMaxVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                            //KontrolPaneli.ServoRollRef[i].DegerFloat = float.Parse(receivedData[20 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.ServoRollAct[i].DegerFloat = float.Parse(receivedData[21 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.ServoRollTemp[i].DegerFloat = float.Parse(receivedData[22 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.ServoPitchRef[i].DegerFloat = float.Parse(receivedData[23 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.ServoPitchAct[i].DegerFloat = float.Parse(receivedData[24 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.ServoPitchTemp[i].DegerFloat = float.Parse(receivedData[25 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
                         }
-                        sw.Write(Environment.NewLine);
+
+                        //KontrolPaneli.ServoBatVolt.DegerFloat = float.Parse(receivedData[44], CultureInfo.InvariantCulture.NumberFormat);
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            //KontrolPaneli.QuadRef[i].DegerFloat = float.Parse(receivedData[45 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.QuadAct[i].DegerFloat = float.Parse(receivedData[46 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.QuadMinVeh[i].DegerFloat = float.Parse(receivedData[47 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
+                            //KontrolPaneli.QuadMinVeh[i].DegerFloat = float.Parse(receivedData[48 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
+                        }
+
+                        //KontrolPaneli.EstopVeh = bool.Parse(receivedData[51]);
+                        //KontrolPaneli.TahminiKutle = float.Parse(receivedData[1], CultureInfo.InvariantCulture.NumberFormat);
+                        //KontrolPaneli.LQR = float.Parse(receivedData[2], CultureInfo.InvariantCulture.NumberFormat);
+                        //KontrolPaneli.HoverServoAcisi = float.Parse(receivedData[3], CultureInfo.InvariantCulture.NumberFormat);
+
+                        //KontrolPaneli.Fuel = float.Parse(datas[10], CultureInfo.InvariantCulture.NumberFormat)/1000f;
                         #endregion
+
+                        // ERRORLARI GUNCELLE
+                        #region
+                        KontrolPaneli.ServoRollErr[0] = KontrolPaneli.ServoRollRef[0].DegerFloat - KontrolPaneli.ServoRollAct[0].DegerFloat;
+                        KontrolPaneli.ServoRollErr[1] = KontrolPaneli.ServoRollRef[1].DegerFloat - KontrolPaneli.ServoRollAct[1].DegerFloat;
+                        KontrolPaneli.ServoRollErr[2] = KontrolPaneli.ServoRollRef[2].DegerFloat - KontrolPaneli.ServoRollAct[2].DegerFloat;
+                        KontrolPaneli.ServoRollErr[3] = KontrolPaneli.ServoRollRef[3].DegerFloat - KontrolPaneli.ServoRollAct[3].DegerFloat;
+
+                        KontrolPaneli.ServoPitchErr[0] = KontrolPaneli.ServoPitchRef[0].DegerFloat - KontrolPaneli.ServoPitchAct[0].DegerFloat;
+                        KontrolPaneli.ServoPitchErr[1] = KontrolPaneli.ServoPitchRef[1].DegerFloat - KontrolPaneli.ServoPitchAct[1].DegerFloat;
+                        KontrolPaneli.ServoPitchErr[2] = KontrolPaneli.ServoPitchRef[2].DegerFloat - KontrolPaneli.ServoPitchAct[2].DegerFloat;
+                        KontrolPaneli.ServoPitchErr[3] = KontrolPaneli.ServoPitchRef[3].DegerFloat - KontrolPaneli.ServoPitchAct[3].DegerFloat;
+
+                        KontrolPaneli.QuadErr[0] = KontrolPaneli.QuadRef[0].DegerFloat - KontrolPaneli.QuadAct[0].DegerFloat;
+                        KontrolPaneli.QuadErr[1] = KontrolPaneli.QuadRef[1].DegerFloat - KontrolPaneli.QuadAct[1].DegerFloat;
+                        KontrolPaneli.QuadErr[2] = KontrolPaneli.QuadRef[2].DegerFloat - KontrolPaneli.QuadAct[2].DegerFloat;
+                        KontrolPaneli.QuadErr[3] = KontrolPaneli.QuadRef[3].DegerFloat - KontrolPaneli.QuadAct[3].DegerFloat;
+                        #endregion
+
+                        if (KontrolPaneli.KayitYap)
+                        {
+                            // ABDULLAH TODO
+                            // BURAYI DÜZENLEMEN LAZIM
+                            // GELEN DATALARI TEXT DOSYASINA KAYDET
+                            #region
+                            // BURADA DEĞİŞİKLİK YAPINCA CmdKaydetExecute İÇİNDE SIRALAMAYI BELİRTEN YERDE DEĞİŞİKLİK YAPMAYI UNUTMA
+                            sw.Write(
+                                KontrolPaneli.Time.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                                KontrolPaneli.BaslangicKutle.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                                KontrolPaneli.TahminiKutle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                                KontrolPaneli.LQR.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                                KontrolPaneli.HoverServoAcisi.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
+                                KontrolPaneli.ServoBatVolt.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
+                                KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+
+                            for (int i = 0; i < 4; i++)
+                            {
+                                sw.Write(KontrolPaneli.ServoRollRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoRollRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoPitchRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoRollAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoPitchAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoRollTemp[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.ServoPitchTemp[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write((int)KontrolPaneli.Durum[i] + ",");
+                                sw.Write(KontrolPaneli.RPM[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.Itki[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.EGT[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.JetBatVolt[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadRef[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadAct[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadMinUI[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadMaxUI[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadMinVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadMaxVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                                sw.Write(KontrolPaneli.QuadMaxVeh[i].DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
+                            }
+                            sw.Write(Environment.NewLine);
+                            #endregion
+                        }
+                    }
+                    else
+                    {
+                        // ABDULLAH TODO
+                        // CHECKSUM'DA ERROR VARSA NE YAPILACAĞI BURADA İMPLEMENTE EDİLECEK
+                        // TODO checksum ERROR !!!!!!!!!!!!!!!!!!!
                     }
                 }
-                else
-                {
-                    KontrolPaneli.MySerialPort.DiscardInBuffer();
-                    KontrolPaneli.Baglanti = EnumBaglanti.HataliVeri;
-                }
+                //else
+                //{
+                //    KontrolPaneli.MySerialPort.DiscardInBuffer();
+                //    KontrolPaneli.Baglanti = EnumBaglanti.HataliVeri;
+                //}
             }
             catch (Exception)
             {
-                MessageBox.Show("ardudan data okuma işlemi yarım kaldı");
+                MessageBox.Show("data okuma işlemi yarım kaldı");
             }
-        }
+        } //end of serialPort_DataReceived
 
         public void ComPortlariBul()
         {

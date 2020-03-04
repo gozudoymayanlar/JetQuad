@@ -1025,6 +1025,27 @@
                                                        Foreground="{Binding KontrolPaneli.JetBatVolt[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource JetBatRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="25" Margin="0 10 0 0">
+                                            <TextBlock Text="RcRoll" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcPitch" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcYaw" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcZ" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcThrust" Margin="0 0 0 0" FontSize="15" Width="80" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcServo" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcLqr" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="RcEstop" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Height="25" Margin="0 0 0 0">
+                                            <TextBlock Text="{Binding KontrolPaneli.RcRoll.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcPitch.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcYaw.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcZ.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcThrust.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="80" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcServo.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcLQR, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcEstop, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </StackPanel>
+
                                     </StackPanel>
 
                                     <!-- Quadrotorun genel bilgileri-->
