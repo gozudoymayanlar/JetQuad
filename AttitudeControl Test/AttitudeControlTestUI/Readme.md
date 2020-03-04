@@ -1,2 +1,2 @@
 ﻿# User Interface
-Jet motor ve eğme mekanizmasının test arayüz programı
+Deney düzeneğinde jet motorlu komple quadro test arayüz programı
