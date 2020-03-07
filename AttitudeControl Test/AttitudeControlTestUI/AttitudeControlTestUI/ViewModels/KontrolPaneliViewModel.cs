@@ -41,6 +41,7 @@ namespace AttitudeControlTestUI.ViewModels
         private int sqFlags = 0;
         private int? gelenByte = null;
         private byte[] receivedData = new byte[82];
+        private byte[] initSeq = { 0xAB, 0xCD, 0xEF };
 
         // PROTOKOL DEĞİŞTİĞİ İÇİN BUNLARI KULLANMIYORUM ARTIK
         //byte[] initChars = { (byte)'"', (byte)'!', (byte)'\'', (byte)'^', (byte)'+', (byte)'%', (byte)'&', (byte)'/', (byte)'(', (byte)')' };
@@ -358,7 +359,6 @@ namespace AttitudeControlTestUI.ViewModels
             return false;
         }
 
-        // TODO - BURASI GÜNCELLENECEK
         private void CmdKaydetExecute(object obj)
         {
             if (KontrolPaneli.KayitYap)
@@ -373,11 +373,7 @@ namespace AttitudeControlTestUI.ViewModels
                 string s = DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss");
                 fs = new FileStream(dbPath + s + ".txt", FileMode.CreateNew);
                 sw = new StreamWriter(fs, Encoding.Default);
-                // TODO ---- BURASI GÜNCELLENECEK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                sw.Write("1.Time \r\n2.MotorStatus \r\n3.KumandaThrottle \r\n4.KumandaTrim \r\n5.ArduThrottle \r\n6.ArduTrim \r\n" +
-                    "7.MotorThrottle \r\n8.Thrust \r\n9.RefRPM \r\n10.MotorRPM \r\n11.EGT \r\n12.BatteryVoltage \r\n13.PumpVoltage \r\n14.Fuel" +
-                    "\r\n15.Roll \r\n16.RollRef \r\n17.RollTemp \r\n18.Pitch \r\n19.PitchRef \r\n20.PitchTemp \r\n21.ServoError \r\n21.RollAkim \r\n22.PitchAkim \r\n" + 
-                    "veri" + s + "= [");
+                sw.Write("veri" + s + "= [");
                 KontrolPaneli.KayitYap = true;
             }
         }
@@ -396,7 +392,9 @@ namespace AttitudeControlTestUI.ViewModels
             // ÖNCE BAŞINA SONUNA KARAKTER EKLEDİĞİMİZ VERSİYONU İMPLEMENTE ETMİŞTİM
             // PROTOKOL DEĞİŞTİĞİ İÇİN AŞAĞIDAKİLER KULLANILMIYOR.
             // SEN AYARLICAN ARTIK
-            
+
+            CmdEnterExecute(null);
+
             //string string2send = "";
             //string2send += Convert.ToString(initChars[0]) + Convert.ToString(KontrolPaneli.EstopUI) + "#";
             //string2send += "\n";
@@ -412,11 +410,8 @@ namespace AttitudeControlTestUI.ViewModels
         }
         private void CmdEnterExecute(object obj)
         {
-            List<byte> bytes2send = new List<byte> { };
-
-            // ABDULLAH TODO
-            // TODO - add initial sequence
-            // TODO - CALCLATE AND add checksum
+            // add initial sequence
+            List<byte> bytes2send = new List<byte> { initSeq[0], initSeq[1], initSeq[2] };
 
             // ÖNCE BAŞINA SONUNA KARAKTER EKLEDİĞİMİZ VERSİYONU İMPLEMENTE ETMİŞTİM
             // PROTOKOL DEĞİŞTİĞİ İÇİN AŞAĞIDAKİLER KULLANILMIYOR.
@@ -448,6 +443,25 @@ namespace AttitudeControlTestUI.ViewModels
             //        KontrolPaneli.DataChangedFlags[i + 6] = false;
             //    }
             //}
+
+            ushort checksum = 0;
+            bytes2send.Add(Convert.ToByte(KontrolPaneli.EstopUI));
+            bytes2send.Add(KontrolPaneli.BaslangicKutle.DegerByte);
+            for (int i = 0; i < 4; i++)
+            {
+                bytes2send.Add(KontrolPaneli.QuadMinUI[i].DegerByte);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                bytes2send.Add(KontrolPaneli.QuadMaxUI[i].DegerByte);
+            }
+            // calculating checksum
+            for (int i = 0; i < bytes2send.Count; i++)
+            {
+                checksum += bytes2send[i];
+            }
+            List<byte> a = BitConverter.GetBytes(checksum).ToList();
+            bytes2send.AddRange(a);
             KontrolPaneli.MySerialPort.Write(bytes2send.ToArray(),0,bytes2send.Count);
         } //end of cmdEnterExecute
 
@@ -464,10 +478,11 @@ namespace AttitudeControlTestUI.ViewModels
                 // checking for initial sequence
                 while (sqFlags != 3 && KontrolPaneli.MySerialPort.BytesToRead >= 3)
                 {
-                    if (gelenByte == null)
-                    {
-                        gelenByte = KontrolPaneli.MySerialPort.ReadByte();
-                    }
+                    //if (gelenByte == null)
+                    //{
+                    //    gelenByte = KontrolPaneli.MySerialPort.ReadByte();
+                    //}
+                    gelenByte = KontrolPaneli.MySerialPort.ReadByte();
 
                     if (gelenByte == 0xAB)
                     {
@@ -488,21 +503,21 @@ namespace AttitudeControlTestUI.ViewModels
                         sqFlags = 0;
                         continue;
                     }
-                    gelenByte = null;
+                    //gelenByte = null;
                     continue;
                 }
                 
-                // TODO - check for checksum
                 if (sqFlags == 3) // if initial squence is received
                 {
-                    KontrolPaneli.MySerialPort.Read(receivedData, 0, 82);
-                    int sum = 0;
-                    for (int i = 0; i < 80; i++)
+                    sqFlags = 0;
+                    KontrolPaneli.MySerialPort.Read(receivedData, 0, 79);
+                    ushort sum = (ushort)(initSeq[0] + initSeq[1] + initSeq[2]);
+                    for (int i = 0; i < 77; i++)
                     {
                         sum += receivedData[i];
                     }
-                    int receivedChecksum = receivedData[81];
-                    receivedChecksum = receivedChecksum | (receivedData[80] << 8);
+                    ushort receivedChecksum = receivedData[77];
+                    receivedChecksum = (ushort)((receivedData[78] << 8) | receivedChecksum);
 
                     if (sum == receivedChecksum)
                     {
@@ -515,38 +530,46 @@ namespace AttitudeControlTestUI.ViewModels
                         // BURADA DEĞİŞİKLİK YAPINCA ALTTA if (KontrolPaneli.KayitYap) İÇİNDE DEĞİŞİKLİK YAPMAYI UNUTMA
                         for (int i = 0; i < 4; i++)
                         {
-                            KontrolPaneli.Durum[i] = (EnumMotorStatus)receivedData[0 + i * 5];
-                            KontrolPaneli.RPM[i].DegerByte = receivedData[1 + i * 5];
-                            // BURDAN SONRASINI ÜSTTEKİ SATIRDAKİ GİBİ YAPACAKSIN
-                            //KontrolPaneli.Itki[i].DegerFloat = float.Parse(receivedData[2 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.EGT[i].DegerFloat = float.Parse(receivedData[3 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.JetBatVolt[i].DegerFloat = float.Parse(receivedData[4 + i * 5], CultureInfo.InvariantCulture.NumberFormat);
+                            KontrolPaneli.Durum[i] = (EnumMotorStatus)receivedData[0 + i * 6];
+                            KontrolPaneli.RPM[i].DegerUshort = (ushort)(receivedData[2 + i * 6] << 8 | receivedData[1 + i * 6]);
+                            KontrolPaneli.Itki[i].DegerByte = receivedData[3 + i * 6];
+                            KontrolPaneli.EGT[i].DegerByte = receivedData[4 + i * 6];
+                            KontrolPaneli.JetBatVolt[i].DegerByte = receivedData[5 + i * 6];
                         }
 
                         for (int i = 0; i < 4; i++)
                         {
-                            //KontrolPaneli.ServoRollRef[i].DegerFloat = float.Parse(receivedData[20 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.ServoRollAct[i].DegerFloat = float.Parse(receivedData[21 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.ServoRollTemp[i].DegerFloat = float.Parse(receivedData[22 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.ServoPitchRef[i].DegerFloat = float.Parse(receivedData[23 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.ServoPitchAct[i].DegerFloat = float.Parse(receivedData[24 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.ServoPitchTemp[i].DegerFloat = float.Parse(receivedData[25 + i * 6], CultureInfo.InvariantCulture.NumberFormat);
+                            KontrolPaneli.ServoRollRef[i].DegerByte = receivedData[24 + i * 6];
+                            KontrolPaneli.ServoRollAct[i].DegerByte = receivedData[25 + i * 6];
+                            KontrolPaneli.ServoRollTemp[i].DegerByte = receivedData[26 + i * 6];
+                            KontrolPaneli.ServoPitchRef[i].DegerByte = receivedData[27 + i * 6];
+                            KontrolPaneli.ServoPitchAct[i].DegerByte = receivedData[28 + i * 6];
+                            KontrolPaneli.ServoPitchTemp[i].DegerByte= receivedData[29 + i * 6];
                         }
 
-                        //KontrolPaneli.ServoBatVolt.DegerFloat = float.Parse(receivedData[44], CultureInfo.InvariantCulture.NumberFormat);
+                        KontrolPaneli.ServoBatVolt.DegerByte = receivedData[48];
 
                         for (int i = 0; i < 4; i++)
                         {
-                            //KontrolPaneli.QuadRef[i].DegerFloat = float.Parse(receivedData[45 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.QuadAct[i].DegerFloat = float.Parse(receivedData[46 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.QuadMinVeh[i].DegerFloat = float.Parse(receivedData[47 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
-                            //KontrolPaneli.QuadMinVeh[i].DegerFloat = float.Parse(receivedData[48 + i * 4], CultureInfo.InvariantCulture.NumberFormat);
+                            KontrolPaneli.QuadRef[i].DegerByte = receivedData[49 + i * 4];
+                            KontrolPaneli.QuadAct[i].DegerByte = receivedData[50 + i * 4];
+                            KontrolPaneli.QuadMinVeh[i].DegerByte = receivedData[51 + i * 4];
+                            KontrolPaneli.QuadMaxVeh[i].DegerByte = receivedData[52 + i * 4];
                         }
 
-                        //KontrolPaneli.EstopVeh = bool.Parse(receivedData[51]);
-                        //KontrolPaneli.TahminiKutle = float.Parse(receivedData[1], CultureInfo.InvariantCulture.NumberFormat);
-                        //KontrolPaneli.LQR = float.Parse(receivedData[2], CultureInfo.InvariantCulture.NumberFormat);
-                        //KontrolPaneli.HoverServoAcisi = float.Parse(receivedData[3], CultureInfo.InvariantCulture.NumberFormat);
+                        KontrolPaneli.EstopVeh = Convert.ToBoolean(receivedData[65]);
+                        KontrolPaneli.TahminiKutle.DegerByte = receivedData[66];
+                        KontrolPaneli.LQR = Convert.ToBoolean(receivedData[67]);
+                        KontrolPaneli.HoverServoAcisi.DegerByte = receivedData[68];
+
+                        KontrolPaneli.RcRoll.DegerByte = receivedData[69];
+                        KontrolPaneli.RcPitch.DegerByte = receivedData[70];
+                        KontrolPaneli.RcYaw.DegerByte = receivedData[71];
+                        KontrolPaneli.RcZ.DegerByte = receivedData[72];
+                        KontrolPaneli.RcThrust.DegerByte = receivedData[73];
+                        KontrolPaneli.RcServo.DegerByte = receivedData[74];
+                        KontrolPaneli.RcLQR.DegerByte = receivedData[75];
+                        KontrolPaneli.RcEstop.DegerByte = receivedData[76];
 
                         //KontrolPaneli.Fuel = float.Parse(datas[10], CultureInfo.InvariantCulture.NumberFormat)/1000f;
                         #endregion
@@ -567,6 +590,7 @@ namespace AttitudeControlTestUI.ViewModels
                         KontrolPaneli.QuadErr[1] = KontrolPaneli.QuadRef[1].DegerFloat - KontrolPaneli.QuadAct[1].DegerFloat;
                         KontrolPaneli.QuadErr[2] = KontrolPaneli.QuadRef[2].DegerFloat - KontrolPaneli.QuadAct[2].DegerFloat;
                         KontrolPaneli.QuadErr[3] = KontrolPaneli.QuadRef[3].DegerFloat - KontrolPaneli.QuadAct[3].DegerFloat;
+                        KontrolPaneli.Baglanti = EnumBaglanti.Bagli;
                         #endregion
 
                         if (KontrolPaneli.KayitYap)
@@ -579,9 +603,9 @@ namespace AttitudeControlTestUI.ViewModels
                             sw.Write(
                                 KontrolPaneli.Time.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                                 KontrolPaneli.BaslangicKutle.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.TahminiKutle.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
+                                KontrolPaneli.TahminiKutle.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
                                 KontrolPaneli.LQR.ToString(CultureInfo.InvariantCulture.NumberFormat) + "," +
-                                KontrolPaneli.HoverServoAcisi.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
+                                KontrolPaneli.HoverServoAcisi.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
                                 KontrolPaneli.ServoBatVolt.DegerFloat.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",",
                                 KontrolPaneli.Fuel.ToString(CultureInfo.InvariantCulture.NumberFormat) + ",");
 
@@ -616,6 +640,7 @@ namespace AttitudeControlTestUI.ViewModels
                         // ABDULLAH TODO
                         // CHECKSUM'DA ERROR VARSA NE YAPILACAĞI BURADA İMPLEMENTE EDİLECEK
                         // TODO checksum ERROR !!!!!!!!!!!!!!!!!!!
+                        KontrolPaneli.Baglanti = EnumBaglanti.HataliVeri;
                     }
                 }
                 //else

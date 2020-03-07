@@ -33,10 +33,10 @@ namespace AttitudeControlTestUI.Models
         private bool _estopVeh = false;
 
         // tekli değişkenler - sol taraftaki
-        private MyVeri _baslangicKutle = new MyVeri(51.4f, 10, 100);
-        private float _tahminiKutle = 20;
-        private float _lqr = 51;
-        private float _hoverServoAcisi = 21;
+        private MyVeri _baslangicKutle = new MyVeri(51.4f, 0, 70);
+        private MyVeri _tahminiKutle = new MyVeri(50.0f, 0, 70);
+        private bool _lqr = false;
+        private MyVeri _hoverServoAcisi = new MyVeri(20, 0, 45);
         //private int _motorThrottle = 52;
 
 
@@ -71,23 +71,22 @@ namespace AttitudeControlTestUI.Models
         // jet motor değişkenler - sağ alt sol tablo
         private ObservableCollection<EnumMotorStatus> _durum = new ObservableCollection<EnumMotorStatus> { EnumMotorStatus.BaglantiYok, EnumMotorStatus.AccelDly, EnumMotorStatus.HataliVeri, EnumMotorStatus.Run };
 
-        // TODO BUNLAR 2 BYTE'LIK OLACAK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private ObservableCollection<MyVeri> _rpm = new ObservableCollection<MyVeri>
-            { new MyVeri(30000, 0, 180000), new MyVeri(75000, 0, 180000), new MyVeri(120000, 0, 180000), new MyVeri(150000, 0, 180000) };
+        private ObservableCollection<MyVeri2Byte> _rpm = new ObservableCollection<MyVeri2Byte>
+            { new MyVeri2Byte(30000, 0, 130000), new MyVeri2Byte(75000, 0, 130000), new MyVeri2Byte(100000, 0, 130000), new MyVeri2Byte(120000, 0, 130000) };
 
         private ObservableCollection<MyVeri> _itki = new ObservableCollection<MyVeri>
             { new MyVeri(32f, 0, 200), new MyVeri(33f, 0, 200), new MyVeri(33f, 0, 200), new MyVeri(34f, 0, 200) };
 
         private ObservableCollection<MyVeri> _egt = new ObservableCollection<MyVeri>
-            { new MyVeri(0, 0, 1500), new MyVeri(300, 0, 1500), new MyVeri(600, 0, 1500), new MyVeri(1400, 0, 1500) };
+            { new MyVeri(0, -10, 1000), new MyVeri(300, -10, 1000), new MyVeri(600, -10, 1000), new MyVeri(1400, -10, 1000) };
         
         // jet bataryalar için 12.6 - 9
         private ObservableCollection<MyVeri> _jetBatVolt = new ObservableCollection<MyVeri>
-            {  new MyVeri(12.6f, 8, 12.6f), new MyVeri(11.4f, 8, 12.6f), new MyVeri(10.4f, 8, 12.6f), new MyVeri(9f, 8, 12.6f)};
+            {  new MyVeri(12.6f, 0, 20), new MyVeri(11.4f, 0, 20), new MyVeri(10.4f, 0, 20), new MyVeri(9f, 0, 20)};
 
         // Jet quad değişkenleri tablosu - sağ alt sağ tablo
-        private ObservableCollection<MyVeri> _quadRef = new ObservableCollection<MyVeri> { new MyVeri(4, -30, 30), new MyVeri(5, -30, 30), new MyVeri(6, -30, 30), new MyVeri(7, -30, 30) };
-        private ObservableCollection<MyVeri> _quadAct = new ObservableCollection<MyVeri> { new MyVeri(8, -30, 30), new MyVeri(9, -30, 30), new MyVeri(10, -30, 30), new MyVeri(1, -30, 30) };
+        private ObservableCollection<MyVeri> _quadRef = new ObservableCollection<MyVeri> { new MyVeri(4, -45, 45), new MyVeri(5, -45, 45), new MyVeri(6, -45, 45), new MyVeri(7, -45, 45) };
+        private ObservableCollection<MyVeri> _quadAct = new ObservableCollection<MyVeri> { new MyVeri(8, -45, 45), new MyVeri(9, -45, 45), new MyVeri(10, -45, 45), new MyVeri(1, -45, 45) };
         private ObservableCollection<float> _quadErr = new ObservableCollection<float> { 12,13,14,15 };
 
         //private float _quad_roll_min_ui = 61;
@@ -109,25 +108,25 @@ namespace AttitudeControlTestUI.Models
         //private float _quad_z_max_veh = 68;
 
         private ObservableCollection<MyVeri> _quadMinUI = new ObservableCollection<MyVeri>
-            { new MyVeri(61, 0, 180, 0), new MyVeri(62, 0, 180, 1), new MyVeri(63, 0, 180, 2), new MyVeri(64, 0, 180, 3) };
+            { new MyVeri(61, -45, 45, 0), new MyVeri(62, -45, 45, 1), new MyVeri(63, 0, 360, 2), new MyVeri(64, 0, 10, 3) };
 
         private ObservableCollection<MyVeri> _quadMaxUI = new ObservableCollection<MyVeri>
-            { new MyVeri(65, 0, 180, 0), new MyVeri(66, 0, 180, 1), new MyVeri(67, 0, 180, 2), new MyVeri(68, 0, 180, 3) };
+            { new MyVeri(65, -45, 45, 0), new MyVeri(66, -45, 45, 1), new MyVeri(67, 0, 360, 2), new MyVeri(68, 0, 10, 3) };
 
         private ObservableCollection<MyVeri> _quadMinVeh = new ObservableCollection<MyVeri>
-            { new MyVeri(69, 0, 180, 0), new MyVeri(70, 0, 180, 1), new MyVeri(71, 0, 180, 2), new MyVeri(72, 0, 180, 3) };
+            { new MyVeri(69, -45, 45, 0), new MyVeri(70, -45, 45, 1), new MyVeri(71, 0, 360, 2), new MyVeri(72, 0, 10, 3) };
 
         private ObservableCollection<MyVeri> _quadMaxVeh = new ObservableCollection<MyVeri>
-            { new MyVeri(73, 0, 180, 0), new MyVeri(74, 0, 180, 1), new MyVeri(75, 0, 180, 2), new MyVeri(76, 0, 180, 3) };
+            { new MyVeri(73, -45, 45, 0), new MyVeri(74, -45, 45, 1), new MyVeri(75, 0, 360, 2), new MyVeri(76, 0, 10, 3) };
 
-        private MyVeri _rcRoll = new MyVeri(0, -30, 30);
-        private MyVeri _rcPitch = new MyVeri(0, -30, 30);
-        private MyVeri _rcYaw = new MyVeri(0, 0, 360);
-        private MyVeri _rcZ = new MyVeri(0, -5, 15);
-        private MyVeri _rcThrust = new MyVeri(0, 0, 150);
-        private MyVeri _rcServo = new MyVeri(0, -30, 30);
-        private bool _rcLQR = false;
-        private bool _rcEstop = false;
+        private MyVeri _rcRoll = new MyVeri(500, 500, 2500);
+        private MyVeri _rcPitch = new MyVeri(1000, 500, 2500);
+        private MyVeri _rcYaw = new MyVeri(1300, 500, 2500);
+        private MyVeri _rcZ = new MyVeri(1500, 500, 2500);
+        private MyVeri _rcThrust = new MyVeri(1700, 500, 2500);
+        private MyVeri _rcServo = new MyVeri(2000, 500, 2500);
+        private MyVeri _rcLQR = new MyVeri(2200, 500, 2500);
+        private MyVeri _rcEstop = new MyVeri(2500, 500, 2500);
 
         private float _fuel = 30f; // ???????????????
 
@@ -241,17 +240,17 @@ namespace AttitudeControlTestUI.Models
                 _dataChangedFlags[1] = true;
             }
         }
-        public float TahminiKutle
+        public MyVeri TahminiKutle
         {
             get { return _tahminiKutle; }
             set { _tahminiKutle = value; OnPropertyChanged(nameof(TahminiKutle)); }
         }
-        public float LQR
+        public bool LQR
         {
             get { return _lqr; }
             set { _lqr = value; OnPropertyChanged(nameof(LQR)); }
         }
-        public float HoverServoAcisi
+        public MyVeri HoverServoAcisi
         {
             get { return _hoverServoAcisi; }
             set { _hoverServoAcisi = value; OnPropertyChanged(nameof(HoverServoAcisi)); }
@@ -320,7 +319,7 @@ namespace AttitudeControlTestUI.Models
             get { return _durum; }
             set { _durum = value; OnPropertyChanged(nameof(Durum)); }
         }
-        public ObservableCollection<MyVeri> RPM
+        public ObservableCollection<MyVeri2Byte> RPM
         {
             get { return _rpm; }
             set { _rpm = value; OnPropertyChanged(nameof(RPM)); }
@@ -676,12 +675,12 @@ namespace AttitudeControlTestUI.Models
             get { return _rcServo; }
             set { _rcServo = value; OnPropertyChanged(nameof(RcServo)); }
         }
-        public bool RcLQR
+        public MyVeri RcLQR
         {
             get { return _rcLQR; }
             set { _rcLQR = value; OnPropertyChanged(nameof(RcLQR)); }
         }
-        public bool RcEstop
+        public MyVeri RcEstop
         {
             get { return _rcEstop; }
             set { _rcEstop = value; OnPropertyChanged(nameof(RcEstop)); }

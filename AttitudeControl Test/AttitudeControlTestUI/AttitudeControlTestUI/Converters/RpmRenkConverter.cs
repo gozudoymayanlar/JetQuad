@@ -15,8 +15,8 @@ namespace AttitudeControlTestUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             float rpm = (float)value;
-            float rpmMax = 150000;
-            float rpmMin = 20000;
+            float rpmMax = 130000;
+            float rpmMin = 0;
             float renkMax = 160;
             float renkMin = 0;
 

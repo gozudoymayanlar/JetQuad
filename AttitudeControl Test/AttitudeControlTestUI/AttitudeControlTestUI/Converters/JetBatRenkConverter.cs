@@ -15,8 +15,8 @@ namespace AttitudeControlTestUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             float jetBat = (float)value;
-            float jetBatMax = 9f;
-            float jetBatMin = 12.6f;
+            float jetBatMax = 8f;
+            float jetBatMin = 13f;
             float renkMax = 120;
             float renkMin = 0;
 

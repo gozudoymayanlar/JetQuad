@@ -789,7 +789,7 @@
                         <StackPanel Orientation="Horizontal" Margin="5 25 5 0">
                             <!--<Image Height="50" Source="/AttitudeControlTestUI;component/Resources/pump.png"/>-->
                             <TextBlock Text="Tahmini Araç&#x0a;Kütlesi [kg]:" Margin="5 0 0 0" Width="160" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" TextAlignment="Center"/>
-                            <TextBlock Text="{Binding KontrolPaneli.TahminiKutle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                            <TextBlock Text="{Binding KontrolPaneli.TahminiKutle.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="5 25 5 0">
                             <!--<Image Height="50" Source="/AttitudeControlTestUI;component/Resources/pump.png"/>-->
@@ -799,7 +799,7 @@
                         <StackPanel Orientation="Horizontal" Margin="5 25 5 0">
                             <!--<Image Height="50" Source="/AttitudeControlTestUI;component/Resources/pump.png"/>-->
                             <TextBlock Text="Hover Servo&#x0a;Açısı:" Margin="5 0 0 0" Width="160" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" TextAlignment="Center"/>
-                            <TextBlock Text="{Binding KontrolPaneli.HoverServoAcisi, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
+                            <TextBlock Text="{Binding KontrolPaneli.HoverServoAcisi.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="25" Foreground="#3C3D95" />
                         </StackPanel>
                     </StackPanel>
 
@@ -837,56 +837,56 @@
                                             <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                         </StackPanel.Background>
                                         <TextBlock Text="Referans" FontSize="20" Foreground="Black" FontWeight="Bold" Width="100" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Foreground="#3C3D95" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0 5 0 5" Height="40">
                                         <TextBlock Text="Gerçek" FontSize="20" Foreground="Black" FontWeight="Bold" Width="100" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollErr[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchErr[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollErr[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchErr[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollErr[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchErr[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollErr[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
 
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchErr[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
                                     </StackPanel>
@@ -896,35 +896,35 @@
                                             <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                         </StackPanel.Background>
                                         <TextBlock Text="Sıcaklık" FontSize="20" Foreground="Black" FontWeight="Bold" Width="100" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchTemp[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchTemp[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}"
                                                    Foreground="{Binding KontrolPaneli.ServoPitchTemp[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoRollTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoRollTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoPitchTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                    Foreground="{Binding KontrolPaneli.ServoPitchTemp[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoSicaklikRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="0 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0 5 0 5" Height="40">
                                         <TextBlock Text="Bat. Volt." FontSize="20" Foreground="Black" FontWeight="Bold" Width="100" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding KontrolPaneli.ServoBatVolt.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        <TextBlock Text="{Binding KontrolPaneli.ServoBatVolt.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                    Foreground="{Binding KontrolPaneli.ServoBatVolt.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ServoBatRenkConverter}}" 
                                                    VerticalAlignment="Center" FontSize="24" Width="75" Margin="280 0 5 0" TextAlignment="Center" FontWeight="Heavy"/>
                                     </StackPanel>
@@ -965,16 +965,16 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="40" Margin="0 5 0 5">
                                             <TextBlock Text="RPM" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RPM[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.RPM[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.RPM[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RpmRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RPM[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.RPM[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.RPM[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RpmRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RPM[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.RPM[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.RPM[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RpmRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RPM[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.RPM[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.RPM[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RpmRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
@@ -983,27 +983,27 @@
                                                 <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                             </StackPanel.Background>
                                             <TextBlock Text="İtki" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.Itki[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.Itki[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.Itki[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.Itki[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.Itki[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.Itki[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.Itki[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.Itki[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="40" Margin="0 5 0 5">
                                             <TextBlock Text="EGT" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.EGT[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.EGT[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.EGT[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EgtRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.EGT[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.EGT[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.EGT[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EgtRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.EGT[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.EGT[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.EGT[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EgtRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.EGT[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.EGT[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" 
                                                        Foreground="{Binding KontrolPaneli.EGT[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EgtRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
@@ -1012,16 +1012,16 @@
                                                 <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                             </StackPanel.Background>
                                             <TextBlock Text="Bat. Volt." FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        Foreground="{Binding KontrolPaneli.JetBatVolt[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource JetBatRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        Foreground="{Binding KontrolPaneli.JetBatVolt[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource JetBatRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        Foreground="{Binding KontrolPaneli.JetBatVolt[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource JetBatRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.JetBatVolt[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        Foreground="{Binding KontrolPaneli.JetBatVolt[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource JetBatRenkConverter}}"
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
@@ -1036,14 +1036,14 @@
                                             <TextBlock Text="RcEstop" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="25" Margin="0 0 0 0">
-                                            <TextBlock Text="{Binding KontrolPaneli.RcRoll.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcPitch.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcYaw.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcZ.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcThrust.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="80" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcServo.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcLQR, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.RcEstop, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcRoll.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcPitch.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcYaw.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcZ.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcThrust.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="80" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcServo.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcLQR.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.RcEstop.DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N0}" Margin="0 0 0 0" FontSize="15" Width="60" TextAlignment="Center" Foreground="Black" VerticalAlignment="Center" FontWeight="Bold"/>
                                         </StackPanel>
 
                                     </StackPanel>
@@ -1064,24 +1064,24 @@
                                                 <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                             </StackPanel.Background>
                                             <TextBlock Text="Referans" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadRef[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="40" Margin="0 5 0 5">
                                             <TextBlock Text="Gerçek" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[0].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[1].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[2].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadAct[3].DegerFloat, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Foreground="#3C3D95" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="50">
@@ -1089,22 +1089,22 @@
                                                 <SolidColorBrush Color="#FFD2AF64" Opacity="0.2"/>
                                             </StackPanel.Background>
                                             <TextBlock Text="Hata" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
                                                        Foreground="{Binding KontrolPaneli.QuadErr[0], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource QuadRenkConverter}}"  
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[1], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[1], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
                                                        Foreground="{Binding KontrolPaneli.QuadErr[1], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource QuadRenkConverter}}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[2], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[2], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
                                                        Foreground="{Binding KontrolPaneli.QuadErr[2], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource QuadRenkConverter}}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[3], Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadErr[3], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
                                                        Foreground="{Binding KontrolPaneli.QuadErr[3], Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource QuadRenkConverter}}" 
                                                        VerticalAlignment="Center" FontSize="24" Width="90" Margin="0 0 20 0" TextAlignment="Center" FontWeight="Heavy"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="40" Margin="0 5 0 5">
                                             <TextBlock Text="Min" FontSize="20" Foreground="Black" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat={}{0:#.##}, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <!--
                                                 key event olusturma
@@ -1117,10 +1117,10 @@
                                                 </TextBox.InputBindings>
                                                 
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMinVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
-                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N2, Converter={StaticResource Float2StringConverter}}" 
+                                            <TextBox Text="{Binding KontrolPaneli.QuadMinUI[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1, Converter={StaticResource Float2StringConverter}}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 5 0" TextAlignment="Center">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Gesture="Enter"
@@ -1128,7 +1128,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMinVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
                                             <TextBox Text="{Binding KontrolPaneli.QuadMinUI[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
@@ -1139,7 +1139,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMinVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
                                             <TextBox Text="{Binding KontrolPaneli.QuadMinUI[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
@@ -1150,8 +1150,8 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                                                     FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMinVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
+                                                     FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center" RenderTransformOrigin="0.502,0.5"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Height="50">
                                             <StackPanel.Background>
@@ -1167,7 +1167,7 @@
                                                 </TextBox.InputBindings>
                                             </TextBox>
 
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[0].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
                                             <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
@@ -1178,7 +1178,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[1].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
                                             <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
@@ -1189,7 +1189,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[2].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
 
                                             <TextBox Text="{Binding KontrolPaneli.QuadMaxUI[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={StaticResource Float2StringConverter}}" 
@@ -1200,7 +1200,7 @@
                                                                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type TextBox}}}"/>
                                                 </TextBox.InputBindings>
                                             </TextBox>
-                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                            <TextBlock Text="{Binding KontrolPaneli.QuadMaxVeh[3].DegerFloat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N1}" 
                                                      FontSize="16" Width="45" VerticalAlignment="Center" Margin="0 0 15 0" TextAlignment="Center"/>
                                         </StackPanel>
                                     </StackPanel>

@@ -104,6 +104,7 @@
     <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\DateTimePoint.cs" />
     <Compile Include="Models\KontrolPaneliModel.cs" />
+    <Compile Include="Models\MyVeri2Byte.cs" />
     <Compile Include="Models\MyVeri.cs" />
     <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="ViewModels\KontrolPaneliViewModel.cs" />

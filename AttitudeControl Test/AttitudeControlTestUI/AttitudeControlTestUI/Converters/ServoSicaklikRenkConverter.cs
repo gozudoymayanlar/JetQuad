@@ -15,8 +15,8 @@ namespace AttitudeControlTestUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             float servoSicaklik = (float)value;
-            float sicMax = 60;
-            float sicMin = 10;
+            float sicMax = 100;
+            float sicMin = 0;
             float renkMax = 180;
             float renkMin = 0;
 
