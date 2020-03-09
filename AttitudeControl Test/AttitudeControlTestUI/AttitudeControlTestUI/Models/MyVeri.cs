@@ -26,7 +26,7 @@ namespace AttitudeControlTestUI.Models
             DegerFloat = deger;
         }
 
-        private byte map2byte(float toMin = 0, float toMax = 255)
+        private byte map2byte(float toMin = 0, float toMax = 254)
         {
             if (!(_degerFloat >= _min && _degerFloat <= _max))
             {
@@ -45,7 +45,7 @@ namespace AttitudeControlTestUI.Models
             return Convert.ToByte(result);
         }
 
-        private float map2float(float fromMin = 0, float fromMax = 255)
+        private float map2float(float fromMin = 0, float fromMax = 254)
         {
             float fromAbs = Convert.ToSingle(_degerByte) - fromMin;
             float fromMaxAbs = fromMax - fromMin;
